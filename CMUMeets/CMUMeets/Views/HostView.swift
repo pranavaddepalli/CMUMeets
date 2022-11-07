@@ -8,26 +8,50 @@
 import SwiftUI
 import FirebaseFirestore
 
-func test() -> String {
-    var db = Firestore.firestore()
-    db.collection("users").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-                print("\(document.documentID) => \(document.data())")
-            }
-        }
-    }
-    
-    return "success"
-}
 
 struct HostView: View {
-    var body: some View {
-        Text("host meet page")
-        Text(test())
+  @ObservedObject var hostViewModel = HostViewModel()
+  @State var meetName: String = ""
+  @State var meetCapacity: Int = 1 
+  
+  @State var meetIcon: HostViewModel.MeetIcon = .hangout
+  @State var meetLoc: String = ""
+  
+  var body: some View {
+    VStack {
+      Text("New Meet")
+        .font(.title)
+        .fontWeight(.bold)
+      
+        HStack {
+          TextField("Title",
+                    text: $meetName)
+            .textFieldStyle(.roundedBorder)
+          
+          Spacer()
+
+          Picker("Location", selection: $meetLoc) {
+            ForEach(hostViewModel.getLocationNames(), id: \.self) { loc in Text(loc)}
+          }
+          
+        }
+        .padding()
+      
+      Picker("Icon", selection: $meetIcon) {
+        Text("🍽 Food").tag(HostViewModel.MeetIcon.food)
+        Text("⛹️ Sport").tag(HostViewModel.MeetIcon.sport)
+        Text("🎪 Hangout").tag(HostViewModel.MeetIcon.hangout)
+      }
+      .pickerStyle(.segmented)
+      
+      
+      
+     
+      Spacer()
+      
     }
+    .padding()
+  }
 }
 
 struct HostView_Previews: PreviewProvider {
