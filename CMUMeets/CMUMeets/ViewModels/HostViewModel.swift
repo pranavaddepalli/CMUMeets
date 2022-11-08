@@ -12,6 +12,13 @@ class HostViewModel : ObservableObject {
   let db = Firestore.firestore()
   let l = LocationSetup()
   
+  struct Location {
+    let name : String
+    let title : String
+    let latitude : Float
+    let longitude : Float
+  }
+  
   enum MeetIcon: String, CaseIterable, Identifiable {
       case food, sport, hangout
       var id: Self { self }

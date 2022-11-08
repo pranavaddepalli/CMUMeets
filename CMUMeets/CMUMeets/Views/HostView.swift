@@ -12,7 +12,7 @@ import FirebaseFirestore
 struct HostView: View {
   @ObservedObject var hostViewModel = HostViewModel()
   @State var meetName: String = ""
-  @State var meetCapacity: Int = 1 
+  @State var meetCapacity: Int = 1
   
   @State var meetIcon: HostViewModel.MeetIcon = .hangout
   @State var meetLoc: String = ""
