@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let viewController: ViewController = ViewController()
+
     var body: some View {
         NavigationView {
             VStack {
@@ -18,11 +20,21 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: HostView().navigationBarTitle("Host a Meet!")) {
+                NavigationLink(destination: MapView(viewController: viewController).navigationBarTitle("MapView!")) {
                     Text("Host view test1")
                 }
                 
                 Spacer()
+              
+              NavigationLink(destination: HostView().navigationBarTitle("HostView!")) {
+                  Text("Host view test2")
+              }
+              
+              Spacer()
+              
+              NavigationLink(destination: LocationView().navigationBarTitle("LocationView!")) {
+                  Text("Host view test3")
+              }
             }
         }
     }
