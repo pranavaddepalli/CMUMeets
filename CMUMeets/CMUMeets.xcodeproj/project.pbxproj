@@ -31,6 +31,7 @@
 		AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B729291B964A007C8FBD /* LocationModel.swift */; };
 		AB20B72D291B9A7B007C8FBD /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B72C291B9A7B007C8FBD /* LocationViewModel.swift */; };
 		AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B72E291B9B2F007C8FBD /* LocationView.swift */; };
+		ABCDF815291CC039006AEE53 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF814291CC039006AEE53 /* DummyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		AB20B729291B964A007C8FBD /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationModel.swift; path = CMUMeets/Repositories/LocationModel.swift; sourceTree = SOURCE_ROOT; };
 		AB20B72C291B9A7B007C8FBD /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		AB20B72E291B9B2F007C8FBD /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		ABCDF814291CC039006AEE53 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				8242BD5F29171DBE00CB82FE /* HostView.swift */,
 				AB20B70B291B65B9007C8FBD /* MapView.swift */,
 				AB20B72E291B9B2F007C8FBD /* LocationView.swift */,
+				ABCDF814291CC039006AEE53 /* DummyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				AB20B711291B667B007C8FBD /* Location.swift in Sources */,
 				AB20B71D291B8FE3007C8FBD /* MeetsRepository.swift in Sources */,
 				AB20B72D291B9A7B007C8FBD /* LocationViewModel.swift in Sources */,
+				ABCDF815291CC039006AEE53 /* DummyView.swift in Sources */,
 				AB20B726291B94CB007C8FBD /* UsersRepository.swift in Sources */,
 				AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */,
 				AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */,

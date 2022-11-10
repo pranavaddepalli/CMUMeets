@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    let viewController: ViewController = ViewController()
-
+    @ObservedObject var viewController: ViewController = ViewController()
+  
     var body: some View {
         NavigationView {
             VStack {
@@ -19,22 +19,49 @@ struct ContentView: View {
                 Text("Hello, world!")
                 
                 Spacer()
-                
-                NavigationLink(destination: MapView(viewController: viewController).navigationBarTitle("MapView!")) {
-                    Text("Host view test1")
+              TabView {
+                      MapView(viewController: viewController)
+                      .tabItem {
+                        Image(systemName: "books.vertical")
+                        Text("MapView")
+                      }
+                      HostView()
+                      .tabItem {
+                        Image(systemName: "books.vertical")
+                        Text("HostView")
+                      }
+                      LocationView(viewController: viewController)
+                      .tabItem {
+                        Image(systemName: "books.vertical")
+                        Text("LocationView")
+                      }
+//
+//                      LocationView()
+//                      .tabItem(
+//                        Image(systemName: "books.vertical")
+//                        Text("HostView")
+//                      )
+//                      LocationView()
+//                      .tabItem(
+//                        Image(systemName: "books.vertical")
+//                        Text("HostView")
+//                      )
                 }
-                
-                Spacer()
-              
-              NavigationLink(destination: HostView().navigationBarTitle("HostView!")) {
-                  Text("Host view test2")
-              }
-              
-              Spacer()
-              
-              NavigationLink(destination: LocationView().navigationBarTitle("LocationView!")) {
-                  Text("Host view test3")
-              }
+//                NavigationLink(destination: MapView(viewController: viewController).navigationBarTitle("MapView!")) {
+//                    Text("Host view test1")
+//                }
+//
+//                Spacer()
+//
+//              NavigationLink(destination: HostView().navigationBarTitle("HostView!")) {
+//                  Text("Host view test2")
+//              }
+//
+//              Spacer()
+//
+//              NavigationLink(destination: LocationView(viewController: viewController).navigationBarTitle("LocationView!")) {
+//                  Text("Host view test3")
+//              }
             }
         }
     }

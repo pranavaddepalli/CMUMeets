@@ -6,35 +6,16 @@
 //
 
 import SwiftUI
-import FirebaseFirestore
-
-
-func test_loc(locations: [Dictionary<String,Any>]) -> String {
-    var db = Firestore.firestore()
-    var locs = locations
-    db.collection("locations").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-                print("\(document.documentID) => \(document.data())")
-              print(type(of: document.data()))
-              locs.append(document.data())
-              // refresh map?
-            }
-        }
-    }
-    return "success"
-}
-
-
 
 struct LocationView: View {
-    var locations: [Dictionary<String,Any>] = []
+    let viewController: ViewController
 
     var body: some View {
-        Text("location meet page")
-      Text(test_loc(locations: locations))
+      Text("location meet page")
+//      Text(viewController.readMeets())
+//      Text(viewController.readLocations())
+//      Text(viewController.updatedMeets())
+//      Text(viewController.test())
     }
 }
 

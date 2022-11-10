@@ -26,7 +26,6 @@ func test() -> String {
 struct HostView: View {
     var body: some View {
         Text("host meet page")
-        Text(test())
     }
 }
 
