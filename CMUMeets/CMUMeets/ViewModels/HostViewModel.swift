@@ -39,23 +39,19 @@ class HostViewModel : ObservableObject {
   }
   
   func hostMeet(meetName : String, icon : MeetIcon, capacity : Int, loc : LocationSetup.Location, start : Date, end : Date) -> String {
-    var failedMsg = ""
     
     // MARK: validation
-    
     // start date must come before end date
     if (start >= end) {
-      failedMsg = "End time must be after start time"
-      return failedMsg
+      return "End time must be after start time"
     }
     
     // capacity has to be greater than 1
     if (capacity <= 1) {
-      failedMsg = "You can't meet with less than 2 people!"
-      return failedMsg
+      return "You can't meet with less than 2 people!"
     }
     
-    
+    var failedMsg = "Successfully hosted your Meet!"
     db.collection("meets").document().setData([
       "title" : meetName,
       "icon" : meetIconToText(mi: icon),
@@ -73,6 +69,7 @@ class HostViewModel : ObservableObject {
         print("Meet successfully written!")
       }
     }
+    print("vm" + failedMsg)
     return failedMsg;
 
   }

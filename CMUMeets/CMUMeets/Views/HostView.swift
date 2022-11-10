@@ -12,7 +12,9 @@ import MapKit
 
 
 struct HostView: View {
-  @ObservedObject var hostViewModel = HostViewModel()
+  let hostViewModel : HostViewModel
+  
+  @Environment(\.presentationMode) var presentationMode
   @State var selection: Int? = nil
 
   @State var meetName: String = ""
@@ -88,11 +90,7 @@ struct HostView: View {
                                capacity: meetCapacity,
                                loc: meetLoc,
                                start: meetStartTime,
-                               end: meetEndTime)
-        if(self.failedMsg.isEmpty){
-          // there were no issues, go back
-          
-        }
+                               end: meetEndTime)     
       }) {
         Text("Host!")
           .font(.title)
@@ -103,11 +101,27 @@ struct HostView: View {
             RoundedRectangle(cornerRadius: 10)
               .stroke(Color.red, lineWidth: 3)
           )
-      }.alert(self.failedMsg, isPresented:
-                Binding<Bool>(get: { !self.failedMsg.isEmpty}, set: { _ in })
+      }.alert(isPresented:
+                 Binding<Bool>(get: { !self.failedMsg.isEmpty}, set: { _ in }
+      )
       ) {
-        Button("OK", role: .cancel) {
-          self.failedMsg = ""
+        print(self.failedMsg)
+        if (self.failedMsg == "Successfully hosted your Meet!"){
+          print("will show success")
+          return Alert(title: Text(self.failedMsg),
+                       dismissButton: .default(Text("OK")) {
+            presentationMode.wrappedValue.dismiss()
+          }
+                       )
+          }
+        else {
+          var err = self.failedMsg + "."    
+          return  Alert(title: Text("Oh no!"),
+                        message: Text(err),
+                        primaryButton: .destructive(Text("Don't host")) {
+            presentationMode.wrappedValue.dismiss()
+          }, secondaryButton:.default(Text("I'll fix it"))
+          )
         }
       }
       }
@@ -130,8 +144,4 @@ struct HostView: View {
   
 }
 
-struct HostView_Previews: PreviewProvider {
-    static var previews: some View {
-        HostView()
-    }
-}
+
