@@ -19,15 +19,18 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: HostView().navigationBarTitle("Host a Meet!")) {
+                NavigationLink(destination: HostView().navigationBarBackButtonHidden(true)
+                  .navigationBarTitle("Host a Meet!")) {
                     Text("Host view test")
                 }
                 
-                Spacer()
+              Spacer()
+                
             }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,21 +1,36 @@
 //
 //  HostView.swift
-//  CMUMeets
+//  CMUMeets›‹
 //
 //  Created by Pranav Addepalli on 11/5/22.
 //
 
 import SwiftUI
 import FirebaseFirestore
+import MapKit
 
 
 struct HostView: View {
+
+
   @ObservedObject var hostViewModel = HostViewModel()
+  @State var selection: Int? = nil
+
   @State var meetName: String = ""
   @State var meetCapacity: Int = 1
+  @State var meetIcon = HostViewModel.MeetIcon.hangout
+  @State var meetLoc: LocationSetup.Location = LocationSetup.Location (
+    code: "FENCE",
+    title: "The Fence",
+    latitude : 40.4432027,
+    longitude : -79.9428499
+  )
+  // add pin to map
+  @State var meetStartTime: Date = Date.now
+  @State var meetEndTime: Date = Date.now.advanced(by: 1800) // 30 min later
   
-  @State var meetIcon: HostViewModel.MeetIcon = .hangout
-  @State var meetLoc: String = ""
+  @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.4447434, longitude: -79.9420948), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
   
   var body: some View {
     VStack {
@@ -23,18 +38,9 @@ struct HostView: View {
         .font(.title)
         .fontWeight(.bold)
       
-        HStack {
-          TextField("Title",
-                    text: $meetName)
-            .textFieldStyle(.roundedBorder)
-          
-          Spacer()
-
-          Picker("Location", selection: $meetLoc) {
-            ForEach(hostViewModel.getLocationNames(), id: \.self) { loc in Text(loc)}
-          }
-          
-        }
+      TextField("Title",
+                text: $meetName)
+        .textFieldStyle(.roundedBorder)
         .padding()
       
       Picker("Icon", selection: $meetIcon) {
@@ -43,15 +49,70 @@ struct HostView: View {
         Text("🎪 Hangout").tag(HostViewModel.MeetIcon.hangout)
       }
       .pickerStyle(.segmented)
+      .padding()
       
+      HStack{
+        Spacer()
+        
+        Text("Capacity")
+          .padding()
+        TextField("Capacity", value: $meetCapacity, formatter: NumberFormatter())
+          .keyboardType(.decimalPad)
+          .textFieldStyle(.roundedBorder)
+          .fixedSize()
+        
+        Spacer()
+        
+        Picker("Location", selection: $meetLoc) {
+          ForEach(hostViewModel.getLocations(), id: \.self) { loc in Text(loc.title).tag(loc)}
+        }
+        .padding()
+        
+        Spacer()
+      }
       
+      HStack{
+        DatePicker("From:", selection: $meetStartTime, displayedComponents: .hourAndMinute)
+          .padding(.leading)
+        
+        DatePicker("To:", selection: $meetEndTime, displayedComponents: .hourAndMinute)
+          .padding()
+      }
+        
+      Button(action: {
+        hostViewModel.hostMeet(meetName: meetName,
+                               icon: meetIcon,
+                               capacity: meetCapacity,
+                               loc: meetLoc,
+                               start: meetStartTime,
+                               end: meetEndTime)
+      }) {
+        Text("Host!")
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundColor(.red)
+          .padding()
+          .overlay(
+            RoundedRectangle(cornerRadius: 10)
+              .stroke(Color.red, lineWidth: 3)
+          )
+      }.padding()
       
-     
+    
+      
+      Spacer()
+      
+      Map(coordinateRegion: $region,
+          interactionModes: [.zoom],
+          showsUserLocation: true, userTrackingMode: .constant(.follow))
+        .padding()
+      
       Spacer()
       
     }
     .padding()
   }
+  
 }
 
 struct HostView_Previews: PreviewProvider {

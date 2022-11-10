@@ -12,45 +12,51 @@ class HostViewModel : ObservableObject {
   let db = Firestore.firestore()
   let l = LocationSetup()
   
-  struct Location {
-    let name : String
-    let title : String
-    let latitude : Float
-    let longitude : Float
-  }
-  
   enum MeetIcon: String, CaseIterable, Identifiable {
       case food, sport, hangout
       var id: Self { self }
   }
   
-  
-  func getLocationNames() -> [String] {
-    var result = [String]()
-    
-    db.collection("locations").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting location documents: \(err)")
-        } else {
-          result = querySnapshot!.documents.map { $0.data()["name"] as! String }
-//          print(result)
-        }
+  func meetIconToText(mi : MeetIcon) -> String {
+    switch mi {
+    case .food:
+      return "🍽"
+    case .sport:
+      return "⛹️"
+    case .hangout:
+      return "🎪"
     }
-    print(result)
-    return result
   }
   
-  // MARK: Methods
-  func hostMeet() -> String {
+  
+  func getLocations() -> [LocationSetup.Location] {
+    return l.locs
+  }
+  
+  func getDefaultLoc() -> LocationSetup.Location {
+    // currently set to The Fence
+    return l.locs.first(where: {$0.code == "FENCE"})!
+  }
+  
+  
+  
+  func hostMeet(meetName : String, icon : MeetIcon, capacity : Int, loc : LocationSetup.Location, start : Date, end : Date) {
     db.collection("meets").document().setData([
-      "title" : "Tennis",
-      "capacity" : 2,
-      "timeStart" : Date(),
-      "timeEnd" : Date().advanced(by: 3600), // 1 hour later
-      "location" : "The Cut"
-    ])
-    
-    return "Success"
+      "title" : meetName,
+      "icon" : meetIconToText(mi: icon),
+      "capacity" : capacity,
+      "location" : loc.title,
+      "latitude" : loc.latitude,
+      "longitude" : loc.longitude,
+      "startTime" : start,
+      "endTime" : end
+    ]) { err in
+      if let err = err {
+        print("Error writing meet: \(err)")
+      } else {
+        print("Meet successfully written!")
+      }
+    }
   }
   
   
