@@ -72,17 +72,17 @@ class LocationSetup {
   init() {
     // from https://docs.google.com/spreadsheets/d/1SoSMEhr0lqqt5qkxmHVyEAmePOGACVdY_NissKrjnok/edit?usp=sharing
     
-    let db = Firestore.firestore()
+//    let db = Firestore.firestore()
     
-//    for loc in locsraw {
+    for loc in locsraw {
 //      db.collection("locations").document(loc["code"] as! String).setData(loc)
-//      self.locs.append(Location(
-//        code: loc["code"] as! String,
-//        title: loc["name"] as! String,
-//        latitude: loc["latitude"] as! Double,
-//        longitude: loc["longitude"] as! Double
-//      ))
-//    }
+      self.locs.append(Location(
+        code: loc["code"] as! String,
+        title: loc["name"] as! String,
+        latitude: loc["latitude"] as! Double,
+        longitude: loc["longitude"] as! Double
+      ))
+    }
     print("Successfully synced locations data to Firestore")
   }
 }

@@ -38,9 +38,24 @@ class HostViewModel : ObservableObject {
     return l.locs.first(where: {$0.code == "FENCE"})!
   }
   
-  
-  
-  func hostMeet(meetName : String, icon : MeetIcon, capacity : Int, loc : LocationSetup.Location, start : Date, end : Date) {
+  func hostMeet(meetName : String, icon : MeetIcon, capacity : Int, loc : LocationSetup.Location, start : Date, end : Date) -> String {
+    var failedMsg = ""
+    
+    // MARK: validation
+    
+    // start date must come before end date
+    if (start >= end) {
+      failedMsg = "End time must be after start time"
+      return failedMsg
+    }
+    
+    // capacity has to be greater than 1
+    if (capacity <= 1) {
+      failedMsg = "You can't meet with less than 2 people!"
+      return failedMsg
+    }
+    
+    
     db.collection("meets").document().setData([
       "title" : meetName,
       "icon" : meetIconToText(mi: icon),
@@ -52,11 +67,14 @@ class HostViewModel : ObservableObject {
       "endTime" : end
     ]) { err in
       if let err = err {
+        failedMsg = "Something is wrong with the app -- we'll deal with it!"
         print("Error writing meet: \(err)")
       } else {
         print("Meet successfully written!")
       }
     }
+    return failedMsg;
+
   }
   
   

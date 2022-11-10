@@ -10,9 +10,8 @@ import FirebaseFirestore
 import MapKit
 
 
+
 struct HostView: View {
-
-
   @ObservedObject var hostViewModel = HostViewModel()
   @State var selection: Int? = nil
 
@@ -29,7 +28,9 @@ struct HostView: View {
   @State var meetStartTime: Date = Date.now
   @State var meetEndTime: Date = Date.now.advanced(by: 1800) // 30 min later
   
-  @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.4447434, longitude: -79.9420948), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+  
+  @State private var failedMsg = ""
+//  @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.4447434, longitude: -79.9420948), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
 
   
   var body: some View {
@@ -79,13 +80,19 @@ struct HostView: View {
           .padding()
       }
         
+      Spacer()
+      
       Button(action: {
-        hostViewModel.hostMeet(meetName: meetName,
+        self.failedMsg = hostViewModel.hostMeet(meetName: meetName,
                                icon: meetIcon,
                                capacity: meetCapacity,
                                loc: meetLoc,
                                start: meetStartTime,
                                end: meetEndTime)
+        if(self.failedMsg.isEmpty){
+          // there were no issues, go back
+          
+        }
       }) {
         Text("Host!")
           .font(.title)
@@ -96,20 +103,28 @@ struct HostView: View {
             RoundedRectangle(cornerRadius: 10)
               .stroke(Color.red, lineWidth: 3)
           )
-      }.padding()
+      }.alert(self.failedMsg, isPresented:
+                Binding<Bool>(get: { !self.failedMsg.isEmpty}, set: { _ in })
+      ) {
+        Button("OK", role: .cancel) {
+          self.failedMsg = ""
+        }
+      }
+      }
+       .padding()
+      
+      Text("Meets can only be scheduled for the current day, \(Date.now.formatted(Date.FormatStyle().month()))" + " \(Date.now.formatted(Date.FormatStyle().day())).")
+      
+      Spacer()
+      
+//      Map(coordinateRegion: $region,
+//          interactionModes: [.zoom],
+//          showsUserLocation: true, userTrackingMode: .constant(.follow))
+//        .padding()
+//
+//      Spacer()
       
     
-      
-      Spacer()
-      
-      Map(coordinateRegion: $region,
-          interactionModes: [.zoom],
-          showsUserLocation: true, userTrackingMode: .constant(.follow))
-        .padding()
-      
-      Spacer()
-      
-    }
     .padding()
   }
   

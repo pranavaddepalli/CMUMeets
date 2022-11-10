@@ -19,7 +19,8 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: HostView().navigationBarBackButtonHidden(true)
+                NavigationLink(destination: HostView()
+                  .navigationBarTitle("Cancel Hosting")
                   .navigationBarTitle("Host a Meet!")) {
                     Text("Host view test")
                 }
