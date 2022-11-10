@@ -8,25 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State private var showingHostView = false
+  var hostViewModel = HostViewModel()
+
     var body: some View {
-        NavigationView {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
+          VStack {
+              Image(systemName: "globe")
+                  .imageScale(.large)
+                  .foregroundColor(.accentColor)
+              Text("Hello, world!")
+              
+              Spacer()
                 
-                Spacer()
-                
-                NavigationLink(destination: HostView().navigationBarTitle("Host a Meet!")) {
-                    Text("Host view test1")
-                }
-                
-                Spacer()
+            Button("Host a meet") {
+              showingHostView = true;
             }
-        }
-    }
+            .sheet(isPresented: $showingHostView) {
+              HostView(hostViewModel: hostViewModel)
+            }
+            
+              
+            Spacer()
+              
+          }
+      }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
