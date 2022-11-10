@@ -1,28 +1,20 @@
 //
 //  ContentView.swift
-//  CMUMeets
+//  Sprint4
 //
-//  Created by Pranav Addepalli on 11/5/22.
+//  Created by Isaac Ahn on 11/2/22.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-                
-                Spacer()
-                
-                NavigationLink(destination: HostView().navigationBarTitle("Host a Meet!")) {
-                    Text("Host view test1")
-                }
-                
-                Spacer()
+        TabView {
+            MeetDetails().tabItem {
+                Image(systemName: "calendar")
+            }
+            NewUserView().tabItem {
+                Image(systemName: "person.badge.plus")
             }
         }
     }
