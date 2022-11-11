@@ -38,7 +38,7 @@ struct MapView: UIViewRepresentable {
         uiView.removeAnnotations(uiView.annotations)
       
       for (_, meet) in viewController.meets{
-        var date = (meet["endTime"] as! Timestamp).dateValue()
+        let date = (meet["endTime"] as! Timestamp).dateValue()
 
         if isSameDay(date1: date, date2: Date.now) && date > Date.now {
           let droppedPin = MKPointAnnotation()
