@@ -7,46 +7,60 @@
 
 import SwiftUI
 import MapKit
+import FirebaseFirestore
+
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+}
 
 struct MapView: UIViewRepresentable {
   @ObservedObject var viewController: ViewController
   
+  func isSameDay(date1: Date, date2: Date) -> Bool {
+      let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
+      if diff.day == 0 {
+          return true
+      } else {
+          return false
+      }
+  }
+  
+  // think about how to remove meets from map
   func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-    let location = Location()
-    location.getCurrentLocation()
-    let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude
-    )
-    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-    let region = MKCoordinateRegion(center: coordinate, span: span)
-    uiView.setRegion(region, animated: true)
-    
+    print("updating view")
     if viewController.locations.count > 0 && viewController.meets.count > 0  {
-      for meet in viewController.meets{
-        var meet_location = meet["location"] as! String
-        for location in viewController.locations{
-          var location_name = location["name"] as! String
-          if meet_location == location_name{
-            let droppedPin = MKPointAnnotation()
-            droppedPin.coordinate = CLLocationCoordinate2D(
-                latitude: location["latitude"] as! Double,
-                longitude: location["longitude"] as! Double
-            )
-            droppedPin.title = meet["title"] as! String
-            droppedPin.subtitle = meet["location"] as! String
-            uiView.addAnnotation(droppedPin)
-          }
+        uiView.removeAnnotations(uiView.annotations)
+      
+      for (_, meet) in viewController.meets{
+        var date = (meet["endTime"] as! Timestamp).dateValue()
+
+        if isSameDay(date1: date, date2: Date.now) && date > Date.now {
+          let droppedPin = MKPointAnnotation()
+          droppedPin.coordinate = CLLocationCoordinate2D(
+            latitude: meet["latitude"] as! Double,
+            longitude: meet["longitude"] as! Double
+          )
+          droppedPin.title = meet["title"] as! String
+          droppedPin.subtitle = meet["location"] as! String
+          uiView.addAnnotation(droppedPin)
         }
       }
-      
     }
-
   }
 
-// pin here is red, not blue
   func makeUIView(context: Context) -> MKMapView {
     //viewController.readMeets()
     viewController.readLocations()
     viewController.readMeets()
+    viewController.updatedMeets()
+    
+
 //    let currLoc = Location()
 //    currLoc.getCurrentLocation()
     
@@ -63,8 +77,13 @@ struct MapView: UIViewRepresentable {
     let mapView = MKMapView(frame: .zero)
 //    mapView.addAnnotation(droppedPin)
     mapView.showsUserLocation=true
+    let location = Location()
+    location.getCurrentLocation()
+    let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    mapView.setRegion(region, animated: true)
     return mapView
-      
   }
 }
 

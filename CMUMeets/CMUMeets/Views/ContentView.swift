@@ -13,12 +13,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-                
-                Spacer()
+              
+
               TabView {
                       MapView(viewController: viewController)
                       .tabItem {
@@ -35,6 +31,8 @@ struct ContentView: View {
                         Image(systemName: "books.vertical")
                         Text("LocationView")
                       }
+                      DummyView(viewController: viewController)
+  
 //
 //                      LocationView()
 //                      .tabItem(
