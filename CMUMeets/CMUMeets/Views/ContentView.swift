@@ -39,6 +39,15 @@ struct ContentView: View {
                   Image(systemName: "books.vertical")
                   Text("LocationView")
                 }
+                MeetDetails().tabItem {
+                  Image(systemName: "calendar")
+                }
+                NewUserView().tabItem {
+                  Image(systemName: "person.badge.plus")
+                }
+                CurrentUser().tabItem {
+                    Image(systemName: "person.crop.circle")
+                }
               }
     }
 }
