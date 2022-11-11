@@ -1,14 +1,7 @@
-//
-//  Meet.swift
-//  Sprint4
-//
-//  Created by Isaac Ahn on 11/2/22.
-//
-
 import Foundation
 import SwiftUI
-import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct Meet: Codable, Identifiable , Comparable {
     @DocumentID var id: String?
@@ -16,8 +9,7 @@ struct Meet: Codable, Identifiable , Comparable {
     var location: String
     var timeStart: Timestamp
     var timeEnd: Timestamp
-    var host: User
-    var people: [User]
+    var joined: Int
     var capacity: Int
     
     enum CodingKeys: String, CodingKey {
@@ -26,13 +18,12 @@ struct Meet: Codable, Identifiable , Comparable {
         case location
         case timeStart
         case timeEnd
-        case host
-        case people
+        case joined
         case capacity
     }
 
     static func ==(lhs: Meet, rhs: Meet) -> Bool {
-        return lhs.title == rhs.title && lhs.host == rhs.host
+        return lhs.title == rhs.title
     }
 
     static func <(lhs: Meet, rhs: Meet) -> Bool {
@@ -41,6 +32,7 @@ struct Meet: Codable, Identifiable , Comparable {
     
     func getStartString() -> String {
         let timeStartDate = timeStart.dateValue()
+        print(timeStartDate)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
