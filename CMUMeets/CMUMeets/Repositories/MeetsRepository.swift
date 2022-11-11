@@ -29,7 +29,7 @@ class MeetsRepository: ObservableObject {
                    location: d["location"] as? String ?? "",
                          timeStart: (d["timeStart"] as? Timestamp ?? Timestamp()).dateValue().timeIntervalSinceNow,
                    timeEnd: d["timeEnd"] as? Date ?? Date(),
-                   host: d["host"] as? User ?? User(id: "", name: "", phone: "", major: "", gradYear: 0, age: 0, gender: "", pronouns: "", ethnicity: ""),
+                   joined: d["joined"] as? Int ?? 0,
                    people: d["people"] as? [User] ?? [],
                    capacity: d["capacity"] as? Int ?? 0
              )
