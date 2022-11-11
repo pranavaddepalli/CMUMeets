@@ -8,30 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var showingHostView = false
-  var hostViewModel = HostViewModel()
+    @ObservedObject var viewController: ViewController = ViewController()
+    @State private var showingHostView = false
+    var hostViewModel = HostViewModel()
 
     var body: some View {
-          VStack {
-              Image(systemName: "globe")
-                  .imageScale(.large)
-                  .foregroundColor(.accentColor)
-              Text("Hello, world!")
-              
-              Spacer()
-                
-            Button("Host a meet") {
-              showingHostView = true;
+        NavigationView {
+            VStack {
+              TabView {
+                VStack {
+                  MapView(viewController: viewController)
+                  Button("Host a meet") {
+                    showingHostView = true;
+                  }
+                  .sheet(isPresented: $showingHostView) {
+                    HostView(hostViewModel: hostViewModel)
+                  }
+                }
+                .tabItem {
+                  Image(systemName: "books.vertical")
+                  Text("MapView")
+                }
+                LocationView(viewController: viewController)
+                .tabItem {
+                  Image(systemName: "books.vertical")
+                  Text("LocationView")
+                }
+                DummyView(viewController: viewController)
+                .tabItem {
+                  Image(systemName: "books.vertical")
+                  Text("LocationView")
+                }
+              }
             }
-            .sheet(isPresented: $showingHostView) {
-              HostView(hostViewModel: hostViewModel)
-            }
-            
-              
-            Spacer()
-              
-          }
-      }
+        }
+    }
 }
 
 
