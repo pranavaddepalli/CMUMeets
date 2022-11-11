@@ -33,7 +33,8 @@ class UsersRepository: ObservableObject {
                          age: d["age"] as? Int ?? 0,
                          gender: d["gender"] as? String ?? "",
                          pronouns: d["pronouns"] as? String ?? "",
-                         ethnicity: d["ethnicity"] as? String ?? ""
+                         ethnicity: d["ethnicity"] as? String ?? "",
+                         username: d["username"] as? String ?? ""
 
              )
            }
