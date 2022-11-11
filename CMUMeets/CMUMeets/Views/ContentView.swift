@@ -9,20 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewController: ViewController = ViewController()
-  
+    @State private var showingHostView = false
+    var hostViewModel = HostViewModel()
+
     var body: some View {
         NavigationView {
             VStack {
               TabView {
-                MapView(viewController: viewController)
+                VStack {
+                  MapView(viewController: viewController)
+                  Button("Host a meet") {
+                    showingHostView = true;
+                  }
+                  .sheet(isPresented: $showingHostView) {
+                    HostView(hostViewModel: hostViewModel)
+                  }
+                }
                 .tabItem {
                   Image(systemName: "books.vertical")
                   Text("MapView")
-                }
-                HostView()
-                .tabItem {
-                  Image(systemName: "books.vertical")
-                  Text("HostView")
                 }
                 LocationView(viewController: viewController)
                 .tabItem {
@@ -34,12 +39,12 @@ struct ContentView: View {
                   Image(systemName: "books.vertical")
                   Text("LocationView")
                 }
-
               }
             }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

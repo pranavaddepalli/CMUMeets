@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820179972918E7C500AF8D4A /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820179962918E7C500AF8D4A /* LocationList.swift */; };
+		820179982918E92700AF8D4A /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820179962918E7C500AF8D4A /* LocationList.swift */; };
+		820179992918E92700AF8D4A /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820179962918E7C500AF8D4A /* LocationList.swift */; };
 		8242BD3229171AA900CB82FE /* CMUMeetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */; };
 		8242BD3429171AA900CB82FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3329171AA900CB82FE /* ContentView.swift */; };
 		8242BD3629171AAF00CB82FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8242BD3529171AAF00CB82FE /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 		82828C0829172BBD003A405C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 82828C0729172BBD003A405C /* FirebaseFirestore */; };
 		82828C0A29172BBD003A405C /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 82828C0929172BBD003A405C /* FirebaseFirestoreCombine-Community */; };
 		82828C0C29172BBD003A405C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82828C0B29172BBD003A405C /* FirebaseFirestoreSwift */; };
+		82828C0E2917345E003A405C /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82828C0D2917345E003A405C /* HostViewModel.swift */; };
+		82828C0F2917345E003A405C /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82828C0D2917345E003A405C /* HostViewModel.swift */; };
+		82828C102917345E003A405C /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82828C0D2917345E003A405C /* HostViewModel.swift */; };
 		AB20B70A291AF3AC007C8FBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */; };
 		AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70B291B65B9007C8FBD /* MapView.swift */; };
 		AB20B70F291B6616007C8FBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70E291B6616007C8FBD /* ViewController.swift */; };
@@ -52,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		820179962918E7C500AF8D4A /* LocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationList.swift; sourceTree = "<group>"; };
 		8242BD2E29171AA900CB82FE /* CMUMeets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMUMeets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMUMeetsApp.swift; sourceTree = "<group>"; };
 		8242BD3329171AA900CB82FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +71,7 @@
 		8242BD4D29171AAF00CB82FE /* CMUMeetsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMUMeetsUITests.swift; sourceTree = "<group>"; };
 		8242BD4F29171AAF00CB82FE /* CMUMeetsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMUMeetsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8242BD5F29171DBE00CB82FE /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
+		82828C0D2917345E003A405C /* HostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewModel.swift; sourceTree = "<group>"; };
 		AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB20B70B291B65B9007C8FBD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AB20B70E291B6616007C8FBD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +146,7 @@
 				AB20B717291B6FE8007C8FBD /* Info.plist */,
 				AB20B70D291B65F4007C8FBD /* Controllers */,
 				8242BD5D29171D3400CB82FE /* Views */,
-				8242BD5C29171D2E00CB82FE /* Models */,
+				8242BD5C29171D2E00CB82FE /* ViewModels */,
 				8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */,
 				8242BD3529171AAF00CB82FE /* Assets.xcassets */,
 				8242BD3729171AAF00CB82FE /* CMUMeets.entitlements */,
@@ -173,14 +181,16 @@
 			path = CMUMeetsUITests;
 			sourceTree = "<group>";
 		};
-		8242BD5C29171D2E00CB82FE /* Models */ = {
+		8242BD5C29171D2E00CB82FE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				AB20B71E291B9000007C8FBD /* Meet.swift */,
 				AB20B720291B9029007C8FBD /* User.swift */,
 				AB20B729291B964A007C8FBD /* LocationModel.swift */,
+				820179962918E7C500AF8D4A /* LocationList.swift */,
+				82828C0D2917345E003A405C /* HostViewModel.swift */,
 			);
-			path = Models;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		8242BD5D29171D3400CB82FE /* Views */ = {
@@ -365,6 +375,9 @@
 				AB20B70F291B6616007C8FBD /* ViewController.swift in Sources */,
 				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
 				AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */,
+				82828C0E2917345E003A405C /* HostViewModel.swift in Sources */,
+				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
+				820179972918E7C500AF8D4A /* LocationList.swift in Sources */,
 				8242BD6029171DBE00CB82FE /* HostView.swift in Sources */,
 				AB20B721291B9029007C8FBD /* User.swift in Sources */,
 				AB20B728291B9640007C8FBD /* LocationsRepository.swift in Sources */,
@@ -383,6 +396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82828C0F2917345E003A405C /* HostViewModel.swift in Sources */,
+				820179992918E92700AF8D4A /* LocationList.swift in Sources */,
 				8242BD4429171AAF00CB82FE /* CMUMeetsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +407,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8242BD5029171AAF00CB82FE /* CMUMeetsUITestsLaunchTests.swift in Sources */,
+				82828C102917345E003A405C /* HostViewModel.swift in Sources */,
+				820179982918E92700AF8D4A /* LocationList.swift in Sources */,
 				8242BD4E29171AAF00CB82FE /* CMUMeetsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
