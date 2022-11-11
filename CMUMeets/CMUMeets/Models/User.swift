@@ -1,10 +1,3 @@
-//
-//  User.swift
-//  Sprint4
-//
-//  Created by Isaac Ahn on 11/2/22.
-//
-
 import SwiftUI
 import FirebaseFirestoreSwift
 
@@ -18,6 +11,7 @@ struct User: Codable, Identifiable , Comparable {
     var gender: String
     var pronouns: String
     var ethnicity: String
+    var username: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,7 +23,7 @@ struct User: Codable, Identifiable , Comparable {
         case gender
         case pronouns
         case ethnicity
-    }
+        case username    }
     
     static func ==(lhs: User, rhs: User) -> Bool {
         return lhs.name == rhs.name
