@@ -12,6 +12,7 @@ enum Pronouns: String {
   case her = "She/Her"
   case they = "They/Them"
   case other = "Other"
+  case none = "Prefer not to say"
   
-  static let allPronouns = ["He/Him", "She/Her", "They/Them", "Other"]
+  static let allPronouns = ["He/Him", "She/Her", "They/Them", "Other", "Prefer not to say"]
 }
