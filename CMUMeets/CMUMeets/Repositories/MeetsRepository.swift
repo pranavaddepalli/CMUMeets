@@ -8,6 +8,8 @@ import Foundation
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftUI
+
 class MeetsRepository: ObservableObject {
  private let path: String = "meets"
  private let store = Firestore.firestore()
@@ -24,14 +26,16 @@ class MeetsRepository: ObservableObject {
        if let snapshot = snapshot {
          DispatchQueue.main.async {
            self.meets = snapshot.documents.map { d in
-             return Meet(id: d.documentID,
+              Meet(id: d.documentID,
                    title: d["title"] as? String ?? "",
                    location: d["location"] as? String ?? "",
-                         timeStart: (d["timeStart"] as? Timestamp ?? Timestamp()).dateValue().timeIntervalSinceNow,
-                   timeEnd: d["timeEnd"] as? Date ?? Date(),
+                   startTime: d["startTime"] as? Timestamp ?? Timestamp(),
+                   endTime: d["timeEnd"] as? Timestamp ?? Timestamp(),
                    joined: d["joined"] as? Int ?? 0,
-                   people: d["people"] as? [User] ?? [],
-                   capacity: d["capacity"] as? Int ?? 0
+                   capacity: d["capacity"] as? Int ?? 0,
+                   //icon: d["icon"] as? Image ?? Image(systemName: "questionmark.folder"),
+                   latitude: d["latitude"] as? Double ?? 0.0,
+                   longitude: d["longitude"] as? Double ?? 0.0
              )
            }
          }
@@ -65,7 +69,7 @@ class MeetsRepository: ObservableObject {
   }
  }
  // MARK: Filtering methods
- func getMeetsBy(_ host: String) -> [Meet] {
-   return self.meets.filter{$0.host.name == host}
- }
+ //func getMeetsBy(_ host: String) -> [Meet] {
+   //return self.meets.filter{$0.host.name == host}
+ //}
 }
