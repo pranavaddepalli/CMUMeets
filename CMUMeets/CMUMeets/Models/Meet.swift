@@ -7,19 +7,25 @@ struct Meet: Codable, Identifiable , Comparable {
     @DocumentID var id: String?
     var title: String
     var location: String
-    var timeStart: Timestamp
-    var timeEnd: Timestamp
+    var startTime: Timestamp
+    var endTime: Timestamp
     var joined: Int
     var capacity: Int
+    //var icon: Image
+    var latitude: Double
+    var longitude: Double
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case location
-        case timeStart
-        case timeEnd
+        case startTime
+        case endTime
         case joined
         case capacity
+        //case icon
+        case latitude
+        case longitude
     }
 
     static func ==(lhs: Meet, rhs: Meet) -> Bool {
@@ -31,19 +37,18 @@ struct Meet: Codable, Identifiable , Comparable {
     }
     
     func getStartString() -> String {
-        let timeStartDate = timeStart.dateValue()
-        print(timeStartDate)
+        let startTimeDate = startTime.dateValue()
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return dateFormatter.string(from: timeStartDate)
+        return dateFormatter.string(from: startTimeDate)
     }
     
     func getEndString() -> String {
-        let timeEndDate = timeEnd.dateValue()
+        let endTimeDate = endTime.dateValue()
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return dateFormatter.string(from: timeEndDate)
+        return dateFormatter.string(from: endTimeDate)
     }
 }
