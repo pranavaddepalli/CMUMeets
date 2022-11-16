@@ -15,6 +15,7 @@ enum Ethnicity: String {
   case island = "Native Hawaiian or Other Pacific Islander"
   case white = "White"
   case other = "Other"
+  case none = "Prefer not to say"
   
-  static let allEthnicities = ["American Indian or Alaskan Native", "Asian", "Black or African American", "Hispanic or Latino", "Native Hawaiian or Other Pacific Islander", "White", "Other"]
+  static let allEthnicities = ["American Indian or Alaskan Native", "Asian", "Black or African American", "Hispanic or Latino", "Native Hawaiian or Other Pacific Islander", "White", "Other", "Prefer not to say"]
 }
