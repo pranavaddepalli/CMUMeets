@@ -11,6 +11,7 @@ enum Gender: String {
   case male = "Male"
   case female = "Female"
   case other = "Other"
+  case none = "Prefer not to say"
   
-  static let allGenders = ["Male", "Female", "Other"]
+  static let allGenders = ["Male", "Female", "Other", "Prefer not to say"]
 }
