@@ -12,26 +12,26 @@ import FirebaseFirestore
 struct MeetDetailsView: View {
     var meet: Meet
     @State private var clicked: Bool = false
+    @State private var alertShown = false
     
     var body: some View {
         Text(meet.title)
         Text("Location: " + meet.location)
         Text("Start: " + meet.getStartString())
         Text("End: " + meet.getEndString())
-        //Text("Host: " + meet.host.name)
+        Text("Joined: " + String(meet.joined))
         Text("Capacity: " + String(meet.capacity))
-        //Text(meet.people)
         Button("JOIN MEET") {
-            if meet.people.count < meet.capacity {
+            if meet.joined < meet.capacity {
                 joinMeet()
                 clicked = true
             }
             else {
-                Text("This Meet is full!")
+                alertShown = true
             }
         }
         .disabled(clicked)
-        
+        .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
     }
     
     func joinMeet() {
