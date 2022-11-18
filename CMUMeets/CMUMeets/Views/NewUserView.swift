@@ -22,6 +22,7 @@ struct NewUserView: View {
     @State private var gender: String = ""
     @State private var pronouns: String = ""
     @State private var ethnicity: String = ""
+    @State private var username: String = ""
     
     var body: some View {
         VStack {
@@ -29,6 +30,7 @@ struct NewUserView: View {
                 .font(.title)
                 .fontWeight(.bold)
             Form {
+                TextField("Username", text: $username)
                 TextField("Name: ", text: $name)
                 TextField("Phone Number: ", text: $phone)
                 TextField("Major: ", text: $major)
@@ -68,11 +70,11 @@ struct NewUserView: View {
                   }
                 
                 if self.isValidUser() {
-                          Button("Add User") {
-                            addUser()
-                            clearFields()
-                          }
-                        }
+                    Button("Add User") {
+                        addUser()
+                        clearFields()
+                    }
+                }
             }
         }
     }
@@ -81,11 +83,12 @@ struct NewUserView: View {
       if name.isEmpty { return false }
       if phone.isEmpty { return false }
       if major.isEmpty { return false }
-        if gradYear.isEmpty { return false }
-        if age.isEmpty { return false }
+      if gradYear.isEmpty { return false }
+      if age.isEmpty || age < "18" { return false }
       if gender.isEmpty { return false }
       if pronouns.isEmpty { return false }
       if ethnicity.isEmpty { return false }
+      if username.isEmpty { return false }
       return true
     }
 
@@ -112,7 +115,8 @@ struct NewUserView: View {
             "age": age,
             "gender": gender,
             "pronouns": pronouns,
-            "ethnicity": ethnicity
+            "ethnicity": ethnicity,
+            "username": username
         ]
         path.setData(newUser) { error in
             if let error = error {

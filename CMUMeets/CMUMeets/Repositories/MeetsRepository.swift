@@ -30,10 +30,10 @@ class MeetsRepository: ObservableObject {
                    title: d["title"] as? String ?? "",
                    location: d["location"] as? String ?? "",
                    startTime: d["startTime"] as? Timestamp ?? Timestamp(),
-                   endTime: d["timeEnd"] as? Timestamp ?? Timestamp(),
+                   endTime: d["endTime"] as? Timestamp ?? Timestamp(),
                    joined: d["joined"] as? Int ?? 0,
                    capacity: d["capacity"] as? Int ?? 0,
-                   //icon: d["icon"] as? Image ?? Image(systemName: "questionmark.folder"),
+                   icon: d["icon"] as? String ?? "",
                    latitude: d["latitude"] as? Double ?? 0.0,
                    longitude: d["longitude"] as? Double ?? 0.0
              )

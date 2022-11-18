@@ -13,6 +13,10 @@ class ViewController: ObservableObject {
     let currentLocation = Location()
     @Published var locations: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
     @Published var meets: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
+    @Published var users: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
+    
+    @Published var currentUser: User = User(id: "0", name: "", phone: "", major: "", gradYear: 0, age: 0, gender: "", pronouns: "", ethnicity: "", username: "")
+    @Published var ongoingMeets: [Meet] = []
   
   func test() -> Int {
     return self.locations.count
@@ -34,6 +38,22 @@ class ViewController: ObservableObject {
       return "success: locations"
     }
   
+    func readUsers() -> String {
+        var db = Firestore.firestore()
+        
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+                  self.users[document.documentID] = document.data()
+                }
+            }
+        }
+      return "success: locations"
+    }
+    
   func readMeets() -> String {
     var db = Firestore.firestore()
     

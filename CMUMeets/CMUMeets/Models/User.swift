@@ -23,7 +23,8 @@ struct User: Codable, Identifiable , Comparable {
         case gender
         case pronouns
         case ethnicity
-        case username    }
+        case username
+    }
     
     static func ==(lhs: User, rhs: User) -> Bool {
         return lhs.name == rhs.name

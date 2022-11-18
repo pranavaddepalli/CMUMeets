@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MeetDetails: View {
     @ObservedObject var meetsLibraryViewModel = MeetsLibraryViewModel()
-      
+    
     var body: some View {
         NavigationView {
             List{

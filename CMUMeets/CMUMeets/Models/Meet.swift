@@ -11,7 +11,7 @@ struct Meet: Codable, Identifiable , Comparable {
     var endTime: Timestamp
     var joined: Int
     var capacity: Int
-    //var icon: Image
+    var icon: String
     var latitude: Double
     var longitude: Double
     
@@ -23,7 +23,7 @@ struct Meet: Codable, Identifiable , Comparable {
         case endTime
         case joined
         case capacity
-        //case icon
+        case icon
         case latitude
         case longitude
     }

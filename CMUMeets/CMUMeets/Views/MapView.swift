@@ -21,7 +21,7 @@ extension Date {
 
 struct MapView: UIViewRepresentable {
   @ObservedObject var viewController: ViewController
-  
+    
   func isSameDay(date1: Date, date2: Date) -> Bool {
       let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
       if diff.day == 0 {
@@ -59,6 +59,7 @@ struct MapView: UIViewRepresentable {
     viewController.readLocations()
     viewController.readMeets()
     viewController.updatedMeets()
+    viewController.readUsers()
     
 
 //    let currLoc = Location()

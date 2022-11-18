@@ -15,13 +15,12 @@ struct MeetDetailsView: View {
     @State private var alertShown = false
     
     var body: some View {
-        Text(meet.title)
-        Text("Location: " + meet.location)
+        Text(meet.title).fontWeight(.bold).font(.title)
+        Text("@ " + meet.location)
         Text("Start: " + meet.getStartString())
         Text("End: " + meet.getEndString())
-        Text("Joined: " + String(meet.joined))
-        Text("Capacity: " + String(meet.capacity))
-        Button("JOIN MEET") {
+        Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
+        Button(action:  {
             if meet.joined < meet.capacity {
                 joinMeet()
                 clicked = true
@@ -29,6 +28,15 @@ struct MeetDetailsView: View {
             else {
                 alertShown = true
             }
+            
+        }) {
+            Text("Join Meet")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: 220, height: 60)
+                .background(Color.green)
+                .cornerRadius(15.0)
         }
         .disabled(clicked)
         .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
@@ -38,7 +46,7 @@ struct MeetDetailsView: View {
         let db = Firestore.firestore()
         let path = db.collection("meets").document(self.meet.id!)
         path.updateData([
-            "capacity": meet.capacity + 1
+            "joined": meet.joined + 1
         ]) { err in
             if let err = err {
                 print("Error updating document: \(err)")
