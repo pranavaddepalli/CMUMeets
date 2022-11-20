@@ -81,7 +81,7 @@ struct NewUserView: View {
     
     private func isValidUser() -> Bool {
       if name.isEmpty { return false }
-      if phone.isEmpty { return false }
+      if phone.isEmpty || phone.count < 10 { return false }
       if major.isEmpty { return false }
       if gradYear.isEmpty { return false }
       if age.isEmpty || age < "18" { return false }

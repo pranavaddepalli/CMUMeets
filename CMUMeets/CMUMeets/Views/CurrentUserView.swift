@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CurrentUserView: View {
-    @ObservedObject var viewController: ViewController = ViewController()
+    @ObservedObject var viewController: ViewController
     
     var body: some View {
         VStack {

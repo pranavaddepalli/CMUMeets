@@ -4,8 +4,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct MeetDetails: View {
-    @ObservedObject var meetsLibraryViewModel = MeetsLibraryViewModel()
-    @ObservedObject var viewController = ViewController()
+    @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
+    @ObservedObject var viewController: ViewController
     var currentTimestamp: Timestamp = Timestamp()
     
     var body: some View {
@@ -15,13 +15,13 @@ struct MeetDetails: View {
                     let meetViewModels = meetsLibraryViewModel.meetViewModels.sorted(by: { $0.meet < $1.meet })
                     ForEach(meetViewModels) { meetViewModel in
                         if meetViewModel.meet.getEndString() > getCurrentDate() {
-                            MeetRowView(meet: meetViewModel.meet)
+                            MeetRowView(viewController: viewController, meet: meetViewModel.meet)
                         }
                     }
                 }
                 Section ("Joined Meets") {
                     ForEach(viewController.ongoingMeets) { meet in
-                            MeetRowView(meet: meet)
+                        MeetRowView(viewController: viewController, meet: meet)
                     }
                 }
             }.navigationBarTitle("Meets")
@@ -37,8 +37,3 @@ struct MeetDetails: View {
     }
 }
 
-struct MeetDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        MeetDetails()
-    }
-}

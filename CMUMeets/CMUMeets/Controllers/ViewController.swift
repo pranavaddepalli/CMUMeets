@@ -15,7 +15,7 @@ class ViewController: ObservableObject {
     @Published var meets: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
     @Published var users: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
     
-    @Published var currentUser: User = User(id: "0", name: "", phone: "", major: "", gradYear: 0, age: 0, gender: "", pronouns: "", ethnicity: "", username: "")
+    @Published var currentUser: User = User(id: "0", name: "", phone: "", major: "", gradYear: "", age: "", gender: "", pronouns: "", ethnicity: "", username: "")
     
     @Published var ongoingMeets: [Meet] = []
     

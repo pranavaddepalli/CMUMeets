@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var viewController: ViewController = ViewController()
+  @ObservedObject var viewController: ViewController
+  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
 
   
   var body: some View {
-      LoginView()
+      LoginView(viewController: viewController, meetsLibraryViewModel: meetsLibraryViewModel)
   }
 }

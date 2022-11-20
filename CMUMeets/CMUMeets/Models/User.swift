@@ -6,8 +6,8 @@ struct User: Codable, Identifiable , Comparable {
     var name: String
     var phone: String
     var major: String
-    var gradYear: Int
-    var age: Int
+    var gradYear: String
+    var age: String
     var gender: String
     var pronouns: String
     var ethnicity: String

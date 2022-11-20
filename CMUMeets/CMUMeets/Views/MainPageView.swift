@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainPageView: View {
-  @ObservedObject var viewController: ViewController = ViewController()
+  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
+  @ObservedObject var viewController: ViewController
   @State private var showingHostView = false
   var hostViewModel = HostViewModel()
   
@@ -39,7 +40,7 @@ struct MainPageView: View {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          MeetDetails().tabItem {
+          MeetDetails(meetsLibraryViewModel: meetsLibraryViewModel, viewController: viewController).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
           }
@@ -47,7 +48,7 @@ struct MainPageView: View {
             Image(systemName: "person.badge.plus")
             Text("Register")
           }
-          CurrentUserView().tabItem {
+          CurrentUserView(viewController: viewController).tabItem {
             Image(systemName: "person.fill")
             Text("User Profile")
           }

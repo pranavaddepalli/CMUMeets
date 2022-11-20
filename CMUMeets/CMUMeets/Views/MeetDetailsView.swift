@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MeetDetailsView: View {
-    @ObservedObject var viewController: ViewController = ViewController()
+    @ObservedObject var viewController: ViewController
     
     var meet: Meet
     @State private var clicked: Bool = false
@@ -58,8 +58,5 @@ struct MeetDetailsView: View {
             }
         }
         self.viewController.ongoingMeets.append(meet)
-        print("Your ongoing meets")
-        print(viewController.ongoingMeets)
-        print("Current User: " + viewController.currentUser.name)
     }
 }

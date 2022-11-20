@@ -9,10 +9,12 @@ import SwiftUI
 import Foundation
 
 struct MeetRowView: View {
+    @ObservedObject var viewController: ViewController
+    
     var meet: Meet
     var body: some View {
         NavigationLink (
-            destination: MeetDetailsView(meet: meet),
+            destination: MeetDetailsView(viewController: viewController, meet: meet),
             label: {
                 Text(meet.title)
             }
