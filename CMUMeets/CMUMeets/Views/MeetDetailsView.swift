@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MeetDetailsView: View {
-    @ObservedObject var viewController: ViewController = ViewController
+    @ObservedObject var viewController: ViewController = ViewController()
     
     var meet: Meet
     @State private var clicked: Bool = false
