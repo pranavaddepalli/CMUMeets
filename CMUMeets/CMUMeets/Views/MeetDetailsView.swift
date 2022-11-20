@@ -10,6 +10,8 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MeetDetailsView: View {
+    @ObservedObject var viewController: ViewController = ViewController
+    
     var meet: Meet
     @State private var clicked: Bool = false
     @State private var alertShown = false
@@ -55,5 +57,9 @@ struct MeetDetailsView: View {
                 print("Document updated successfully")
             }
         }
+        self.viewController.ongoingMeets.append(meet)
+        print("Your ongoing meets")
+        print(viewController.ongoingMeets)
+        print("Current User: " + viewController.currentUser.name)
     }
 }

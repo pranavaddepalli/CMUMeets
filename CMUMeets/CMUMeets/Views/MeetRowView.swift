@@ -12,7 +12,7 @@ struct MeetRowView: View {
     var meet: Meet
     var body: some View {
         NavigationLink (
-            destination: MeetDetailsView(meet: meet),
+            destination: MeetDetailsView(viewController: viewController, meet: meet),
             label: {
                 Text(meet.title)
             }

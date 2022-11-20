@@ -108,7 +108,7 @@ struct LoginView: View {
                 } else {
                     for document in querySnapshot!.documents {
                         //print("\(document.documentID) => \(document.data())")
-                        viewController.currentUser = User(id: document.documentID,
+                        self.viewController.currentUser = User(id: document.documentID,
                                                           name: document["name"] as? String ?? "",
                                                           phone: document["phone"] as? String ?? "",
                                                           major: document["major"] as? String ?? "",
