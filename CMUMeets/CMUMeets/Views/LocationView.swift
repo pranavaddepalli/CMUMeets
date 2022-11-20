@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationView: View {
-    let viewController: ViewController
+    let firebase: Firebase
 
     var body: some View {
       Text("location meet page")

@@ -7,17 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B02B03CC-8AE0-4FA2-97C5-C09820FEDB15"
+            uuid = "1693BBAD-50B1-4F92-BD42-4D9F6F12E3CF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CMUMeets/Views/MapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "MapView"
-            landmarkType = "14">
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "isSameDay(date1:date2:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C517A94C-8A3C-42D8-8BDA-53C749434263"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CMUMeets/Views/MapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "get(_:calendar:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C517A94C-8A3C-42D8-8BDA-53C749434263 - 10f080ffe735b8c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of Foundation.Date.get(_: Foundation.Calendar.Component..., calendar: Foundation.Calendar) -&gt; Foundation.DateComponents"
+                  moduleName = "CMUMeets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rickylee/Desktop/appdev443-proj3/CMUMeets/CMUMeets/CMUMeets/Views/MapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "C517A94C-8A3C-42D8-8BDA-53C749434263 - 1edf12df921c1fbf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foundation.Date.get(_: Foundation.Calendar.Component..., calendar: Foundation.Calendar) -&gt; Foundation.DateComponents"
+                  moduleName = "CMUMeets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rickylee/Desktop/appdev443-proj3/CMUMeets/CMUMeets/CMUMeets/Views/MapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62029579-44E9-4BC8-BC1C-0121E5BA5062"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CMUMeets/MeetAnnotation.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "configureDetailView()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

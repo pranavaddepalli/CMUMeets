@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var viewController: ViewController = ViewController()
+  @ObservedObject var firebase: Firebase = Firebase()
   @State private var showingHostView = false
   var hostViewModel = HostViewModel()
   
@@ -17,7 +17,7 @@ struct ContentView: View {
       VStack {
         TabView {
           VStack {
-            MapView(viewController: viewController)
+            MapView(firebase: firebase).edgesIgnoringSafeArea(.all)
             Button("Host a meet") {
               showingHostView = true;
             }
@@ -29,12 +29,12 @@ struct ContentView: View {
             Image(systemName: "books.vertical")
             Text("MapView")
           }
-          LocationView(viewController: viewController)
+          LocationView(firebase: firebase)
             .tabItem {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          DummyView(viewController: viewController)
+          DummyView(firebase: firebase)
             .tabItem {
               Image(systemName: "books.vertical")
               Text("LocationView")
@@ -45,18 +45,8 @@ struct ContentView: View {
           NewUserView().tabItem {
             Image(systemName: "person.badge.plus")
           }
-//          CurrentUser().tabItem {
-//            Image(systemName: "person.crop.circle")
-//          }
         }
       }
     }
   }
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }

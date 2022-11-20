@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DummyView: View {
-    let viewController: ViewController
+    let firebase: Firebase
 
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
