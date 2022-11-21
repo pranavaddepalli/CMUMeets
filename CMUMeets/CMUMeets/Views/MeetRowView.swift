@@ -7,14 +7,15 @@
 
 import SwiftUI
 import Foundation
+import FirebaseFirestore
 
 struct MeetRowView: View {
-    @ObservedObject var viewController: ViewController
+    @ObservedObject var firebase: Firebase
     
     var meet: Meet
     var body: some View {
         NavigationLink (
-            destination: MeetDetailsView(viewController: viewController, meet: meet),
+            destination: MeetDetailsView(firebase: firebase, meet: meet),
             label: {
                 Text(meet.title)
             }

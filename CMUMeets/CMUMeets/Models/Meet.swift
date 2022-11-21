@@ -3,7 +3,7 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Meet: Codable, Identifiable , Comparable {
+struct Meet: Codable, Identifiable, Comparable {
     @DocumentID var id: String?
     var title: String
     var location: String

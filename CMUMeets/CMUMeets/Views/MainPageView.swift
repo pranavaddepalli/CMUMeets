@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainPageView: View {
   @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
-  @ObservedObject var viewController: ViewController
+  @ObservedObject var firebase: Firebase
   @State private var showingHostView = false
   var hostViewModel = HostViewModel()
   
@@ -18,7 +18,7 @@ struct MainPageView: View {
       VStack {
         TabView {
           VStack {
-            MapView(viewController: viewController)
+            MapView(firebase: firebase)
             Button("Host a meet") {
               showingHostView = true;
             }
@@ -30,17 +30,17 @@ struct MainPageView: View {
             Image(systemName: "books.vertical")
             Text("MapView")
           }
-          LocationView(viewController: viewController)
+          LocationView(firebase: firebase)
             .tabItem {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          DummyView(viewController: viewController)
+          DummyView(firebase: firebase)
             .tabItem {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          MeetDetails(meetsLibraryViewModel: meetsLibraryViewModel, viewController: viewController).tabItem {
+          MeetDetails(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
           }
@@ -48,7 +48,7 @@ struct MainPageView: View {
             Image(systemName: "person.badge.plus")
             Text("Register")
           }
-          CurrentUserView(viewController: viewController).tabItem {
+          CurrentUserView(firebase: firebase).tabItem {
             Image(systemName: "person.fill")
             Text("User Profile")
           }

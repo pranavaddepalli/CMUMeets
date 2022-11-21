@@ -13,7 +13,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct LoginView: View {
-    @ObservedObject var viewController: ViewController = ViewController()
+    @ObservedObject var firebase: Firebase = Firebase()
     @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel = MeetsLibraryViewModel()
         
     @State private var username: String = ""
@@ -50,7 +50,7 @@ struct LoginView: View {
                         .cornerRadius(15.0)
                 }
                 if goToMain == true {
-                    NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, viewController: viewController).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).navigationBarBackButtonHidden(true)) {
                         Text("Continue")
                     }
                 }
@@ -60,14 +60,14 @@ struct LoginView: View {
     }
     
     private func getUsers() -> [String: Dictionary<String, Any>] {
-        viewController.readUsers()
-        return viewController.users
+        firebase.readUsers()
+        return firebase.users
     }
     
     
     private func getNameAndUsername() -> [String: String] {
         getUsers()
-        var userRepo = viewController.users
+        var userRepo = firebase.users
         var nameList: [usersName] = []
         var usernameList: [usersUserame] = []
         var userToNameDict: [String:String] = [:]
@@ -109,7 +109,7 @@ struct LoginView: View {
                 } else {
                     for document in querySnapshot!.documents {
                         //print("\(document.documentID) => \(document.data())")
-                        self.viewController.currentUser = User(id: document.documentID,
+                        self.firebase.currentUser = User(id: document.documentID,
                                                           name: document["name"] as? String ?? "",
                                                           phone: document["phone"] as? String ?? "",
                                                           major: document["major"] as? String ?? "",
@@ -120,7 +120,7 @@ struct LoginView: View {
                                                           ethnicity: document["ethnicity"] as? String ?? "",
                                                           username: document["username"] as? String ?? ""
                         )
-                        print(viewController.currentUser)
+                        print(firebase.currentUser)
                     }
                 }
         }

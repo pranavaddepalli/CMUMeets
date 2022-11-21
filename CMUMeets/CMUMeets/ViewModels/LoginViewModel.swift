@@ -9,7 +9,7 @@
 //import Combine
 //
 //class LoginViewModel {
-//    @ObservedObject var viewController: ViewController = ViewController()
+//    @ObservedObject var firebase: Firebase = Firebase()
 //
 //    @Published var username: String = ""
 //    @Published private var name: String = ""
@@ -18,14 +18,14 @@
 //
 //
 //    private func getUsers() -> [String: Dictionary<String, Any>] {
-//        viewController.readUsers()
-//        return viewController.users
+//        firebase.readUsers()
+//        return firebase.users
 //    }
 //
 //
 //    private func getNameAndUsername() -> [String: String] {
 //        getUsers()
-//        var userRepo = viewController.users
+//        var userRepo = firebase.users
 //        var nameList: [usersName] = []
 //        var usernameList: [usersUserame] = []
 //        var userToNameDict: [String:String] = [:]

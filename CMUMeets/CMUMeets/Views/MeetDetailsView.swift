@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MeetDetailsView: View {
-    @ObservedObject var viewController: ViewController
+    @ObservedObject var firebase: Firebase
     
     var meet: Meet
     @State private var clicked: Bool = false
@@ -57,6 +57,6 @@ struct MeetDetailsView: View {
                 print("Document updated successfully")
             }
         }
-        self.viewController.ongoingMeets.append(meet)
+        self.firebase.ongoingMeets.append(meet)
     }
 }

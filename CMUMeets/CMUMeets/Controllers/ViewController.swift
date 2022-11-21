@@ -1,15 +1,20 @@
+////
+////  Firebase.swift
+////  ChiMeetLocations
+////
+////  Created by Steven Lipton on 11/3/17.
+////  Copyright © 2017 Steven Lipton. All rights reserved.
+////
 //
-//  ViewController.swift
-//  FindMyCar
+//import UIKit
+//import MapKit
 //
-//  Created by Ricky Lee on 11/3/22.
-//  Copyright © 2022 Steph K. Ananth. All rights reserved.
 //
 
 import Foundation
 import FirebaseFirestore
 
-class ViewController: ObservableObject {
+class Firebase: ObservableObject {
     let currentLocation = Location()
     @Published var locations: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
     @Published var meets: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()

@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 struct CurrentUserView: View {
-    @ObservedObject var viewController: ViewController
+    @ObservedObject var firebase: Firebase
     
     var body: some View {
         VStack {
-            Text("Name: " + viewController.currentUser.name)
-            Text("Phone: " + viewController.currentUser.phone)
-            Text("Age: " + String(viewController.currentUser.age))
-            Text("Graduation Year: " + String(viewController.currentUser.gradYear))
-            Text("Major: " + viewController.currentUser.major)
-            Text("Gender: " + viewController.currentUser.gender)
-            Text("Pronouns: " + viewController.currentUser.pronouns)
-            Text("Ethnicity: " + viewController.currentUser.ethnicity)
+            Text("Name: " + firebase.currentUser.name)
+            Text("Phone: " + firebase.currentUser.phone)
+            Text("Age: " + String(firebase.currentUser.age))
+            Text("Graduation Year: " + String(firebase.currentUser.gradYear))
+            Text("Major: " + firebase.currentUser.major)
+            Text("Gender: " + firebase.currentUser.gender)
+            Text("Pronouns: " + firebase.currentUser.pronouns)
+            Text("Ethnicity: " + firebase.currentUser.ethnicity)
         }
     }
 }
