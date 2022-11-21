@@ -55,10 +55,6 @@ struct MapView: UIViewRepresentable {
           annotationView.canShowCallout = true
           annotationView.subtitleVisibility = .visible
         
-          // render preview view onto mkmarker
-          let btn = UIButton(type: .detailDisclosure)
-          annotationView.detailCalloutAccessoryView = btn
-        
           return annotationView
       }
   }

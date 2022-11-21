@@ -50,12 +50,6 @@ private extension MeetAnnotationView {
         canShowCallout = true
         configureDetailView()
     }
-  
-//  private func createMeetObject(meet: Dictionary<String, Any>) -> Meet {
-//    var newMeet = Meet(from: <#Decoder#>)
-//
-//    return newMeet
-//  }
 
     func configureDetailView() {
         guard let annotation = annotation else { return }
@@ -67,16 +61,9 @@ private extension MeetAnnotationView {
         snapshotView.translatesAutoresizingMaskIntoConstraints = false
         snapshotView.frame = rect
 
-      
         var child = UIHostingController(rootView: MeetPreviewView(annotation: annotation))
-        child.view.frame = snapshotView.frame
+        child.view.frame = snapshotView.bounds
         snapshotView.addSubview(child.view)
-      
-//        let imageView = UIImageView(frame: rect)
-//        imageView.image = UIImage(systemName: "a")
-//
-//        snapshotView.addSubview(imageView)
-        // Load another view
 
         detailCalloutAccessoryView = snapshotView
         NSLayoutConstraint.activate([

@@ -11,7 +11,7 @@ struct DummyView: View {
     let firebase: Firebase
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("This is a dummy view!")
     }
 }
 

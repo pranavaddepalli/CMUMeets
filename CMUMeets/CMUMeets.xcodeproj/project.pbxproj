@@ -34,7 +34,6 @@
 		AB20B728291B9640007C8FBD /* LocationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B727291B9640007C8FBD /* LocationsRepository.swift */; };
 		AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B729291B964A007C8FBD /* LocationModel.swift */; };
 		AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B72E291B9B2F007C8FBD /* LocationView.swift */; };
-		AB6435612927552C00D32C52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6435602927552C00D32C52 /* ViewController.swift */; };
 		AB6435632929F66F00D32C52 /* MeetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6435622929F66F00D32C52 /* MeetPreviewView.swift */; };
 		ABCDF815291CC039006AEE53 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF814291CC039006AEE53 /* DummyView.swift */; };
 		ABCDF86929253141006AEE53 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86429253141006AEE53 /* Gender.swift */; };
@@ -93,7 +92,6 @@
 		AB20B727291B9640007C8FBD /* LocationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsRepository.swift; sourceTree = "<group>"; };
 		AB20B729291B964A007C8FBD /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationModel.swift; path = CMUMeets/Repositories/LocationModel.swift; sourceTree = SOURCE_ROOT; };
 		AB20B72E291B9B2F007C8FBD /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		AB6435602927552C00D32C52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AB6435622929F66F00D32C52 /* MeetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPreviewView.swift; sourceTree = "<group>"; };
 		ABCDF814291CC039006AEE53 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		ABCDF86429253141006AEE53 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				AB20B70E291B6616007C8FBD /* Firebase.swift */,
-				AB6435602927552C00D32C52 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -423,7 +420,6 @@
 				ABCDF8742925904F006AEE53 /* MeetDetails.swift in Sources */,
 				AB20B71D291B8FE3007C8FBD /* MeetsRepository.swift in Sources */,
 				ABCDF815291CC039006AEE53 /* DummyView.swift in Sources */,
-				AB6435612927552C00D32C52 /* ViewController.swift in Sources */,
 				AB20B726291B94CB007C8FBD /* UsersRepository.swift in Sources */,
 				AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */,
 				ABCDF8752925904F006AEE53 /* MeetRowView.swift in Sources */,

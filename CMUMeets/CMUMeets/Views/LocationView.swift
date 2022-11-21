@@ -11,11 +11,7 @@ struct LocationView: View {
     let firebase: Firebase
 
     var body: some View {
-      Text("location meet page")
-//      Text(viewController.readMeets())
-//      Text(viewController.readLocations())
-//      Text(viewController.updatedMeets())
-//      Text(viewController.test())
+      Text("This is another dummy view!")
     }
 }
 
