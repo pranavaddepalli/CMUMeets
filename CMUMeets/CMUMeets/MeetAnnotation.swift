@@ -18,15 +18,15 @@ class MeetAnnotation:NSObject,MKAnnotation{
     var type: String?
     var joined: Int?
     var capacity: Int?
-    var meet: Dictionary<String, Any>
-    init(meet: Dictionary<String, Any>){
-      self.coordinate = CLLocationCoordinate2D(latitude: meet["latitude"] as! Double, longitude: meet["longitude"] as! Double)
-      self.title = meet["title"] as! String
-      self.subtitle = meet["location"] as! String
-      self.type = meet["icon"] as! String
+    var meet: Meet
+    init(meet: Meet){
+      self.coordinate = CLLocationCoordinate2D(latitude: meet.latitude, longitude: meet.longitude)
+      self.title = meet.title
+      self.subtitle = meet.location
+      self.type = meet.icon
 //      self.joined = meet["joined"] as! Int
       // on ricky's branch, missing joined field for meets in hosting
-      self.capacity = meet["capacity"] as! Int
+      self.capacity = meet.capacity
       self.meet = meet
     }
 }
@@ -61,7 +61,7 @@ private extension MeetAnnotationView {
         snapshotView.translatesAutoresizingMaskIntoConstraints = false
         snapshotView.frame = rect
 
-        var child = UIHostingController(rootView: MeetPreviewView(annotation: annotation))
+      var child = UIHostingController(rootView: MeetPreviewView(annotation: annotation as! MeetAnnotation))
         child.view.frame = snapshotView.bounds
         snapshotView.addSubview(child.view)
 

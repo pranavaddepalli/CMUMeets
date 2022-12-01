@@ -15,7 +15,6 @@ struct LocationModel: Codable, Identifiable, Comparable {
   var longitude: Float
   var name: String
 
-
 //  enum CodingKeys: String, CodingKey {
 //    case code
 //    case latitude

@@ -34,6 +34,7 @@
 		AB20B728291B9640007C8FBD /* LocationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B727291B9640007C8FBD /* LocationsRepository.swift */; };
 		AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B729291B964A007C8FBD /* LocationModel.swift */; };
 		AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B72E291B9B2F007C8FBD /* LocationView.swift */; };
+		AB31CF6D293804740030B300 /* MeetPreviewDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31CF6C293804740030B300 /* MeetPreviewDetailsView.swift */; };
 		AB6435632929F66F00D32C52 /* MeetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6435622929F66F00D32C52 /* MeetPreviewView.swift */; };
 		ABCDF815291CC039006AEE53 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF814291CC039006AEE53 /* DummyView.swift */; };
 		ABCDF86929253141006AEE53 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86429253141006AEE53 /* Gender.swift */; };
@@ -94,8 +95,9 @@
 		AB20B71C291B8FE3007C8FBD /* MeetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetsRepository.swift; sourceTree = "<group>"; };
 		AB20B725291B94CB007C8FBD /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
 		AB20B727291B9640007C8FBD /* LocationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsRepository.swift; sourceTree = "<group>"; };
-		AB20B729291B964A007C8FBD /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationModel.swift; path = CMUMeets/Repositories/LocationModel.swift; sourceTree = SOURCE_ROOT; };
+		AB20B729291B964A007C8FBD /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationModel.swift; path = CMUMeets/Models/LocationModel.swift; sourceTree = SOURCE_ROOT; };
 		AB20B72E291B9B2F007C8FBD /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		AB31CF6C293804740030B300 /* MeetPreviewDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPreviewDetailsView.swift; sourceTree = "<group>"; };
 		AB6435622929F66F00D32C52 /* MeetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPreviewView.swift; sourceTree = "<group>"; };
 		ABCDF814291CC039006AEE53 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		ABCDF86429253141006AEE53 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
@@ -215,7 +217,6 @@
 			children = (
 				ABCDF87629259084006AEE53 /* MeetsLibraryViewModel.swift */,
 				ABCDF87729259084006AEE53 /* MeetViewModel.swift */,
-				AB20B729291B964A007C8FBD /* LocationModel.swift */,
 				820179962918E7C500AF8D4A /* LocationList.swift */,
 				82828C0D2917345E003A405C /* HostViewModel.swift */,
 				C392410529272FBD00DD9602 /* LoginViewModel.swift */,
@@ -239,6 +240,7 @@
 				C3DA3BAC292638A7008247D0 /* MainPageView.swift */,
 				C39241072927810800DD9602 /* CurrentUserView.swift */,
 				AB6435622929F66F00D32C52 /* MeetPreviewView.swift */,
+				AB31CF6C293804740030B300 /* MeetPreviewDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +270,7 @@
 				ABCDF86529253141006AEE53 /* Meet.swift */,
 				ABCDF86629253141006AEE53 /* User.swift */,
 				ABCDF86729253141006AEE53 /* Pronouns.swift */,
+				AB20B729291B964A007C8FBD /* LocationModel.swift */,
 				ABCDF86829253141006AEE53 /* Ethnicity.swift */,
 			);
 			path = Models;
@@ -423,6 +426,7 @@
 				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
 				ABCDF86C29253141006AEE53 /* Pronouns.swift in Sources */,
 				C392410629272FBD00DD9602 /* LoginViewModel.swift in Sources */,
+				AB31CF6D293804740030B300 /* MeetPreviewDetailsView.swift in Sources */,
 				820179972918E7C500AF8D4A /* LocationList.swift in Sources */,
 				ABCDF86A29253141006AEE53 /* Meet.swift in Sources */,
 				8242BD6029171DBE00CB82FE /* HostView.swift in Sources */,

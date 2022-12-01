@@ -28,6 +28,7 @@ struct MapView: UIViewRepresentable {
   class Coordinator: NSObject, MKMapViewDelegate {
       func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
           var annotationView = MeetAnnotationView()
+
           guard let annotation = annotation as? MeetAnnotation else {return nil}
           let identifier = ""
           var color = UIColor.white
@@ -59,9 +60,6 @@ struct MapView: UIViewRepresentable {
       }
   }
   
-  
-  
-  
   func makeCoordinator() -> Coordinator {
       return Coordinator()
   }
@@ -78,6 +76,8 @@ struct MapView: UIViewRepresentable {
     firebase.readMeets()
     firebase.readUsers()
     firebase.updatedMeets()
+    firebase.updatedLocations()
+    firebase.updatedUsers()
   }
   
   private func setupRegionForMap() {
@@ -95,7 +95,7 @@ struct MapView: UIViewRepresentable {
       uiView.removeAnnotations(uiView.annotations)
       
       for (_, meet) in firebase.meets{
-        let date = (meet["endTime"] as! Timestamp).dateValue()
+        let date = (meet.endTime).dateValue()
 
         if isSameDay(date1: date, date2: Date.now) && date > Date.now {
           let droppedPin = MeetAnnotation(meet:meet)
