@@ -12,8 +12,8 @@ struct MeetPreviewDetailsView: View {
     
     var body: some View {
         Text("@ " + meet.location)
-        Text("Start: " + meet.getStartString())
-        Text("End: " + meet.getEndString())
+        Text("Start: " + getStartTime())
+        Text("End: " + getEndTime())
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         Button(action:  {
             if meet.joined < meet.capacity {
@@ -51,5 +51,21 @@ struct MeetPreviewDetailsView: View {
             }
         }
         self.firebase.ongoingMeets.append(meet)
+    }
+  
+    func getStartTime() -> String {
+      let startTimeDate = meet.startTime.dateValue()
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "hh:mm a"
+      return dateFormatter.string(from: startTimeDate)
+    }
+  
+    func getEndTime() -> String {
+      let endTimeDate = meet.endTime.dateValue()
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "hh:mm a"
+      return dateFormatter.string(from: endTimeDate)
     }
 }

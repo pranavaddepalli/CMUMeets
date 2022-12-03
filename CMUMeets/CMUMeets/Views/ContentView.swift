@@ -1,18 +1,18 @@
+////
+////  ContentView.swift
+////  Sprint4
+////
+////  Created by Isaac Ahn on 11/2/22.
+////
 //
-//  ContentView.swift
-//  Sprint4
+//import SwiftUI
 //
-//  Created by Isaac Ahn on 11/2/22.
+//struct ContentView: View {
+//  @ObservedObject var firebase: Firebase
+//  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
 //
-
-import SwiftUI
-
-struct ContentView: View {
-  @ObservedObject var firebase: Firebase
-  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
-
-  
-  var body: some View {
-      LoginView(firebase: firebase, meetsLibraryViewModel: meetsLibraryViewModel)
-  }
-}
+//
+//  var body: some View {
+//      LoginView(firebase: firebase, meetsLibraryViewModel: meetsLibraryViewModel)
+//  }
+//}
