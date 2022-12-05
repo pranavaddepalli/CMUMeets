@@ -86,5 +86,26 @@ class Firebase: ObservableObject {
         }
     return "success: updates"
   }
+    
+    func updatedUsers() -> String {
+      self.db.collection("users")
+          .addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            snapshot.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                  print("New User: \(diff.document.data())")
+                  self.users[diff.document.documentID] = diff.document.data()
+                }
+                if (diff.type == .modified) {
+                  print("Modified User: \(diff.document.data())")
+                  self.users[diff.document.documentID] = diff.document.data()
+                }
+            }
+          }
+      return "success: updates"
+    }
 }
 

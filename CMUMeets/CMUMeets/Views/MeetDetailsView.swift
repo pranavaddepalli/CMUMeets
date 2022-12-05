@@ -13,8 +13,8 @@ struct MeetDetailsView: View {
     @ObservedObject var firebase: Firebase
     
     var meet: Meet
-    @State private var clicked: Bool = false
     @State private var alertShown = false
+    @State private var alertMessage = ""
     
     var body: some View {
         Text(meet.title).fontWeight(.bold).font(.title)
@@ -23,12 +23,17 @@ struct MeetDetailsView: View {
         Text("End: " + meet.getEndString())
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         Button(action:  {
-            if meet.joined < meet.capacity {
+            if meet.joined < meet.capacity && !firebase.ongoingMeets.contains(meet) {
                 joinMeet()
-                clicked = true
             }
             else {
                 alertShown = true
+                if meet.joined == meet.capacity {
+                    alertMessage = "This Meet is Full!"
+                }
+                if firebase.ongoingMeets.contains(meet) {
+                    alertMessage = "You've already joined this Meet!"
+                }
             }
             
         }) {
@@ -40,8 +45,7 @@ struct MeetDetailsView: View {
                 .background(Color.green)
                 .cornerRadius(15.0)
         }
-        .disabled(clicked)
-        .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
+        .alert(alertMessage, isPresented: $alertShown, actions: {})
     }
     
     func joinMeet() {

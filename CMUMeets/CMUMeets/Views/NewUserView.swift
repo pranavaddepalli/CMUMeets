@@ -13,6 +13,7 @@ import FirebaseFirestoreSwift
 
 
 struct NewUserView: View {
+    @ObservedObject var firebase: Firebase
     
     @State private var name: String = ""
     @State private var phone: String = ""
@@ -24,9 +25,11 @@ struct NewUserView: View {
     @State private var ethnicity: String = ""
     @State private var username: String = ""
     
+    @State private var registered: Bool = false
+    
     var body: some View {
         VStack {
-            Text("New User")
+            Text("Register")
                 .font(.title)
                 .fontWeight(.bold)
             Form {
@@ -69,15 +72,26 @@ struct NewUserView: View {
                     }
                   }
                 
-                if self.isValidUser() {
-                    Button("Add User") {
-                        addUser()
-                        clearFields()
+                  Button(action:  {
+                      if self.isValidUser() {
+                          addUser()
+                          clearFields()
+                          registered = true
+                          firebase.updatedUsers()
+                      }
+                    }) {
+                        Text("Add User")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 220, height: 60)
+                            .background(Color.green)
+                            .cornerRadius(15.0)
                     }
+                    .alert("Successfully Registered!", isPresented: $registered, actions: {})
                 }
             }
         }
-    }
     
     private func isValidUser() -> Bool {
       if name.isEmpty { return false }
@@ -126,13 +140,5 @@ struct NewUserView: View {
                 print("Document successfully written!")
             }
         }
-    }
-}
-
-
-
-struct NewUserView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewUserView()
     }
 }

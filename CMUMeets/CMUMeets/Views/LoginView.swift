@@ -38,10 +38,11 @@ struct LoginView: View {
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
                 Button(action: {
-                    isUser()
-                    storeUser()
+                    if isUser() {
+                        storeUser()
+                    }
                 }) {
-                    Text("Verify")
+                    Text("Login")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
@@ -49,24 +50,23 @@ struct LoginView: View {
                         .background(Color.green)
                         .cornerRadius(15.0)
                 }
-                if goToMain == true {
-                    NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).navigationBarBackButtonHidden(true)) {
-                        Text("Continue")
-                    }
+                NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).navigationBarBackButtonHidden(true), isActive: $goToMain) {}
+
+                NavigationLink(destination: NewUserView(firebase: firebase)) {
+                    Text("Register")
                 }
             }
         }
+        .onAppear(perform: getUsers )
         
     }
     
-    private func getUsers() -> [String: Dictionary<String, Any>] {
+    private func getUsers() {
         firebase.readUsers()
-        return firebase.users
     }
     
     
     private func getNameAndUsername() -> [String: String] {
-        getUsers()
         var userRepo = firebase.users
         var nameList: [usersName] = []
         var usernameList: [usersUserame] = []
