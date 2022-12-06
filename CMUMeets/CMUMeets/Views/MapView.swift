@@ -27,7 +27,7 @@ struct MapView: UIViewRepresentable {
   
   class Coordinator: NSObject, MKMapViewDelegate {
       func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        var annotationView = MeetAnnotationView()
+          var annotationView = MeetAnnotationView()
 
           guard let annotation = annotation as? MeetAnnotation else {return nil}
           let identifier = ""
@@ -98,7 +98,7 @@ struct MapView: UIViewRepresentable {
         let date = (meet.endTime).dateValue()
 
         if isSameDay(date1: date, date2: Date.now) && date > Date.now {
-          let droppedPin = MeetAnnotation(meet:meet, firebase: firebase)
+          let droppedPin = MeetAnnotation(meet:meet)
           uiView.addAnnotation(droppedPin)
         }
       }
