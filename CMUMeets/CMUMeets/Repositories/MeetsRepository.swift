@@ -35,7 +35,9 @@ class MeetsRepository: ObservableObject {
                    capacity: d["capacity"] as? Int ?? 0,
                    icon: d["icon"] as? String ?? "",
                    latitude: d["latitude"] as? Double ?? 0.0,
-                   longitude: d["longitude"] as? Double ?? 0.0
+                   longitude: d["longitude"] as? Double ?? 0.0,
+                   host: d["host"] as? String ?? "",
+                   people: d["people"] as? [String] ?? [""]
              )
            }
          }

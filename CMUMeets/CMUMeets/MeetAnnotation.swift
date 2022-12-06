@@ -18,15 +18,20 @@ class MeetAnnotation:NSObject,MKAnnotation{
     var type: String?
     var joined: Int?
     var capacity: Int?
+    var host : String
     var meet: Meet
-    init(meet: Meet){
+    var people : [String]
+    
+  init(meet: Meet){
       self.coordinate = CLLocationCoordinate2D(latitude: meet.latitude, longitude: meet.longitude)
       self.title = meet.title
       self.subtitle = meet.location
       self.type = meet.icon
-//      self.joined = meet["joined"] as! Int
+      self.joined = meet.joined
       // on ricky's branch, missing joined field for meets in hosting
       self.capacity = meet.capacity
+      self.host = meet.host
+      self.people = meet.people
       self.meet = meet
     }
 }

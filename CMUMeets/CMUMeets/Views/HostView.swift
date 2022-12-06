@@ -12,28 +12,24 @@ import MapKit
 
 
 struct HostView: View {
-  let hostViewModel : HostViewModel
+  @ObservedObject var firebase: Firebase
   
   @Environment(\.presentationMode) var presentationMode
-  @State var selection: Int? = nil
 
   @State var meetName: String = ""
-  @State var meetCapacity: Int = 1
-  @State var meetIcon = HostViewModel.MeetIcon.hangout
-  @State var meetLoc: LocationSetup.Location = LocationSetup.Location (
+  @State var meetCapacity: Int = 2
+  @State var meetIcon = "🍽"
+  @State var meetLoc: LocationModel = LocationModel (
     code: "FENCE",
-    title: "The Fence",
     latitude : 40.4432027,
-    longitude : -79.9428499
+    longitude : -79.9428499,
+    name: "The Fence"
   )
-  // add pin to map
   @State var meetStartTime: Date = Date.now
   @State var meetEndTime: Date = Date.now.advanced(by: 1800) // 30 min later
-  
-  
+    
   @State private var failedMsg = ""
-//  @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.4447434, longitude: -79.9420948), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
+  
   
   var body: some View {
     VStack {
@@ -47,9 +43,9 @@ struct HostView: View {
         .padding()
       
       Picker("Icon", selection: $meetIcon) {
-        Text("🍽 Food").tag(HostViewModel.MeetIcon.food)
-        Text("⛹️ Sport").tag(HostViewModel.MeetIcon.sport)
-        Text("🎪 Hangout").tag(HostViewModel.MeetIcon.hangout)
+        Text("🍽 Food").tag("🍽")
+        Text("⛹️ Sport").tag("⛹️")
+        Text("🎪 Hangout").tag("🎪")
       }
       .pickerStyle(.segmented)
       .padding()
@@ -67,7 +63,8 @@ struct HostView: View {
         Spacer()
         
         Picker("Location", selection: $meetLoc) {
-          ForEach(hostViewModel.getLocations(), id: \.self) { loc in Text(loc.title).tag(loc)}
+          ForEach(Array(firebase.locations.values), id: \.self) { loc in
+            Text(loc.longitude.formatted()).tag(loc)}
         }
         .padding()
         
@@ -85,12 +82,13 @@ struct HostView: View {
       Spacer()
       
       Button(action: {
-        self.failedMsg = hostViewModel.hostMeet(meetName: meetName,
+        
+        self.failedMsg = firebase.hostMeet(meetName: meetName,
                                icon: meetIcon,
                                capacity: meetCapacity,
                                loc: meetLoc,
                                start: meetStartTime,
-                               end: meetEndTime)     
+                               end: meetEndTime)
       }) {
         Text("Host!")
           .font(.title)
@@ -115,7 +113,7 @@ struct HostView: View {
                        )
           }
         else {
-          var err = self.failedMsg + "."    
+          let err = self.failedMsg + "."
           return  Alert(title: Text("Oh no!"),
                         message: Text(err),
                         primaryButton: .destructive(Text("Don't host")) {

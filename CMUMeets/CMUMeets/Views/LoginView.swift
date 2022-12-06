@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift
 struct LoginView: View {
     @ObservedObject var firebase: Firebase = Firebase()
     @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel = MeetsLibraryViewModel()
-        
+  
     @State private var username: String = ""
     @State private var name: String = ""
     @State private var goToMain: Bool = false
@@ -50,7 +50,7 @@ struct LoginView: View {
                         .cornerRadius(15.0)
                 }
                 if goToMain == true {
-                    NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).navigationBarBackButtonHidden(true)) {
+                  NavigationLink(destination: MainPageView(firebase: firebase, meetsLibraryViewModel: meetsLibraryViewModel).navigationBarBackButtonHidden(true)) {
                         Text("Continue")
                     }
                 }

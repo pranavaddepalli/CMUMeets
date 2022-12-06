@@ -25,8 +25,7 @@ class LocationsRepository: ObservableObject {
        if let snapshot = snapshot {
          DispatchQueue.main.async {
            self.locations = snapshot.documents.map { d in
-             return LocationModel(id: d.documentID,
-                                  code: d["code"] as? String ?? "",
+             return LocationModel(code: d["code"] as? String ?? "",
                                   latitude: d["latitude"] as? Float ?? 0.0,
                                   longitude: d["longitude"] as? Float ?? 0.0,
                                   name: d["String"] as? String ?? ""
@@ -48,16 +47,14 @@ class LocationsRepository: ObservableObject {
   }
  }
  func update(_ location: LocationModel) {
-  guard let locationId = location.id else { return }
   do {
-   try store.collection(path).document(locationId).setData(from: location)
+    try store.collection(path).document(location.name).setData(from: location)
   } catch {
    fatalError("Unable to update Location: \(error.localizedDescription).")
   }
  }
  func remove(_ location: LocationModel) {
-  guard let locationId = location.id else { return }
-  store.collection(path).document(locationId).delete { error in
+   store.collection(path).document(location.name).delete { error in
    if let error = error {
     print("Unable to remove Location: \(error.localizedDescription)")
    }

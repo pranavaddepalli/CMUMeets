@@ -1,8 +1,8 @@
 //
 //  MeetsLibraryViewModel.swift
-//  Sprint4
+//  CMUMeets
 //
-//  Created by Isaac Ahn on 11/7/22.
+//  Created by Pranav Addepalli on 12/2/22.
 //
 
 import Foundation

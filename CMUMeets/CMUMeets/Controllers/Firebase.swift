@@ -50,11 +50,10 @@ class Firebase: ObservableObject {
 //                self.locations[document.documentID] = document.data()
                 self.locations[d.documentID] = (
                   LocationModel(
-                    id: d.documentID,
                     code: d["code"] as? String ?? "",
                     latitude: d["latitude"] as? Float ?? 0.0,
                     longitude: d["longitude"] as? Float ?? 0.0,
-                    name: d["String"] as? String ?? ""
+                    name: d["name"] as? String ?? ""
 
                   )
                 )
@@ -82,8 +81,9 @@ class Firebase: ObservableObject {
               capacity: d["capacity"] as? Int ?? 0,
               icon: d["icon"] as? String ?? "",
               latitude: d["latitude"] as? Double ?? 0.0,
-              longitude: d["longitude"] as? Double ?? 0.0
-
+              longitude: d["longitude"] as? Double ?? 0.0,
+              host: d["host"] as? String ?? "",
+              people: d["people"] as? [String] ?? [""]
             )
           )
         }
@@ -113,7 +113,9 @@ class Firebase: ObservableObject {
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
                     latitude: diff.document["latitude"] as? Double ?? 0.0,
-                    longitude: diff.document["longitude"] as? Double ?? 0.0
+                    longitude: diff.document["longitude"] as? Double ?? 0.0,
+                    host: diff.document["host"] as? String ?? "",
+                    people: diff.document["people"] as? [String] ?? [""]
 
                   )
                 )
@@ -131,7 +133,9 @@ class Firebase: ObservableObject {
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
                     latitude: diff.document["latitude"] as? Double ?? 0.0,
-                    longitude: diff.document["longitude"] as? Double ?? 0.0
+                    longitude: diff.document["longitude"] as? Double ?? 0.0,
+                    host: diff.document["host"] as? String ?? "",
+                    people: diff.document["people"] as? [String] ?? [""]
 
                   )
                 )
@@ -172,13 +176,15 @@ class Firebase: ObservableObject {
           snapshot.documentChanges.forEach { diff in
               if (diff.type == .added) {
                 print("New location: \(diff.document.data())")
+                print("AT \(diff.document["longitude"])!")
+                print("AND \(diff.document["latitude"])!")
+                
                 self.locations[diff.document.documentID] = (
                   LocationModel(
-                    id: diff.document.documentID,
                     code: diff.document["code"] as? String ?? "",
-                    latitude: diff.document["latitude"] as? Float ?? 0.0,
-                    longitude: diff.document["longitude"] as? Float ?? 0.0,
-                    name: diff.document["String"] as? String ?? ""
+                    latitude: diff.document["latitude"]! as? Float ?? 0.0,
+                    longitude: diff.document["longitude"]! as? Float ?? 0.0,
+                    name: diff.document["name"] as? String ?? ""
 
                   )
                 )
@@ -187,7 +193,6 @@ class Firebase: ObservableObject {
                 print("Modified location: \(diff.document.data())")
                 self.locations[diff.document.documentID] = (
                   LocationModel(
-                    id: diff.document.documentID,
                     code: diff.document["code"] as? String ?? "",
                     latitude: diff.document["latitude"] as? Float ?? 0.0,
                     longitude: diff.document["longitude"] as? Float ?? 0.0,
@@ -199,6 +204,58 @@ class Firebase: ObservableObject {
           }
         }
     return "success: updated locations"
+  }
+  
+  
+  
+  // MARK: Meet operations
+  
+  // hosting a meet
+  func hostMeet(meetName : String, icon : String, capacity : Int, loc : LocationModel, start : Date, end : Date) -> String {
+      
+    // MARK: validation
+    // start date must come before end date
+    if (start >= end) {
+      return "End time must be after start time."
+    }
+    
+    // capacity has to be greater than 1
+    if (capacity <= 1) {
+      return "You can't Meet with less than 2 people!"
+    }
+  
+    // title cannot be empty
+    if (loc.name == "") {
+      return "Give your Meet a good name."
+    }
+    
+    var res = "Successfully hosted your Meet!"
+    
+    print("HOSTING MEET AT")
+    print(loc)
+    
+    db.collection("meets").document().setData([
+      "title" : meetName,
+      "icon" : icon,
+      "joined" : 1,
+      "host" : currentUser.id!,
+      "capacity" : capacity,
+      "location" : loc.name,
+      "latitude" : loc.latitude,
+      "longitude" : loc.longitude,
+      "startTime" : start,
+      "endTime" : end,
+      "people" : [currentUser.id!]
+    ]) { err in
+      if let err = err {
+        res = "\(err)"
+        print("Error writing meet: \(err)")
+      } else {
+        print("Meet successfully written!")
+      }
+    }
+    print(res)
+    return res;
   }
 
 }

@@ -3,7 +3,7 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Meet: Codable, Identifiable, Comparable{
+struct Meet: Codable, Identifiable, Comparable, Hashable {
     @DocumentID var id: String?
     var title: String
     var location: String
@@ -14,6 +14,8 @@ struct Meet: Codable, Identifiable, Comparable{
     var icon: String
     var latitude: Double
     var longitude: Double
+    var host: String
+    var people : [String]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,6 +28,8 @@ struct Meet: Codable, Identifiable, Comparable{
         case icon
         case latitude
         case longitude
+        case host
+        case people
     }
     
     static func ==(lhs: Meet, rhs: Meet) -> Bool {

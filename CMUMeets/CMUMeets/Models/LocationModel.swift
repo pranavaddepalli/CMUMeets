@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseFirestoreSwift
-struct LocationModel: Codable, Identifiable, Comparable {
-  @DocumentID var id: String?
+struct LocationModel: Codable, Comparable, Hashable {
   var code: String
   var latitude: Float
   var longitude: Float
@@ -23,7 +22,7 @@ struct LocationModel: Codable, Identifiable, Comparable {
 //
   
   static func ==(lhs: LocationModel, rhs: LocationModel) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.code == rhs.code
   }
   static func <(lhs: LocationModel, rhs: LocationModel) -> Bool {
    return lhs.name < rhs.name
