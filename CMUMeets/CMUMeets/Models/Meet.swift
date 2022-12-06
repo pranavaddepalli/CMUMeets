@@ -51,4 +51,5 @@ struct Meet: Codable, Identifiable, Comparable{
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         return dateFormatter.string(from: endTimeDate)
     }
+  
 }

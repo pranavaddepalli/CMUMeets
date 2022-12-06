@@ -14,7 +14,9 @@ import FirebaseFirestoreSwift
 
 struct MeetPreviewView: View {
   var annotation:  MeetAnnotation
-  var firebase = Firebase()
+  
+  @State private var clicked: Bool = false
+  @State private var alertShown = false
   var body: some View {
     NavigationStack {
       VStack {
@@ -31,7 +33,7 @@ struct MeetPreviewView: View {
         }
         HStack {
           Spacer()
-          NavigationLink(destination: MeetPreviewDetailsView(firebase: firebase, meet: annotation.meet)) {
+          NavigationLink(destination: MeetPreviewDetailsView(firebase: annotation.firebase, meet: annotation.meet)) {
             Text("See more")
               .foregroundColor(.black)
               .padding()
@@ -41,17 +43,33 @@ struct MeetPreviewView: View {
               )
           }
           Spacer()
+          
+          
+          
           // https://developer.apple.com/documentation/swiftui/navigationstack
           // Use this resource once we implement user info, to change the display for meets that you've already joined
-          NavigationLink(destination: Text("Confirmation that you joined this meet.")) {
-            Text("Join")
-              .foregroundColor(.black)
-              .padding()
-              .overlay(
-                  RoundedRectangle(cornerRadius: 15)
-                      .stroke(Color.blue, lineWidth: 4)
-              )
+          
+          
+          Button(action:  {
+            if annotation.meet.joined < annotation.meet.capacity {
+                  joinMeet()
+                  clicked = true
+              }
+              else {
+                  alertShown = true
+              }
+              
+          }) {
+              Text("Join Meet")
+                  .font(.headline)
+                  .foregroundColor(.white)
+                  .padding()
+                  .background(Color.green)
+                  .cornerRadius(15.0)
           }
+          .disabled(clicked)
+          .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
+          // Change this to the green button found in the See More navigation link so that joining a meet actually happens
           Spacer()
           
         }
@@ -59,13 +77,28 @@ struct MeetPreviewView: View {
     }
   }
   
-  // Make this into 12HR time not 24HR time
   func getStartTime() -> String {
     let startTimeDate = annotation.meet.startTime.dateValue()
     
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.dateFormat = "hh:mm a"
     return dateFormatter.string(from: startTimeDate)
+  }
+  
+  func joinMeet() {
+      let db = Firestore.firestore()
+    let path = db.collection("meets").document(self.annotation.meet.id!)
+      path.updateData([
+        "joined": annotation.meet.joined + 1
+      ]) { err in
+          if let err = err {
+              print("Error updating document: \(err)")
+          }
+          else {
+              print("Document updated successfully")
+          }
+      }
+    self.annotation.ffirebase.ongoingMeets.append(annotation.meet)
   }
 }
 
