@@ -19,8 +19,7 @@ class MeetAnnotation:NSObject,MKAnnotation{
     var joined: Int?
     var capacity: Int?
     var meet: Meet
-  var firebase: Firebase
-  init(meet: Meet, firebase: Firebase){
+    init(meet: Meet){
       self.coordinate = CLLocationCoordinate2D(latitude: meet.latitude, longitude: meet.longitude)
       self.title = meet.title
       self.subtitle = meet.location
@@ -29,7 +28,6 @@ class MeetAnnotation:NSObject,MKAnnotation{
       // on ricky's branch, missing joined field for meets in hosting
       self.capacity = meet.capacity
       self.meet = meet
-    self.firebase = firebase
     }
 }
 
