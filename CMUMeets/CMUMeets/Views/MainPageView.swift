@@ -35,10 +35,6 @@ struct MainPageView: View {
             Image(systemName: "calendar")
             Text("Meets")
           }
-          NewUserView().tabItem {
-            Image(systemName: "person.badge.plus")
-            Text("Register")
-          }
           CurrentUserView(firebase: firebase).tabItem {
             Image(systemName: "person.fill")
             Text("User Profile")
