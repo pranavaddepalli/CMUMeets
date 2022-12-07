@@ -98,7 +98,7 @@ struct MeetPreviewView: View {
               print("Document updated successfully")
           }
       }
-    self.annotation.ffirebase.ongoingMeets.append(annotation.meet)
+    self.annotation.firebase.ongoingMeets.append(annotation.meet)
   }
 }
 

@@ -1,8 +1,8 @@
 //
-//  MeetAnnotations.swift
+//  ClusterView.swift
 //  CMUMeets
 //
-//  Created by Ricky Lee on 11/17/22.
+//  Created by Ricky Lee on 12/5/22.
 //
 
 import Foundation
@@ -11,56 +11,41 @@ import MapKit
 import FirebaseFirestore
 import SwiftUI
 
-class MeetAnnotation:NSObject,MKAnnotation,Identifiable{
-  let id = UUID()
-  var coordinate: CLLocationCoordinate2D
-  var title: String?
-  var subtitle: String?
-  var meet: Meet
-  var firebase: Firebase
-  init(meet: Meet, firebase: Firebase){
-    self.coordinate = CLLocationCoordinate2D(latitude: meet.latitude, longitude: meet.longitude)
-    self.title = meet.title
-    self.subtitle = meet.location
-    self.meet = meet
-    self.firebase = firebase
-    }
-}
-
-class MeetAnnotationView: MKMarkerAnnotationView {
-    static let reuseID = "MeetAnnotation"
+class ClusterView: MKMarkerAnnotationView {
+    static let reuseID = "ClusterAnnotation"
   
-    override var annotation: MKAnnotation? { didSet { configureDetailView() } }
-
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         configure()
-
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        configure()
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
-private extension MeetAnnotationView {
+
+private extension ClusterView {
     func configure() {
         canShowCallout = true
         configureDetailView()
     }
 
     func configureDetailView() {
-        guard let annotation = annotation else { return }
+        
+        guard let annotation = annotation as? MKClusterAnnotation else { return }
 
         let rect = CGRect(origin: .zero, size: CGSize(width: 275, height: 190))
 
-        // 
         let snapshotView = UIView()
         snapshotView.translatesAutoresizingMaskIntoConstraints = false
         snapshotView.frame = rect
 
-        let child = UIHostingController(rootView: MeetPreviewView(annotation: annotation as! MeetAnnotation))
+        var listAnnos : [MeetAnnotation] = []
+        for item in annotation.memberAnnotations {
+          listAnnos.append(item as! MeetAnnotation)
+        }
+        let child = UIHostingController(rootView: ClusteredMeetsView(annotations: listAnnos))
         child.view.frame = snapshotView.bounds
         snapshotView.addSubview(child.view)
 
