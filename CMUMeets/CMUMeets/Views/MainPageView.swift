@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct MainPageView: View {
-  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
   @ObservedObject var firebase: Firebase
+  
   @State private var showingHostView = false
-  var hostViewModel = HostViewModel()
   
   var body: some View {
     NavigationView {
@@ -23,7 +22,7 @@ struct MainPageView: View {
               showingHostView = true;
             }
             .sheet(isPresented: $showingHostView) {
-              HostView(hostViewModel: hostViewModel)
+              HostView(firebase: firebase)
             }
           }
           .tabItem {
@@ -40,7 +39,7 @@ struct MainPageView: View {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          MeetDetails(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).tabItem {
+          MeetDetails(firebase: firebase).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
           }

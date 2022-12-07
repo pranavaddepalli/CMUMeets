@@ -106,7 +106,7 @@ struct NewUserView: View {
     private func addUser() {
 //      let user = User(name: name, phone: phone, major: major, gradYear: gradYear, age: age, gender: gender, pronouns: pronouns, ethnicity: ethnicity)
         let db = Firestore.firestore()
-        let path = db.collection("users").document(UUID().uuidString + "IsaacTest")
+        let path = db.collection("users").document(UUID().uuidString)
         let newUser: [String: Any] = [
             "name": name,
             "phone": phone,

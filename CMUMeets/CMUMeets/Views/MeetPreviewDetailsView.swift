@@ -1,15 +1,9 @@
-//
-//  MeetDetailsView.swift
-//  Sprint4
-//
-//  Created by Isaac Ahn on 11/2/22.
-//
 
 import Foundation
 import SwiftUI
 import FirebaseFirestore
 
-struct MeetDetailsView: View {
+struct MeetPreviewDetailsView: View {
     @ObservedObject var firebase: Firebase
     
     var meet: Meet
@@ -17,15 +11,14 @@ struct MeetDetailsView: View {
     @State private var alertShown = false
     
     var body: some View {
-        Text(meet.title).fontWeight(.bold).font(.title)
         Text("@ " + meet.location)
         Text("Start: " + meet.getStartString())
         Text("End: " + meet.getEndString())
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         Button(action:  {
             if meet.joined < meet.capacity {
-                firebase.joinMeet(meet: meet)
-                clicked = true
+              firebase.joinMeet(meet: meet)
+              clicked = true
             }
             else {
                 alertShown = true
@@ -43,5 +36,4 @@ struct MeetDetailsView: View {
         .disabled(clicked)
         .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
     }
-    
 }
