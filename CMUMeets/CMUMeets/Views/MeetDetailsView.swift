@@ -24,7 +24,7 @@ struct MeetDetailsView: View {
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         Button(action:  {
             if meet.joined < meet.capacity {
-                joinMeet()
+                firebase.joinMeet(meet: meet)
                 clicked = true
             }
             else {
@@ -44,19 +44,4 @@ struct MeetDetailsView: View {
         .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
     }
     
-    func joinMeet() {
-        let db = Firestore.firestore()
-        let path = db.collection("meets").document(self.meet.id!)
-        path.updateData([
-            "joined": meet.joined + 1
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            }
-            else {
-                print("Document updated successfully")
-            }
-        }
-        self.firebase.ongoingMeets.append(meet)
-    }
 }

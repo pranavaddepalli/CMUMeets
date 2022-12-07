@@ -4,26 +4,26 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct MeetDetails: View {
-    @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
     @ObservedObject var firebase: Firebase
     var currentTimestamp: Timestamp = Timestamp()
     
     var body: some View {
         NavigationView {
             List{
-                Section ("Ongoing Meets") {
-                    let meetViewModels = meetsLibraryViewModel.meetViewModels.sorted(by: { $0.meet < $1.meet })
-                    ForEach(meetViewModels) { meetViewModel in
-                        if meetViewModel.meet.getEndString() > getCurrentDate() {
-                            MeetRowView(firebase: firebase, meet: meetViewModel.meet)
-                        }
-                    }
+              Section ("Ongoing Meets") {
+                ForEach(Array(firebase.meets.values), id: \.self) { meet in
+                  if (meet.getEndString() > getCurrentDate()) {
+                    MeetRowView(firebase: firebase, meet: meet)
+                  }
                 }
-                Section ("Joined Meets") {
-                    ForEach(firebase.ongoingMeets) { meet in
-                        MeetRowView(firebase: firebase, meet: meet)
-                    }
+              }
+              Section ("Joined Meets") {
+                ForEach(firebase.meets.values.filter( {$0.people.contains(firebase.currentUser.id!)} ).sorted(by: {$0.endTime.dateValue() > $1.endTime.dateValue()} ), id: \.self) { meet in
+                  if (meet.getEndString() > getCurrentDate()){
+                    MeetRowView(firebase: firebase, meet: meet)
+                  }
                 }
+              }
             }.navigationBarTitle("Meets")
         }
     }

@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var firebase: Firebase
   
   var body: some View {
-      LoginView(firebase: firebase)
+      LoginView()
   }
 }

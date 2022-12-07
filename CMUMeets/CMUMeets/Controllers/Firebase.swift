@@ -19,7 +19,7 @@ class Firebase: ObservableObject {
   
   @Published var currentUser: User = User(id: "0", name: "", phone: "", major: "", gradYear: "", age: "", gender: "", pronouns: "", ethnicity: "", username: "")
   
-  @Published var ongoingMeets: [Meet] = []
+  @Published var joinedMeets: [Meet] = []
   let db = Firestore.firestore()
   
   init() {
@@ -101,7 +101,6 @@ class Firebase: ObservableObject {
           }
           snapshot.documentChanges.forEach { diff in
               if (diff.type == .added) {
-                print("New meet: \(diff.document.data())")
                 self.meets[diff.document.documentID] = (
                   Meet(
                     id: diff.document.documentID,
@@ -121,7 +120,6 @@ class Firebase: ObservableObject {
                 )
               }
               if (diff.type == .modified) {
-                print("Modified meet: \(diff.document.data())")
                 self.meets[diff.document.documentID] = (
                   Meet(
                     id: diff.document.documentID,
@@ -154,11 +152,9 @@ class Firebase: ObservableObject {
           }
           snapshot.documentChanges.forEach { diff in
               if (diff.type == .added) {
-                print("New user: \(diff.document.data())")
                 self.users[diff.document.documentID] = diff.document.data()
               }
               if (diff.type == .modified) {
-                print("Modified user: \(diff.document.data())")
                 self.users[diff.document.documentID] = diff.document.data()
               }
           }
@@ -175,10 +171,6 @@ class Firebase: ObservableObject {
           }
           snapshot.documentChanges.forEach { diff in
               if (diff.type == .added) {
-                print("New location: \(diff.document.data())")
-                print("AT \(type(of: (diff.document["longitude"]! as! NSNumber)))")
-                print("AND \( Float(diff.document["latitude"]! as! NSNumber) )")
-                
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
@@ -190,7 +182,6 @@ class Firebase: ObservableObject {
                 )
               }
               if (diff.type == .modified) {
-                print("Modified location: \(diff.document.data())")
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
@@ -212,6 +203,7 @@ class Firebase: ObservableObject {
   
   // hosting a meet
   func hostMeet(meetName : String, icon : String, capacity : Int, loc : LocationModel, start : Date, end : Date) -> String {
+
       
     // MARK: validation
     // start date must come before end date
@@ -229,11 +221,15 @@ class Firebase: ObservableObject {
       return "Give your Meet a good name."
     }
     
+    // cannot be in more than one Meet at a time, so can't host if in a current meet
+    for j in self.joinedMeets {
+      if j.endTime.dateValue() > Date() {
+        return "You can't host a Meet if you are currently in one!"
+      }
+    }
+    
     var res = "Successfully hosted your Meet!"
-    
-    print("HOSTING MEET AT")
-    print(loc)
-    
+        
     db.collection("meets").document().setData([
       "title" : meetName,
       "icon" : icon,
@@ -250,12 +246,35 @@ class Firebase: ObservableObject {
       if let err = err {
         res = "\(err)"
         print("Error writing meet: \(err)")
-      } else {
-        print("Meet successfully written!")
       }
     }
-    print(res)
+    
     return res;
+  }
+  
+  func joinMeet(meet : Meet) {
+    
+    // cannot be in more than one Meet at a time, so can't join if in a current meet
+    for j in self.joinedMeets {
+      if j.endTime.dateValue() > Date() {
+        print("Trying to join Meet but already in one")
+        return;
+      }
+    }
+    
+      var newPeople = meet.people
+      db.collection("meets").document(meet.id!).updateData([
+          "joined" : meet.joined + 1,
+          "people" : newPeople.append(self.currentUser.id!)
+      ]) { err in
+          if let err = err {
+              print("Error updating document: \(err)")
+          }
+          else {
+              print("Document updated successfully")
+          }
+      }
+    self.joinedMeets.append(meet)
   }
 
 }

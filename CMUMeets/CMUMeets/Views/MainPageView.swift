@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainPageView: View {
   @ObservedObject var firebase: Firebase
-  @ObservedObject var meetsLibraryViewModel: MeetsLibraryViewModel
   
   @State private var showingHostView = false
   
@@ -40,7 +39,7 @@ struct MainPageView: View {
               Image(systemName: "books.vertical")
               Text("LocationView")
             }
-          MeetDetails(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).tabItem {
+          MeetDetails(firebase: firebase).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
           }

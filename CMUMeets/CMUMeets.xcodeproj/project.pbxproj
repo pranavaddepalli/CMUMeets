@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8216D991293A71580038B879 /* MeetsLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8216D990293A71570038B879 /* MeetsLibraryViewModel.swift */; };
 		8242BD3229171AA900CB82FE /* CMUMeetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */; };
 		8242BD3429171AA900CB82FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3329171AA900CB82FE /* ContentView.swift */; };
 		8242BD3629171AAF00CB82FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8242BD3529171AAF00CB82FE /* Assets.xcassets */; };
@@ -41,7 +40,6 @@
 		ABCDF8732925904F006AEE53 /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86F2925904F006AEE53 /* NewUserView.swift */; };
 		ABCDF8742925904F006AEE53 /* MeetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF8702925904F006AEE53 /* MeetDetails.swift */; };
 		ABCDF8752925904F006AEE53 /* MeetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF8712925904F006AEE53 /* MeetRowView.swift */; };
-		ABCDF87929259084006AEE53 /* MeetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF87729259084006AEE53 /* MeetViewModel.swift */; };
 		ABCDF87B2926C4B3006AEE53 /* MeetAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */; };
 		C39241082927810800DD9602 /* CurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39241072927810800DD9602 /* CurrentUserView.swift */; };
 		C3DA3BAB292610CA008247D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DA3BAA292610CA008247D0 /* LoginView.swift */; };
@@ -66,7 +64,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8216D990293A71570038B879 /* MeetsLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetsLibraryViewModel.swift; sourceTree = "<group>"; };
 		8242BD2E29171AA900CB82FE /* CMUMeets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMUMeets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMUMeetsApp.swift; sourceTree = "<group>"; };
 		8242BD3329171AA900CB82FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,7 +98,6 @@
 		ABCDF86F2925904F006AEE53 /* NewUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 		ABCDF8702925904F006AEE53 /* MeetDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetDetails.swift; sourceTree = "<group>"; };
 		ABCDF8712925904F006AEE53 /* MeetRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetRowView.swift; sourceTree = "<group>"; };
-		ABCDF87729259084006AEE53 /* MeetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetViewModel.swift; sourceTree = "<group>"; };
 		ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetAnnotation.swift; sourceTree = "<group>"; };
 		C39241072927810800DD9602 /* CurrentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserView.swift; sourceTree = "<group>"; };
 		C3DA3BAA292610CA008247D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -166,7 +162,6 @@
 				AB20B717291B6FE8007C8FBD /* Info.plist */,
 				AB20B70D291B65F4007C8FBD /* Controllers */,
 				8242BD5D29171D3400CB82FE /* Views */,
-				8242BD5C29171D2E00CB82FE /* ViewModels */,
 				8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */,
 				8242BD3529171AAF00CB82FE /* Assets.xcassets */,
 				8242BD3729171AAF00CB82FE /* CMUMeets.entitlements */,
@@ -200,15 +195,6 @@
 				8242BD4F29171AAF00CB82FE /* CMUMeetsUITestsLaunchTests.swift */,
 			);
 			path = CMUMeetsUITests;
-			sourceTree = "<group>";
-		};
-		8242BD5C29171D2E00CB82FE /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				ABCDF87729259084006AEE53 /* MeetViewModel.swift */,
-				8216D990293A71570038B879 /* MeetsLibraryViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		8242BD5D29171D3400CB82FE /* Views */ = {
@@ -405,7 +391,6 @@
 			files = (
 				AB20B70F291B6616007C8FBD /* Firebase.swift in Sources */,
 				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
-				ABCDF87929259084006AEE53 /* MeetViewModel.swift in Sources */,
 				ABCDF87B2926C4B3006AEE53 /* MeetAnnotation.swift in Sources */,
 				AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */,
 				ABCDF8732925904F006AEE53 /* NewUserView.swift in Sources */,
@@ -426,7 +411,6 @@
 				AB20B72F291B9B2F007C8FBD /* LocationView.swift in Sources */,
 				ABCDF8752925904F006AEE53 /* MeetRowView.swift in Sources */,
 				AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */,
-				8216D991293A71580038B879 /* MeetsLibraryViewModel.swift in Sources */,
 				C3DA3BAB292610CA008247D0 /* LoginView.swift in Sources */,
 				C3DA3BAD292638A7008247D0 /* MainPageView.swift in Sources */,
 				8242BD3229171AA900CB82FE /* CMUMeetsApp.swift in Sources */,
