@@ -34,8 +34,8 @@ class MeetsRepository: ObservableObject {
                    joined: d["joined"] as? Int ?? 0,
                    capacity: d["capacity"] as? Int ?? 0,
                    icon: d["icon"] as? String ?? "",
-                   latitude: d["latitude"] as? Double ?? 0.0,
-                   longitude: d["longitude"] as? Double ?? 0.0,
+                   latitude: Float((d["latitude"]! as! NSNumber)),
+                   longitude: Float((d["longitude"]! as! NSNumber)),
                    host: d["host"] as? String ?? "",
                    people: d["people"] as? [String] ?? [""]
              )

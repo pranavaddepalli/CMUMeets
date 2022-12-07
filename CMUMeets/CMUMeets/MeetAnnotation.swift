@@ -23,7 +23,7 @@ class MeetAnnotation:NSObject,MKAnnotation{
     var people : [String]
     
   init(meet: Meet){
-      self.coordinate = CLLocationCoordinate2D(latitude: meet.latitude, longitude: meet.longitude)
+    self.coordinate = CLLocationCoordinate2D(latitude: Double(CLLocationDegrees(meet.latitude)), longitude: Double(CLLocationDegrees(meet.longitude)))
       self.title = meet.title
       self.subtitle = meet.location
       self.type = meet.icon

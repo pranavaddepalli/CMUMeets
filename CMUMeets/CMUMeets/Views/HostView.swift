@@ -64,7 +64,7 @@ struct HostView: View {
         
         Picker("Location", selection: $meetLoc) {
           ForEach(Array(firebase.locations.values), id: \.self) { loc in
-            Text(loc.longitude.formatted()).tag(loc)}
+            Text(loc.name).tag(loc)}
         }
         .padding()
         

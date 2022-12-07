@@ -51,8 +51,8 @@ class Firebase: ObservableObject {
                 self.locations[d.documentID] = (
                   LocationModel(
                     code: d["code"] as? String ?? "",
-                    latitude: d["latitude"] as? Float ?? 0.0,
-                    longitude: d["longitude"] as? Float ?? 0.0,
+                    latitude: Float((d["latitude"]! as! NSNumber)),
+                    longitude: Float((d["longitude"]! as! NSNumber)),
                     name: d["name"] as? String ?? ""
 
                   )
@@ -80,8 +80,8 @@ class Firebase: ObservableObject {
               joined: d["joined"] as? Int ?? 0,
               capacity: d["capacity"] as? Int ?? 0,
               icon: d["icon"] as? String ?? "",
-              latitude: d["latitude"] as? Double ?? 0.0,
-              longitude: d["longitude"] as? Double ?? 0.0,
+              latitude: Float((d["latitude"]! as! NSNumber)),
+              longitude: Float((d["longitude"]! as! NSNumber)),
               host: d["host"] as? String ?? "",
               people: d["people"] as? [String] ?? [""]
             )
@@ -112,8 +112,8 @@ class Firebase: ObservableObject {
                     joined: diff.document["joined"] as? Int ?? 0,
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
-                    latitude: diff.document["latitude"] as? Double ?? 0.0,
-                    longitude: diff.document["longitude"] as? Double ?? 0.0,
+                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
                     host: diff.document["host"] as? String ?? "",
                     people: diff.document["people"] as? [String] ?? [""]
 
@@ -132,8 +132,8 @@ class Firebase: ObservableObject {
                     joined: diff.document["joined"] as? Int ?? 0,
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
-                    latitude: diff.document["latitude"] as? Double ?? 0.0,
-                    longitude: diff.document["longitude"] as? Double ?? 0.0,
+                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
                     host: diff.document["host"] as? String ?? "",
                     people: diff.document["people"] as? [String] ?? [""]
 
@@ -176,14 +176,14 @@ class Firebase: ObservableObject {
           snapshot.documentChanges.forEach { diff in
               if (diff.type == .added) {
                 print("New location: \(diff.document.data())")
-                print("AT \(diff.document["longitude"])!")
-                print("AND \(diff.document["latitude"])!")
+                print("AT \(type(of: (diff.document["longitude"]! as! NSNumber)))")
+                print("AND \( Float(diff.document["latitude"]! as! NSNumber) )")
                 
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
-                    latitude: diff.document["latitude"]! as? Float ?? 0.0,
-                    longitude: diff.document["longitude"]! as? Float ?? 0.0,
+                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
                     name: diff.document["name"] as? String ?? ""
 
                   )
@@ -194,8 +194,8 @@ class Firebase: ObservableObject {
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
-                    latitude: diff.document["latitude"] as? Float ?? 0.0,
-                    longitude: diff.document["longitude"] as? Float ?? 0.0,
+                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
                     name: diff.document["String"] as? String ?? ""
 
                   )
