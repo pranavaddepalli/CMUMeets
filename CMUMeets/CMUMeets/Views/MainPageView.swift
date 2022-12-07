@@ -29,16 +29,8 @@ struct MainPageView: View {
             Image(systemName: "books.vertical")
             Text("MapView")
           }
-          LocationView(firebase: firebase)
-            .tabItem {
-              Image(systemName: "books.vertical")
-              Text("LocationView")
-            }
-          DummyView(firebase: firebase)
-            .tabItem {
-              Image(systemName: "books.vertical")
-              Text("LocationView")
-            }
+         
+    
           MeetDetails(firebase: firebase).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
