@@ -265,10 +265,10 @@ class Firebase: ObservableObject {
       }
     }
     
-      var newPeople = meet.people
+      
       db.collection("meets").document(meet.id!).updateData([
           "joined" : meet.joined + 1,
-          "people" : newPeople.append(self.currentUser.id!)
+          "people" : FieldValue.arrayUnion([self.currentUser.id!])
       ]) { err in
           if let err = err {
               print("Error updating document: \(err)")
