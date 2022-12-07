@@ -51,8 +51,8 @@ class Firebase: ObservableObject {
                 self.locations[d.documentID] = (
                   LocationModel(
                     code: d["code"] as? String ?? "",
-                    latitude: Float((d["latitude"]! as! NSNumber)),
-                    longitude: Float((d["longitude"]! as! NSNumber)),
+                    latitude: Double((d["latitude"]! as! NSNumber)),
+                    longitude: Double((d["longitude"]! as! NSNumber)),
                     name: d["name"] as? String ?? ""
 
                   )
@@ -80,8 +80,8 @@ class Firebase: ObservableObject {
               joined: d["joined"] as? Int ?? 0,
               capacity: d["capacity"] as? Int ?? 0,
               icon: d["icon"] as? String ?? "",
-              latitude: Float((d["latitude"]! as! NSNumber)),
-              longitude: Float((d["longitude"]! as! NSNumber)),
+              latitude: Double((d["latitude"]! as! NSNumber)),
+              longitude: Double((d["longitude"]! as! NSNumber)),
               host: d["host"] as? String ?? "",
               people: d["people"] as? [String] ?? [""]
             )
@@ -111,8 +111,8 @@ class Firebase: ObservableObject {
                     joined: diff.document["joined"] as? Int ?? 0,
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
-                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
-                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
+                    latitude: Double((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Double((diff.document["longitude"]! as! NSNumber)),
                     host: diff.document["host"] as? String ?? "",
                     people: diff.document["people"] as? [String] ?? [""]
 
@@ -130,8 +130,8 @@ class Firebase: ObservableObject {
                     joined: diff.document["joined"] as? Int ?? 0,
                     capacity: diff.document["capacity"] as? Int ?? 0,
                     icon: diff.document["icon"] as? String ?? "",
-                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
-                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
+                    latitude: Double((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Double((diff.document["longitude"]! as! NSNumber)),
                     host: diff.document["host"] as? String ?? "",
                     people: diff.document["people"] as? [String] ?? [""]
 
@@ -174,8 +174,8 @@ class Firebase: ObservableObject {
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
-                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
-                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
+                    latitude: Double((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Double((diff.document["longitude"]! as! NSNumber)),
                     name: diff.document["name"] as? String ?? ""
 
                   )
@@ -185,8 +185,8 @@ class Firebase: ObservableObject {
                 self.locations[diff.document.documentID] = (
                   LocationModel(
                     code: diff.document["code"] as? String ?? "",
-                    latitude: Float((diff.document["latitude"]! as! NSNumber)),
-                    longitude: Float((diff.document["longitude"]! as! NSNumber)),
+                    latitude: Double((diff.document["latitude"]! as! NSNumber)),
+                    longitude: Double((diff.document["longitude"]! as! NSNumber)),
                     name: diff.document["String"] as? String ?? ""
 
                   )
@@ -229,7 +229,10 @@ class Firebase: ObservableObject {
     }
     
     var res = "Successfully hosted your Meet!"
-        
+    
+    print("ME \(self.currentLocation.latitude), \(self.currentLocation.longitude)")
+    print("MEET \(loc.latitude), \(loc.longitude)")
+    
     db.collection("meets").document().setData([
       "title" : meetName,
       "icon" : icon,

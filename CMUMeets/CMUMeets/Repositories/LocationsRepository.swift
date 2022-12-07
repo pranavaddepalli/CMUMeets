@@ -26,8 +26,8 @@ class LocationsRepository: ObservableObject {
          DispatchQueue.main.async {
            self.locations = snapshot.documents.map { d in
              return LocationModel(code: d["code"] as? String ?? "",
-                                  latitude: d["latitude"] as? Float ?? 0.0,
-                                  longitude: d["longitude"] as? Float ?? 0.0,
+                                  latitude: Double((d["latitude"]! as! NSNumber)),
+                                  longitude: Double((d["longitude"]! as! NSNumber)),
                                   name: d["String"] as? String ?? ""
 
              )

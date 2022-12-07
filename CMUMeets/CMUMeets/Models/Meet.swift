@@ -12,8 +12,8 @@ struct Meet: Codable, Identifiable, Comparable, Hashable {
     var joined: Int
     var capacity: Int
     var icon: String
-    var latitude: Float
-    var longitude: Float
+    var latitude: Double
+    var longitude: Double
     var host: String
     var people : [String]
     

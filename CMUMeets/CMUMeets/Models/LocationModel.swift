@@ -10,8 +10,8 @@ import SwiftUI
 import FirebaseFirestoreSwift
 struct LocationModel: Codable, Comparable, Hashable {
   var code: String
-  var latitude: Float
-  var longitude: Float
+  var latitude: Double
+  var longitude: Double
   var name: String
 
 //  enum CodingKeys: String, CodingKey {
