@@ -255,13 +255,13 @@ class Firebase: ObservableObject {
     return res;
   }
   
-  func joinMeet(meet : Meet) {
+  func joinMeet(meet : Meet) -> String {
     
     // cannot be in more than one Meet at a time, so can't join if in a current meet
     for j in self.joinedMeets {
       if j.endTime.dateValue() > Date() {
         print("Trying to join Meet but already in one")
-        return;
+        return "Trying to join Meet but already in one";
       }
     }
     
@@ -278,6 +278,7 @@ class Firebase: ObservableObject {
           }
       }
     self.joinedMeets.append(meet)
+      return "Successfully joined meet!"
   }
 
 }
