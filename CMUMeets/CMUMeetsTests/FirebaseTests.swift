@@ -13,12 +13,13 @@ import FirebaseFirestore
 @testable import CMUMeets
 
 class FirebaseTests : XCTestCase {
+    var firebase : Firebase!
     var e: XCTestExpectation!
-    let firebase = Firebase()
-    let expired: TimeInterval = 10.0
-
+    let expired: TimeInterval = 5.0
+    
     override func setUp() {
       e = expectation(description: "Firebase operations work correctly")
+      firebase = Firebase()
     }
     
     func testReadUsers() {
@@ -118,8 +119,9 @@ class FirebaseTests : XCTestCase {
     }
     
     func testJoinMeet() {
-      
-      defer { waitForExpectations(timeout: expired) }
+      firebase = Firebase()
+      expectation(description: "Firebase operations work correctly")
+      defer { waitForExpectations(timeout: 20) }
 
       // host a meet first
       let exampleMeetID = "EXAMPLEMEETID"
@@ -134,7 +136,7 @@ class FirebaseTests : XCTestCase {
         "latitude" : 0,
         "longitude" : 0,
         "startTime" : Date(),
-        "endTime" : Date().advanced(by: 1000)
+        "endTime" : Date().advanced(by: 1000),
         "people" : ["not my id"]
       ]) { err in
         if let err = err {
@@ -160,13 +162,15 @@ class FirebaseTests : XCTestCase {
             XCTAssertNotNil(res)
             // check corect value
             XCTAssert(res == "Successfully joined meet!")
-            self.e.fulfill()
 
           case .failure(let error):
               // A `City` value could not be initialized from the DocumentSnapshot.
               print("Error decoding meet: \(error)")
               XCTAssert(false)
           }
+          
+                      self.e.fulfill()
+
       }
       
         
