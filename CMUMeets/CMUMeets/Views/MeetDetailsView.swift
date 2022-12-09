@@ -25,14 +25,13 @@ struct MeetDetailsView: View {
         Button(action:  {
             if meet.joined < meet.capacity {
                 firebase.joinMeet(meet: meet)
-                clicked = true
             }
             else {
                 alertShown = true
                 if meet.joined == meet.capacity {
                     alertMessage = "This Meet is Full!"
                 }
-                if firebase.ongoingMeets.contains(meet) {
+                if firebase.joinedMeets.contains(meet) {
                     alertMessage = "You've already joined this Meet!"
                 }
             }

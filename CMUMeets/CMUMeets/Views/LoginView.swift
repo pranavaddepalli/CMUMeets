@@ -48,7 +48,7 @@ struct LoginView: View {
                         .background(Color.green)
                         .cornerRadius(15.0)
                 }
-                NavigationLink(destination: MainPageView(meetsLibraryViewModel: meetsLibraryViewModel, firebase: firebase).navigationBarBackButtonHidden(true), isActive: $goToMain) {}
+                NavigationLink(destination: MainPageView(firebase: firebase).navigationBarBackButtonHidden(true), isActive: $goToMain) {}
 
                 NavigationLink(destination: NewUserView(firebase: firebase)) {
                     Text("Register")
