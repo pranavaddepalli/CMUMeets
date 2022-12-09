@@ -280,6 +280,36 @@ class Firebase: ObservableObject {
     self.joinedMeets.append(meet)
       return "Successfully joined meet!"
   }
+    
+    func leaveMeet(meet : Meet) {
+        // leave a meet
+        db.collection("meets").document(meet.id!).updateData([
+            "joined" : meet.joined - 1,
+            "people" : FieldValue.arrayRemove([self.currentUser.id!])
+        ]) { err in
+            if let err = err {
+                print("Error leaving Meet: \(err)")
+            }
+            else {
+                print("Meet left successfully")
+            }
+        }
+        self.joinedMeets.removeAll(where: {$0.id == meet.id})
+    }
+    
+    func deleteMeet(meet: Meet) {
+        db.collection("meets").document(meet.id!).delete() { err in
+            if let err = err {
+                print("Error removing Meet: \(err)")
+            } else {
+                print("Meet successfully removed!")
+            }
+        }
+        self.joinedMeets.removeAll(where: {$0.id == meet.id!})
+        // pull Meets again
+        self.meets.removeValue(forKey: meet.id!)
+            
+    }
 
 }
 
