@@ -17,6 +17,8 @@ struct MeetPreviewView: View {
   
   @State private var clicked: Bool = false
   @State private var alertShown = false
+  @State private var alert2Shown = false
+
   var body: some View {
     NavigationStack {
       VStack {
@@ -48,27 +50,66 @@ struct MeetPreviewView: View {
           
           // https://developer.apple.com/documentation/swiftui/navigationstack
           // Use this resource once we implement user info, to change the display for meets that you've already joined
+            
+            if (annotation.meet.host == annotation.firebase.currentUser.id!) {
+                // you are the host, so you should delete meets
+                
+                Button(action:  {
+                        annotation.firebase.deleteMeet(meet: annotation.meet)
+                        clicked = true
+                        alert2Shown = true
+                   
+                    
+                }) {
+                    Text("Delete Meet")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(15.0)
+                }
+                .disabled(clicked)
+                .alert("This Meet has been Removed!", isPresented: $alert2Shown, actions: {})
+
+            
+            }
           
-          
-          Button(action:  {
-            if annotation.meet.joined < annotation.meet.capacity {
-                  annotation.firebase.joinMeet(meet: annotation.meet)
-                  clicked = true
-              }
-              else {
-                  alertShown = true
-              }
-              
-          }) {
-              Text("Join Meet")
-                  .font(.headline)
-                  .foregroundColor(.white)
-                  .padding()
-                  .background(Color.green)
-                  .cornerRadius(15.0)
-          }
-          .disabled(clicked)
-          .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
+            else if (!annotation.firebase.joinedMeets.contains(annotation.meet)){
+                Button(action:  {
+                    if annotation.meet.joined < annotation.meet.capacity {
+                        annotation.firebase.joinMeet(meet: annotation.meet)
+                        clicked = true
+                    }
+                    else {
+                        alertShown = true
+                    }
+                    
+                }) {
+                    Text("Join Meet")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(15.0)
+                }
+                .disabled(clicked)
+                .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
+            }
+            else {
+                Button(action:  {
+                    annotation.firebase.leaveMeet(meet: annotation.meet)
+                      clicked = true
+                    
+                }) {
+                    Text("Leave Meet")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(15.0)
+                }
+                .disabled(clicked)
+            }
           // Change this to the green button found in the See More navigation link so that joining a meet actually happens
           Spacer()
           

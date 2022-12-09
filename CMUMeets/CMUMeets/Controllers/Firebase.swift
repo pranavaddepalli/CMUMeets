@@ -138,6 +138,25 @@ class Firebase: ObservableObject {
                   )
                 )
               }
+              
+              if (diff.type == .removed) {
+                  self.meets[diff.document.documentID] = (
+                    Meet(
+                        id: diff.document.documentID,
+                        title: diff.document["title"] as? String ?? "",
+                        location: diff.document["location"] as? String ?? "",
+                        startTime: Timestamp(),
+                        endTime: Timestamp(),
+                        joined: diff.document["joined"] as? Int ?? 0,
+                        capacity: diff.document["capacity"] as? Int ?? 0,
+                        icon: diff.document["icon"] as? String ?? "",
+                        latitude: 0,
+                        longitude: 0,
+                        host: diff.document["host"] as? String ?? "",
+                        people: diff.document["people"] as? [String] ?? [""]
+                  )
+                    )
+              }
           }
         }
     return "success: updated meets"
@@ -230,8 +249,6 @@ class Firebase: ObservableObject {
     
     var res = "Successfully hosted your Meet!"
     
-    print("ME \(self.currentLocation.latitude), \(self.currentLocation.longitude)")
-    print("MEET \(loc.latitude), \(loc.longitude)")
     
     db.collection("meets").document().setData([
       "title" : meetName,
@@ -255,13 +272,13 @@ class Firebase: ObservableObject {
     return res;
   }
   
-  func joinMeet(meet : Meet) {
+  func joinMeet(meet : Meet) -> String {
     
     // cannot be in more than one Meet at a time, so can't join if in a current meet
     for j in self.joinedMeets {
       if j.endTime.dateValue() > Date() {
         print("Trying to join Meet but already in one")
-        return;
+        return "Trying to join Meet but already in one";
       }
     }
     
@@ -278,7 +295,38 @@ class Firebase: ObservableObject {
           }
       }
     self.joinedMeets.append(meet)
+      return "Successfully joined meet!"
   }
+    
+    func leaveMeet(meet : Meet) {
+        // leave a meet
+        db.collection("meets").document(meet.id!).updateData([
+            "joined" : meet.joined - 1,
+            "people" : FieldValue.arrayRemove([self.currentUser.id!])
+        ]) { err in
+            if let err = err {
+                print("Error leaving Meet: \(err)")
+            }
+            else {
+                print("Meet left successfully")
+            }
+        }
+        self.joinedMeets.removeAll(where: {$0.id == meet.id})
+    }
+    
+    func deleteMeet(meet: Meet) {
+        db.collection("meets").document(meet.id!).delete() { err in
+            if let err = err {
+                print("Error removing Meet: \(err)")
+            } else {
+                print("Meet successfully removed!")
+            }
+        }
+        self.joinedMeets.removeAll(where: {$0.id == meet.id!})
+        // pull Meets again
+        self.meets.removeValue(forKey: meet.id!)
+            
+    }
 
 }
 

@@ -21,6 +21,9 @@
 		82828C0C29172BBD003A405C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82828C0B29172BBD003A405C /* FirebaseFirestoreSwift */; };
 		82857A812941440300934CA2 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82857A802941440300934CA2 /* ClusterView.swift */; };
 		82857A832941444200934CA2 /* ClusteredMeetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82857A822941444200934CA2 /* ClusteredMeetsView.swift */; };
+		84233C172941AF5500AEB70D /* FirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84233C162941AF5500AEB70D /* FirebaseTests.swift */; };
+		84233C1A2941B3A000AEB70D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 84233C192941B3A000AEB70D /* FirebaseFirestore */; };
+		8463FE2F2942DC2C00ABAB8F /* LocationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */; };
 		AB20B70A291AF3AC007C8FBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */; };
 		AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70B291B65B9007C8FBD /* MapView.swift */; };
 		AB20B70F291B6616007C8FBD /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70E291B6616007C8FBD /* Firebase.swift */; };
@@ -82,6 +85,8 @@
 		8242BD5F29171DBE00CB82FE /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
 		82857A802941440300934CA2 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		82857A822941444200934CA2 /* ClusteredMeetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMeetsView.swift; sourceTree = "<group>"; };
+		84233C162941AF5500AEB70D /* FirebaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
+		8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
 		AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB20B70B291B65B9007C8FBD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AB20B70E291B6616007C8FBD /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
@@ -128,7 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABF39CD92942D16A00A8AFA1 /* FirebaseFirestore in Frameworks */,
+				84233C1A2941B3A000AEB70D /* FirebaseFirestore in Frameworks */,
+
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +157,7 @@
 				8242BD4229171AAF00CB82FE /* CMUMeetsTests */,
 				8242BD4C29171AAF00CB82FE /* CMUMeetsUITests */,
 				8242BD2F29171AA900CB82FE /* Products */,
+				84233C182941B3A000AEB70D /* Frameworks */,
 				ABC450962942CAFF00DA0180 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -196,6 +204,8 @@
 			children = (
 				ABC450942942C64200DA0180 /* MeetAnnotationTests.swift */,
 				8242BD4329171AAF00CB82FE /* CMUMeetsTests.swift */,
+				84233C162941AF5500AEB70D /* FirebaseTests.swift */,
+				8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */,
 				ABF39CDA2942E26A00A8AFA1 /* LocationTests.swift */,
 			);
 			path = CMUMeetsTests;
@@ -232,6 +242,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		84233C182941B3A000AEB70D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB20B70D291B65F4007C8FBD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +267,7 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+
 		ABC4509329428B3700DA0180 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +283,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+
 		ABCDF86329253141006AEE53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,7 +338,8 @@
 			);
 			name = CMUMeetsTests;
 			packageProductDependencies = (
-				ABF39CD82942D16A00A8AFA1 /* FirebaseFirestore */,
+				84233C192941B3A000AEB70D /* FirebaseFirestore */,
+
 			);
 			productName = CMUMeetsTests;
 			productReference = 8242BD3F29171AAF00CB82FE /* CMUMeetsTests.xctest */;
@@ -457,6 +477,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84233C172941AF5500AEB70D /* FirebaseTests.swift in Sources */,
+				8463FE2F2942DC2C00ABAB8F /* LocationModelTests.swift in Sources */,
 				8242BD4429171AAF00CB82FE /* CMUMeetsTests.swift in Sources */,
 				ABF39CDB2942E26A00A8AFA1 /* LocationTests.swift in Sources */,
 				ABF39CD72942CEB700A8AFA1 /* MeetAnnotationTests.swift in Sources */,
@@ -679,6 +701,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/Pods/Firebase/CoreOnly/Sources";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -701,6 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/Pods/Firebase/CoreOnly/Sources";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -830,7 +854,8 @@
 			package = 82828C0429172BBD003A405C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
-		ABF39CD82942D16A00A8AFA1 /* FirebaseFirestore */ = {
+		84233C192941B3A000AEB70D /* FirebaseFirestore */ = {
+
 			isa = XCSwiftPackageProductDependency;
 			package = 82828C0429172BBD003A405C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
