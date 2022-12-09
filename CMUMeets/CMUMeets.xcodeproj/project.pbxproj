@@ -252,6 +252,17 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
+=======
+		ABC450962942CAFF00DA0180 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABC450972942CAFF00DA0180 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+>>>>>>> Stashed changes
 		ABCDF86329253141006AEE53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
