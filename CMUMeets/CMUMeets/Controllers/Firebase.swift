@@ -230,8 +230,6 @@ class Firebase: ObservableObject {
     
     var res = "Successfully hosted your Meet!"
     
-    print("ME \(self.currentLocation.latitude), \(self.currentLocation.longitude)")
-    print("MEET \(loc.latitude), \(loc.longitude)")
     
     db.collection("meets").document().setData([
       "title" : meetName,

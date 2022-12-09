@@ -15,7 +15,7 @@ import FirebaseFirestore
 class FirebaseTests : XCTestCase {
     var e: XCTestExpectation!
     let firebase = Firebase()
-    let expired: TimeInterval = 5.0
+    let expired: TimeInterval = 10.0
 
     override func setUp() {
       e = expectation(description: "Firebase operations work correctly")
@@ -118,29 +118,57 @@ class FirebaseTests : XCTestCase {
     }
     
     func testJoinMeet() {
-        // MARK: NEED to use a real meet from firestore to try to join
-        
-//        defer { waitForExpectations(timeout: expired) }
-//        let exampleMeet = Meet(title: "more code testing",
-//                               location: "Wean Hall",
-//                               startTime: Timestamp(),
-//                               endTime: Timestamp(),
-//                               joined: 1,
-//                               capacity: 2,
-//                               icon: "fake icon",
-//                               latitude: 0,
-//                               longitude: 0,
-//                               host: "id",
-//                               people: ["person id 1"]
-//                            )
-//        
-//        let res = firebase.joinMeet(meet: exampleMeet)
-//        
-//        // check not nil
-//        XCTAssertNotNil(res)
-//        // check corect value
-//        XCTAssert(res == "Successfully joined meet!")
-//        self.e.fulfill()
+      
+      defer { waitForExpectations(timeout: expired) }
+
+      // host a meet first
+      let exampleMeetID = "EXAMPLEMEETID"
+      
+      firebase.db.collection("meets").document(exampleMeetID).setData([
+        "title" : "JoinMeetTest",
+        "icon" : "Fake icon",
+        "joined" : 1,
+        "host" : "not my id",
+        "capacity" : 2,
+        "location" : "Nowhere to be found",
+        "latitude" : 0,
+        "longitude" : 0,
+        "startTime" : Date(),
+        "endTime" : Date().advanced(by: 1000)
+        "people" : ["not my id"]
+      ]) { err in
+        if let err = err {
+          print("Error writing meet: \(err)")
+        }
+      }
+      
+      let docRef = firebase.db.collection("meets").document(exampleMeetID)
+      
+      
+      docRef.getDocument(as: Meet.self) { result in
+          // The Result type encapsulates deserialization errors or
+          // successful deserialization, and can be handled as follows:
+          //
+          //      Result
+          //        /\
+          //   Error  Meet
+          switch result {
+          case .success(let m):
+            
+            let res = self.firebase.joinMeet(meet: m)
+            // check not nil
+            XCTAssertNotNil(res)
+            // check corect value
+            XCTAssert(res == "Successfully joined meet!")
+            self.e.fulfill()
+
+          case .failure(let error):
+              // A `City` value could not be initialized from the DocumentSnapshot.
+              print("Error decoding meet: \(error)")
+              XCTAssert(false)
+          }
+      }
+      
         
     }
 }
