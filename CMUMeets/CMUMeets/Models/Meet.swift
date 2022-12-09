@@ -27,7 +27,7 @@ struct Meet: Codable, Identifiable, Comparable, Hashable {
         case capacity
         case icon
         case latitude
-        case longitude
+        case longitude 
         case host
         case people
     }
