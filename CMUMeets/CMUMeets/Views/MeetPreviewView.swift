@@ -23,6 +23,8 @@ struct MeetPreviewView: View {
     NavigationStack {
       VStack {
         // CREATE A MEET MODEL USING ANNOTATION.MEET!
+          Text(annotation.meet.icon)
+
         HStack {
           Spacer()
           VStack {

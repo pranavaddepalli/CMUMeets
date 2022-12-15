@@ -63,68 +63,12 @@ struct LoginView: View {
         firebase.updatedUsers()
     }
     
-    
-    private func getNameAndUsername() -> [String: String] {
-        var userRepo = firebase.users
-        var nameList: [usersName] = []
-        var usernameList: [usersUserame] = []
-        var userToNameDict: [String:String] = [:]
-        
-        for (x, y) in userRepo {
-            for (x2, y2) in y {
-                if x2 == "name" {
-                    nameList.append(usersName(name: y2 as! String))
-                }
-                if x2 == "username" {
-                    usernameList.append(usersUserame(username: y2 as! String))
-                }
-            }
-        }
-        
-        for (index, element) in nameList.enumerated() {
-            userToNameDict[element.name] = usernameList[index].username
-        }
-        return userToNameDict
-    }
-    
     private func isUser() -> Bool {
         
-        var usersDict = getNameAndUsername()
-        if usersDict.keys.contains(name) {
-            if usersDict[name] == username {
-                goToMain = true
-            }
-        }
-        return goToMain
+        return Array(firebase.users.values).contains(where: {$0.username == username && $0.name == $0.name})
     }
     
     func storeUser() {
-        let db = Firestore.firestore()
-
-        db.collection("users").whereField("username", isEqualTo: username)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        //print("\(document.documentID) => \(document.data())")
-                        self.firebase.currentUser = User(id: document.documentID,
-                                                          name: document["name"] as? String ?? "",
-                                                          phone: document["phone"] as? String ?? "",
-                                                          major: document["major"] as? String ?? "",
-                                                          gradYear: document["gradYear"] as? String ?? "",
-                                                          age: document["age"] as? String ?? "",
-                                                          gender: document["gender"] as? String ?? "",
-                                                          pronouns: document["pronouns"] as? String ?? "",
-                                                          ethnicity: document["ethnicity"] as? String ?? "",
-                                                          username: document["username"] as? String ?? ""
-                        )
-                        print(firebase.currentUser)
-                      
-                    }
-                }
-        }
-        
         let defaults = UserDefaults.standard
         defaults.set(username, forKey: "username")
         defaults.set(name, forKey: "name")

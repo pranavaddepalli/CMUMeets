@@ -14,69 +14,27 @@ struct MeetPreviewDetailsView: View {
     
     
     var body: some View {
-        Text("@ " + meet.location)
-        Text("Start: " + meet.getStartString())
-        Text("End: " + meet.getEndString())
+        VStack {
+            Text("Hosted by: " + (firebase.users[meet.host]?.name ?? "unknown"))
+            Text("Host's Phone: " + (firebase.users[meet.host]?.phone ?? "unknown"))
+            
+            
+        }
+        HStack{
+            Text("Start: " + meet.getStartString().split(separator: " ")[1])
+            Text("End: " + meet.getEndString().split(separator: " ")[1])
+            
+                .padding()
+        }
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         
-        if (meet.host == firebase.currentUser.id!) {
-            // you are the host, so you should delete meets
-            
-            Button(action:  {
-                    firebase.deleteMeet(meet: meet)
-                    clicked = true
-                alert2Shown = true;
-                
-            }) {
-                Text("Remove Meet")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.red)
-                    .cornerRadius(15.0)
+        HStack {
+            ForEach(meet.people, id: \.self) {p in
+                VStack{
+                    Text("🧍" + (firebase.users[p]?.name ?? "unknown"))}
             }
-            .disabled(clicked)
+        }.padding()
+        Spacer()
         
-        }
-      
-        else if (!firebase.joinedMeets.contains(meet)){
-            Button(action:  {
-                if meet.joined < meet.capacity {
-                    firebase.joinMeet(meet: meet)
-                    clicked = true
-                }
-                else {
-                    alertShown = true
-                }
-                
-            }) {
-                Text("Join Meet")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.green)
-                    .cornerRadius(15.0)
-            }
-            .disabled(clicked)
-            .alert("This Meet is Full!", isPresented: $alertShown, actions: {})
-        }
-        else {
-            Button(action:  {
-                  firebase.leaveMeet(meet: meet)
-                  clicked = true
-                
-            }) {
-                Text("Leave Meet")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.red)
-                    .cornerRadius(15.0)
-            }
-            .disabled(clicked)
-        }
     }
 }
