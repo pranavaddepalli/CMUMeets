@@ -13,8 +13,8 @@ struct MainPageView: View {
   @State private var showingHostView = false
   
   var body: some View {
-    NavigationView {
       VStack {
+        Spacer()
         TabView {
           ZStack {
               MapView(firebase: firebase)
@@ -60,7 +60,7 @@ struct MainPageView: View {
           }
         }
       }
-    }
+      .background(Color(red: 0xd1/255, green: 0xcc/255, blue: 0xbd/255))
   }
 }
 

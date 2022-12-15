@@ -24,31 +24,14 @@ struct MapView: UIViewRepresentable {
   typealias UIViewType = MKMapView
   let mapView = MKMapView(frame: .zero)
   var firebase: Firebase
-  @State private var showingHostView = false
-
   
   class Coordinator: NSObject, MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didChange mode: MKUserTrackingMode, didUpdate userLocation: MKUserLocation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //      mapView.register(MeetAnnotationView.self, forAnnotationViewWithReuseIdentifier: MeetAnnotationView.reuseID)
       guard !(annotation is MKUserLocation) else {
           return nil
       }
-      
-      if mode == .followWithHeading || mode == .follow {
-        mapView.region.span = MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
-      }
-      
-//      let newRegion = mapView.region
-//      let maxLat = newRegion.center.latitude + newRegion.span.latitudeDelta / 2
-//      let minLat = newRegion.center.latitude - newRegion.span.latitudeDelta / 2
-//      let maxLon = newRegion.center.longitude + newRegion.span.longitudeDelta / 2
-//      let minLon = newRegion.center.longitude - newRegion.span.longitudeDelta / 2
-//
-//      if maxLat > 40.450945 || minLat < 40.450945 || maxLon > -79.93729 || minLon < -79.956225 {
-//          // Prevent the map from panning or zooming outside of the allowed region
-//          mapView.setRegion(mapView.region, animated: false)
-//      }
       
       if (annotation is MeetAnnotation) {
         var annotation = annotation as! MeetAnnotation
@@ -92,10 +75,7 @@ struct MapView: UIViewRepresentable {
   func makeUIView(context: Context) -> MKMapView {
     loadFirebase()
     setupRegionForMap()
-    
     mapView.delegate = context.coordinator
-    // this doesn't work for some reason
-    mapView.setUserTrackingMode(.followWithHeading, animated: true)
     
 //    mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: ClusterView.reuseID)
     
@@ -105,15 +85,12 @@ struct MapView: UIViewRepresentable {
     compassButton.compassVisibility = .visible          // Make it visible
 
     mapView.addSubview(compassButton) // Add it to the view
-    
-
 
     // Position it as required
     compassButton.translatesAutoresizingMaskIntoConstraints = false
     compassButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -12).isActive = true
     compassButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 12).isActive = true
-    
-    
+      
     // add a user tracking button
     let userTrackingButton = MKUserTrackingButton(mapView: mapView)
     userTrackingButton.frame = CGRect(x: 10, y: 10, width: 44, height: 44)
@@ -123,13 +100,11 @@ struct MapView: UIViewRepresentable {
     userTrackingButton.layer.cornerRadius = 5
     mapView.addSubview(userTrackingButton)
     
-    
+    mapView.userTrackingMode = .follow
+
     
     return mapView
   }
-  
-
-
   
   private func loadFirebase() {
     firebase.updatedMeets()
@@ -143,7 +118,7 @@ struct MapView: UIViewRepresentable {
     let location = Location()
     location.getCurrentLocation()
     let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-    let span = MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
+    let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
     let region = MKCoordinateRegion(center: coordinate, span: span)
     mapView.setRegion(region, animated: true)
   }
@@ -167,6 +142,5 @@ struct MapView: UIViewRepresentable {
     let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
     return diff.day == 0
   }
-
 }
 
