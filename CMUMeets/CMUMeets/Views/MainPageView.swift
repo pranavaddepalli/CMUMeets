@@ -16,18 +16,37 @@ struct MainPageView: View {
     NavigationView {
       VStack {
         TabView {
-          VStack {
-            MapView(firebase: firebase)
-            Button("Host a meet") {
-              showingHostView = true;
-            }
-            .sheet(isPresented: $showingHostView) {
-              HostView(firebase: firebase)
-            }
+          ZStack {
+              MapView(firebase: firebase)
+            
+              VStack {
+                Spacer()
+                  
+                Button(action: {
+                      showingHostView = true;
+                  }) {
+                      ZStack {
+                          // Use a Circle shape to create a circular button
+                          Circle()
+                              .frame(width: 50, height: 50)
+                              .foregroundColor(Color(red: 0x8a/255, green: 0x2b/255, blue: 0x2b/255))
+                          
+                          // Add a plus icon to the button using an image
+                          Image(systemName: "plus")
+                              .font(.title)
+                              .foregroundColor(.white)
+                      }
+                  }
+                  .sheet(isPresented: $showingHostView) {
+                      HostView(firebase: firebase)
+                  }
+              }
+              .padding()
+            
           }
           .tabItem {
-            Image(systemName: "books.vertical")
-            Text("MapView")
+            Image(systemName: "mappin.circle.fill")
+            Text("Home")
           }
          
     
@@ -37,7 +56,7 @@ struct MainPageView: View {
           }
           CurrentUserView(firebase: firebase).tabItem {
             Image(systemName: "person.fill")
-            Text("User Profile")
+            Text("Profile")
           }
         }
       }

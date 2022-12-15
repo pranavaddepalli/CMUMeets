@@ -24,10 +24,12 @@ struct MapView: UIViewRepresentable {
   typealias UIViewType = MKMapView
   let mapView = MKMapView(frame: .zero)
   var firebase: Firebase
+  @State private var showingHostView = false
+
   
   class Coordinator: NSObject, MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didChange mode: MKUserTrackingMode) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didChange mode: MKUserTrackingMode, didUpdate userLocation: MKUserLocation) -> MKAnnotationView? {
 //      mapView.register(MeetAnnotationView.self, forAnnotationViewWithReuseIdentifier: MeetAnnotationView.reuseID)
       guard !(annotation is MKUserLocation) else {
           return nil
@@ -103,12 +105,15 @@ struct MapView: UIViewRepresentable {
     compassButton.compassVisibility = .visible          // Make it visible
 
     mapView.addSubview(compassButton) // Add it to the view
+    
+
 
     // Position it as required
     compassButton.translatesAutoresizingMaskIntoConstraints = false
     compassButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -12).isActive = true
     compassButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 12).isActive = true
-      
+    
+    
     // add a user tracking button
     let userTrackingButton = MKUserTrackingButton(mapView: mapView)
     userTrackingButton.frame = CGRect(x: 10, y: 10, width: 44, height: 44)
@@ -118,8 +123,13 @@ struct MapView: UIViewRepresentable {
     userTrackingButton.layer.cornerRadius = 5
     mapView.addSubview(userTrackingButton)
     
+    
+    
     return mapView
   }
+  
+
+
   
   private func loadFirebase() {
     firebase.updatedMeets()
@@ -157,5 +167,6 @@ struct MapView: UIViewRepresentable {
     let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
     return diff.day == 0
   }
+
 }
 
