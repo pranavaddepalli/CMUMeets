@@ -22,8 +22,8 @@ class LocationTests: XCTestCase {
     XCTAssertNotNil(instance.longitude)
 
     //Assert True Tests
-    XCTAssertTrue(instance.latitude == 0)
-    XCTAssertTrue(instance.longitude == 0)
+    XCTAssertTrue(instance.latitude == 40.4432027)
+    XCTAssertTrue(instance.longitude == -79.9428499)
     
     //Assert False Tests
     XCTAssertFalse(instance.latitude == -3)

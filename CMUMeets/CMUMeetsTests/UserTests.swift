@@ -2,15 +2,19 @@
 //  UserTests.swift
 //  CMUMeets
 //
-//  Created by Isaac Ahn on 12/8/22.
+//  Created by Pranav Addepalli on 12/14/22.
 //
 
 import XCTest
 import Firebase
 
+@testable import CMUMeets
+
 class UserTests: XCTestCase {
  func testInit() {
-     let instance = User(name: "Isaac Ahn", phone: "1123456789", major: "Information Systems", gradYear: "2023", age: "21", gender: "Male", pronouns: "He/Him", ethnicity: "Asian", username: "Iya")
+   let instance = User(name: "Isaac Ahn", phone: "1123456789", major: "Information Systems", gradYear: "2023", age: "21", gender: "Male", pronouns: "He/Him", ethnicity: "Asian", username: "Iya")
+   
+   let instance2 = User(name: "Pranav Addepalli", phone: "1123456789", major: "Information Systems", gradYear: "2024", age: "21", gender: "Male", pronouns: "He/Him", ethnicity: "Asian", username: "P")
 
 
    XCTAssertNotNil(instance)
@@ -46,18 +50,10 @@ class UserTests: XCTestCase {
    XCTAssertFalse(instance.pronouns == "She/Her")
    XCTAssertFalse(instance.ethnicity == "Hispanic")
    XCTAssertFalse(instance.username == "rickyl")
-
-   //Tests for Functions
-   let dictInstance: [String: String] = instance.toAnyObject()
-   XCTAssertTrue(dictInstance["name"] == instance.name)
-   XCTAssertTrue(dictInstance["phone"] == instance.phone)
-   XCTAssertTrue(dictInstance["gradYear"] == instance.gradYear)
-   XCTAssertTrue(dictInstance["major"] == instance.major)
-   XCTAssertTrue(dictInstance["age"] == instance.age)
-   XCTAssertTrue(dictInstance["gender"] == instance.gender)
-   XCTAssertTrue(dictInstance["pronouns"] == instance.pronouns)
-   XCTAssertTrue(dictInstance["ethnicity"] == instance.ethnicity)
-   XCTAssertTrue(dictInstance["username"] == instance.username)
+   
+   
+   XCTAssertTrue(instance != instance2)
+   XCTAssertTrue(instance < instance2)
 
  }
 }
