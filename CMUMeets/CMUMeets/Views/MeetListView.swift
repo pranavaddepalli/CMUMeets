@@ -13,18 +13,19 @@ import FirebaseFirestoreSwift
 struct MeetList: View {
     @ObservedObject var firebase: Firebase
     var currentTimestamp: Timestamp = Timestamp()
+    @State var updater: Bool = false
     
     var body: some View {
         NavigationView {
             List{
-              Section ("Ongoing Meets") {
+              Section ("Meets Around Me") {
                 ForEach(Array(firebase.meets.values), id: \.self) { meet in
-                  if (meet.getEndString() > getCurrentDate()) {
+                    if (meet.getEndString() > getCurrentDate() && !firebase.joinedMeets.contains(meet)) {
                     MeetRowView(firebase: firebase, meet: meet)
                   }
                 }
               }
-              Section ("Joined Meets") {
+              Section ("My Meets") {
                 ForEach(firebase.meets.values.filter( {$0.people.contains(firebase.currentUser.id!)} ).sorted(by: {$0.endTime.dateValue() > $1.endTime.dateValue()} ), id: \.self) { meet in
                   if (meet.getEndString() > getCurrentDate()){
                     MeetRowView(firebase: firebase, meet: meet)

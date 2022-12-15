@@ -50,26 +50,31 @@ struct HostView: View {
       .pickerStyle(.segmented)
       .padding()
       
-      HStack{
-        Spacer()
-        
-        Text("Capacity")
+        HStack (alignment: .center){
+        Text("Capacity:")
           .padding()
         TextField("Capacity", value: $meetCapacity, formatter: NumberFormatter())
-          .keyboardType(.decimalPad)
+          .keyboardType(.numberPad)
           .textFieldStyle(.roundedBorder)
           .fixedSize()
-        
         Spacer()
-        
-        Picker("Location", selection: $meetLoc) {
-          ForEach(Array(firebase.locations.values), id: \.self) { loc in
-            Text(loc.name).tag(loc)}
         }
-        .padding()
         
         Spacer()
-      }
+        
+        HStack(alignment: .center) {
+            Text("Location:")
+              .padding()
+            Picker("Location", selection: $meetLoc) {
+                ForEach(Array(firebase.locations.values).sorted(), id: \.self) { loc in
+                Text(loc.name).tag(loc)}
+            }
+            Spacer()
+        }
+     
+        
+        Spacer()
+      
       
       HStack{
         DatePicker("From:", selection: $meetStartTime, displayedComponents: .hourAndMinute)
@@ -91,21 +96,17 @@ struct HostView: View {
                                end: meetEndTime)
       }) {
         Text("Host!")
-          .font(.title)
+              .font(.title)
           .fontWeight(.bold)
-          .foregroundColor(.red)
+          .foregroundColor(.white)
           .padding()
-          .overlay(
-            RoundedRectangle(cornerRadius: 10)
-              .stroke(Color.red, lineWidth: 3)
-          )
-      }.alert(isPresented:
-                 Binding<Bool>(get: { !self.failedMsg.isEmpty}, set: { _ in }
-      )
+      }.background(Color(red: 0x8a/255, green: 0x2b/255, blue: 0x2b/255))
+        
+        .cornerRadius(10)
+        .alert(isPresented:
+                 Binding<Bool>(get: { !self.failedMsg.isEmpty}, set: { _ in })
       ) {
-        print(self.failedMsg)
         if (self.failedMsg == "Successfully hosted your Meet!"){
-          print("will show success")
           return Alert(title: Text(self.failedMsg),
                        dismissButton: .default(Text("OK")) {
             presentationMode.wrappedValue.dismiss()
@@ -118,14 +119,16 @@ struct HostView: View {
                         message: Text(err),
                         primaryButton: .destructive(Text("Don't host")) {
             presentationMode.wrappedValue.dismiss()
-          }, secondaryButton:.default(Text("I'll fix it"))
+          }, secondaryButton:.default(Text("I'll fix it")) {
+              presentationMode.wrappedValue.dismiss()
+          }
           )
         }
       }
       }
        .padding()
       
-      Text("Meets can only be scheduled for the current day, \(Date.now.formatted(Date.FormatStyle().month()))" + " \(Date.now.formatted(Date.FormatStyle().day())).")
+      Text("Meets can only be scheduled for the current day, \(Date.now.formatted(Date.FormatStyle().month()))" + " \(Date.now.formatted(Date.FormatStyle().day())).").padding()
       
       Spacer()
       

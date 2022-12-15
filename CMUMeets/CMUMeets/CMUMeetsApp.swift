@@ -25,7 +25,14 @@ struct CMUMeetsApp: App {
         
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            let defaults = UserDefaults.standard
+
+            if let username = defaults.string(forKey: "username"), let name = defaults.string(forKey: "name") {
+                MainPageView(firebase: Firebase())
+            } else {
+                LoginView(firebase: Firebase())
+            }
+
         }
     }
 }

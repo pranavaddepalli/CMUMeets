@@ -29,9 +29,6 @@
 		AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70B291B65B9007C8FBD /* MapView.swift */; };
 		AB20B70F291B6616007C8FBD /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B70E291B6616007C8FBD /* Firebase.swift */; };
 		AB20B711291B667B007C8FBD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B710291B667B007C8FBD /* Location.swift */; };
-		AB20B71D291B8FE3007C8FBD /* MeetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B71C291B8FE3007C8FBD /* MeetsRepository.swift */; };
-		AB20B726291B94CB007C8FBD /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B725291B94CB007C8FBD /* UsersRepository.swift */; };
-		AB20B728291B9640007C8FBD /* LocationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B727291B9640007C8FBD /* LocationsRepository.swift */; };
 		AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB20B729291B964A007C8FBD /* LocationModel.swift */; };
 		AB31CF6D293804740030B300 /* MeetPreviewDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31CF6C293804740030B300 /* MeetPreviewDetailsView.swift */; };
 		AB6435632929F66F00D32C52 /* MeetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6435622929F66F00D32C52 /* MeetPreviewView.swift */; };
@@ -89,13 +86,10 @@
 		84233C162941AF5500AEB70D /* FirebaseTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
 		AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AB20B70B291B65B9007C8FBD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		AB20B70B291B65B9007C8FBD /* MapView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		AB20B70E291B6616007C8FBD /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		AB20B710291B667B007C8FBD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AB20B717291B6FE8007C8FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		AB20B71C291B8FE3007C8FBD /* MeetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetsRepository.swift; sourceTree = "<group>"; };
-		AB20B725291B94CB007C8FBD /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
-		AB20B727291B9640007C8FBD /* LocationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsRepository.swift; sourceTree = "<group>"; };
 		AB20B729291B964A007C8FBD /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationModel.swift; path = CMUMeets/Models/LocationModel.swift; sourceTree = SOURCE_ROOT; };
 		AB31CF6C293804740030B300 /* MeetPreviewDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPreviewDetailsView.swift; sourceTree = "<group>"; };
 		AB6435622929F66F00D32C52 /* MeetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPreviewView.swift; sourceTree = "<group>"; };
@@ -115,7 +109,7 @@
 		ABF39CDA2942E26A00A8AFA1 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		C39241072927810800DD9602 /* CurrentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserView.swift; sourceTree = "<group>"; };
 		C3DA3BAA292610CA008247D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		C3DA3BAC292638A7008247D0 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
+		C3DA3BAC292638A7008247D0 /* MainPageView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +170,6 @@
 			children = (
 				ABC4509329428B3700DA0180 /* Tests */,
 				ABCDF86329253141006AEE53 /* Models */,
-				AB20B71B291B8FD8007C8FBD /* Repositories */,
 				AB20B717291B6FE8007C8FBD /* Info.plist */,
 				AB20B70D291B65F4007C8FBD /* Controllers */,
 				8242BD5D29171D3400CB82FE /* Views */,
@@ -253,16 +246,6 @@
 				AB20B70E291B6616007C8FBD /* Firebase.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		AB20B71B291B8FD8007C8FBD /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				AB20B71C291B8FE3007C8FBD /* MeetsRepository.swift */,
-				AB20B725291B94CB007C8FBD /* UsersRepository.swift */,
-				AB20B727291B9640007C8FBD /* LocationsRepository.swift */,
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		ABC4509329428B3700DA0180 /* Tests */ = {
@@ -448,15 +431,12 @@
 				8242BD6029171DBE00CB82FE /* HostView.swift in Sources */,
 				82857A832941444200934CA2 /* ClusteredMeetsView.swift in Sources */,
 				ABCDF86D29253141006AEE53 /* Ethnicity.swift in Sources */,
-				AB20B728291B9640007C8FBD /* LocationsRepository.swift in Sources */,
 				AB20B711291B667B007C8FBD /* Location.swift in Sources */,
 				82857A812941440300934CA2 /* ClusterView.swift in Sources */,
 				AB6435632929F66F00D32C52 /* MeetPreviewView.swift in Sources */,
 				ABCDF8742925904F006AEE53 /* MeetListView.swift in Sources */,
 				ABC45091294285BA00DA0180 /* MeetAnnotationView.swift in Sources */,
 				C39241082927810800DD9602 /* CurrentUserView.swift in Sources */,
-				AB20B71D291B8FE3007C8FBD /* MeetsRepository.swift in Sources */,
-				AB20B726291B94CB007C8FBD /* UsersRepository.swift in Sources */,
 				ABCDF8752925904F006AEE53 /* MeetRowView.swift in Sources */,
 				AB20B72A291B964A007C8FBD /* LocationModel.swift in Sources */,
 				C3DA3BAB292610CA008247D0 /* LoginView.swift in Sources */,

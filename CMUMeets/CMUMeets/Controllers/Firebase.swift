@@ -14,7 +14,7 @@ class Firebase: ObservableObject {
 //  @Published var locations: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
   @Published var locations: [String: LocationModel] = [String: LocationModel]()
   @Published var meets: [String: Meet] = [String: Meet]()
-  @Published var users: [String: Dictionary<String, Any>] = [String: Dictionary<String, Any>]()
+  @Published var users: [String: User] = [String: User]()
   // make into a list of Meet models, User models, Location models
   
   @Published var currentUser: User = User(id: "0", name: "", phone: "", major: "", gradYear: "", age: "", gender: "", pronouns: "", ethnicity: "", username: "")
@@ -22,9 +22,34 @@ class Firebase: ObservableObject {
   @Published var joinedMeets: [Meet] = []
   let db = Firestore.firestore()
   
-  init() {
-      
-  }
+    init() {
+        let defaults = UserDefaults.standard
+        if let username = defaults.string(forKey: "username"), let name = defaults.string(forKey: "name") {
+            
+            db.collection("users").whereField("username", isEqualTo: username)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            //print("\(document.documentID) => \(document.data())")
+                            self.currentUser = User(id: document.documentID,
+                                                    name: document["name"] as? String ?? "",
+                                                    phone: document["phone"] as? String ?? "",
+                                                    major: document["major"] as? String ?? "",
+                                                    gradYear: document["gradYear"] as? String ?? "",
+                                                    age: document["age"] as? String ?? "",
+                                                    gender: document["gender"] as? String ?? "",
+                                                    pronouns: document["pronouns"] as? String ?? "",
+                                                    ethnicity: document["ethnicity"] as? String ?? "",
+                                                    username: document["username"] as? String ?? ""
+                            )
+                            
+                        }
+                    }
+                }
+        }
+    }
 
   func updatedMeets() -> String {
     self.db.collection("meets")
@@ -72,6 +97,26 @@ class Firebase: ObservableObject {
                   )
                 )
               }
+              if (diff.type == .removed) {
+                self.meets[diff.document.documentID] = (
+                  Meet(
+                    id: diff.document.documentID,
+                    title: diff.document["title"] as? String ?? "",
+                    location: diff.document["location"] as? String ?? "",
+                    startTime: diff.document["startTime"] as? Timestamp ?? Timestamp(),
+                    endTime: diff.document["endTime"] as? Timestamp ?? Timestamp(),
+                    joined: diff.document["joined"] as? Int ?? 0,
+                    capacity: diff.document["capacity"] as? Int ?? 0,
+                    icon: diff.document["icon"] as? String ?? "",
+                    latitude: 0,
+                    longitude: 0,
+                    host: diff.document["host"] as? String ?? "",
+                    people: diff.document["people"] as? [String] ?? [""]
+                  )
+                )
+                  
+                  self.joinedMeets.removeAll(where: {$0 == self.meets[diff.document.documentID]})
+              }
               
   
           }
@@ -86,12 +131,30 @@ class Firebase: ObservableObject {
               print("Error fetching snapshots: \(error!)")
               return
           }
-          snapshot.documentChanges.forEach { diff in
+          for diff in snapshot.documentChanges {
               if (diff.type == .added) {
-                self.users[diff.document.documentID] = diff.document.data()
+                self.users[diff.document.documentID] = User(id: diff.document.documentID,
+                                                            name: diff.document["name"] as! String,
+                                                            phone: diff.document["phone"] as! String,
+                                                            major: diff.document["major"] as! String,
+                                                            gradYear: diff.document["gradYear"] as! String,
+                                                            age: diff.document["age"] as! String,
+                                                            gender: diff.document["gender"] as! String,
+                                                            pronouns: diff.document["pronouns"] as! String,
+                                                            ethnicity: diff.document["ethnicity"] as! String,
+                                                            username: diff.document["username"] as! String)
               }
               if (diff.type == .modified) {
-                self.users[diff.document.documentID] = diff.document.data()
+                self.users[diff.document.documentID] = User(id: diff.document.documentID,
+                                                            name: diff.document["name"] as! String,
+                                                            phone: diff.document["phone"] as! String,
+                                                            major: diff.document["major"] as! String,
+                                                            gradYear: diff.document["gradYear"] as! String,
+                                                            age: diff.document["age"] as! String,
+                                                            gender: diff.document["gender"] as! String,
+                                                            pronouns: diff.document["pronouns"] as! String,
+                                                            ethnicity: diff.document["ethnicity"] as! String,
+                                                            username: diff.document["username"] as! String)
               }
           }
         }
@@ -173,11 +236,12 @@ func updatedLocations(completion: @escaping ([LocationModel]) -> Void) -> String
     
     var res = "Successfully hosted your Meet!"
     
-    
-    db.collection("meets").document().setData([
+    let newMeetRef = db.collection("meets").document()
+          
+    newMeetRef.setData([
       "title" : meetName,
       "icon" : icon,
-      "joined" : 1,
+      "joined" : 0,
       "host" : currentUser.id!,
       "capacity" : capacity,
       "location" : loc.name,
@@ -185,8 +249,17 @@ func updatedLocations(completion: @escaping ([LocationModel]) -> Void) -> String
       "longitude" : loc.longitude,
       "startTime" : start,
       "endTime" : end,
-      "people" : [currentUser.id!]
+      "people" : []
     ]) { _ in }
+      
+      newMeetRef.getDocument(as: Meet.self) { result in
+          switch result {
+          case .success(let m):
+              self.joinMeet(meet: m)
+          case.failure(let fail):
+              print(fail)
+          }
+      }
     
     return res;
   }
