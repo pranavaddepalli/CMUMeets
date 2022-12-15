@@ -20,12 +20,6 @@ struct MeetPreviewDetailsView: View {
             
             
         }
-        HStack{
-            Text("Start: " + meet.getStartString().split(separator: " ")[1])
-            Text("End: " + meet.getEndString().split(separator: " ")[1])
-            
-                .padding()
-        }
         Text("Joined: " + String(meet.joined) + "/" + String(meet.capacity))
         
         HStack {
@@ -34,7 +28,6 @@ struct MeetPreviewDetailsView: View {
                     Text("🧍" + (firebase.users[p]?.name ?? "unknown"))}
             }
         }.padding()
-        Spacer()
         
     }
 }

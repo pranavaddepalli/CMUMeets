@@ -32,7 +32,11 @@ struct MeetPreviewView: View {
             Text("Start: " + self.getStartTime())
           }
           Spacer()
-          Text("Joined: " + String(annotation.meet.joined) + "/" + String(annotation.meet.capacity))
+            VStack {
+                Text("Joined: " + String(annotation.meet.joined) + "/" + String(annotation.meet.capacity))
+                Text("End: " + self.getEndTime())
+
+            }
           Spacer()
         }
         HStack {
@@ -126,6 +130,14 @@ struct MeetPreviewView: View {
     dateFormatter.dateFormat = "hh:mm a"
     return dateFormatter.string(from: startTimeDate)
   }
+    
+    func getEndTime() -> String {
+      let endTimeDate = annotation.meet.endTime.dateValue()
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "hh:mm a"
+      return dateFormatter.string(from: endTimeDate)
+    }
   
 }
 
