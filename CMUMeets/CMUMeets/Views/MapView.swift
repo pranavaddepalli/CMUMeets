@@ -27,11 +27,26 @@ struct MapView: UIViewRepresentable {
   
   class Coordinator: NSObject, MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, didChange mode: MKUserTrackingMode) -> MKAnnotationView? {
 //      mapView.register(MeetAnnotationView.self, forAnnotationViewWithReuseIdentifier: MeetAnnotationView.reuseID)
       guard !(annotation is MKUserLocation) else {
           return nil
       }
+      
+      if mode == .followWithHeading || mode == .follow {
+        mapView.region.span = MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
+      }
+      
+//      let newRegion = mapView.region
+//      let maxLat = newRegion.center.latitude + newRegion.span.latitudeDelta / 2
+//      let minLat = newRegion.center.latitude - newRegion.span.latitudeDelta / 2
+//      let maxLon = newRegion.center.longitude + newRegion.span.longitudeDelta / 2
+//      let minLon = newRegion.center.longitude - newRegion.span.longitudeDelta / 2
+//
+//      if maxLat > 40.450945 || minLat < 40.450945 || maxLon > -79.93729 || minLon < -79.956225 {
+//          // Prevent the map from panning or zooming outside of the allowed region
+//          mapView.setRegion(mapView.region, animated: false)
+//      }
       
       if (annotation is MeetAnnotation) {
         var annotation = annotation as! MeetAnnotation
@@ -75,7 +90,10 @@ struct MapView: UIViewRepresentable {
   func makeUIView(context: Context) -> MKMapView {
     loadFirebase()
     setupRegionForMap()
+    
     mapView.delegate = context.coordinator
+    // this doesn't work for some reason
+    mapView.setUserTrackingMode(.followWithHeading, animated: true)
     
 //    mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: ClusterView.reuseID)
     
@@ -99,7 +117,6 @@ struct MapView: UIViewRepresentable {
     userTrackingButton.layer.borderWidth = 1
     userTrackingButton.layer.cornerRadius = 5
     mapView.addSubview(userTrackingButton)
-
     
     return mapView
   }
@@ -116,7 +133,7 @@ struct MapView: UIViewRepresentable {
     let location = Location()
     location.getCurrentLocation()
     let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let span = MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
     let region = MKCoordinateRegion(center: coordinate, span: span)
     mapView.setRegion(region, animated: true)
   }
