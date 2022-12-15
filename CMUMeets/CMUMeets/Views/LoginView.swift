@@ -13,7 +13,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct LoginView: View {
-    @ObservedObject var firebase: Firebase = Firebase()
+    @ObservedObject var firebase: Firebase
     @State private var username: String = ""
     @State private var name: String = ""
     @State private var goToMain: Bool = false
@@ -88,6 +88,7 @@ struct LoginView: View {
     }
     
     private func isUser() -> Bool {
+        
         var usersDict = getNameAndUsername()
         if usersDict.keys.contains(name) {
             if usersDict[name] == username {
@@ -123,6 +124,11 @@ struct LoginView: View {
                     }
                 }
         }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(username, forKey: "username")
+        defaults.set(name, forKey: "name")
+
     }
     
     
