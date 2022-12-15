@@ -26,16 +26,6 @@ struct MapView: UIViewRepresentable {
   var firebase: Firebase
   
   class Coordinator: NSObject, MKMapViewDelegate {
-//      func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-//          if mapView.region.span.latitudeDelta < 0.4 {
-//              let location = Location()
-//              location.getCurrentLocation()
-//              let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-//              let regionSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-//              let mapRegion = MKCoordinateRegion(center: coordinate, span: regionSpan)
-//              mapView.setRegion(mapRegion, animated: true)
-//          }
-//      }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //      mapView.register(MeetAnnotationView.self, forAnnotationViewWithReuseIdentifier: MeetAnnotationView.reuseID)
@@ -52,14 +42,6 @@ struct MapView: UIViewRepresentable {
         } else {
           annotationView = MeetAnnotationView(annotation: annotation, reuseIdentifier: MeetAnnotationView.reuseID)
         }
-//
-//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: MeetAnnotationView.reuseID, for: annotation)
-//
-        
-//        print(type(of: annotationView))
-//        if let annotationView = annotationView as MeetAnnotationView {
-//          annotationView.glyphText = annotation.meet.icon
-//        }
         annotationView.glyphText = annotation.meet.icon
         annotationView.clusteringIdentifier = "meet"
         annotationView.markerTintColor = UIColor.white
@@ -77,12 +59,6 @@ struct MapView: UIViewRepresentable {
           clusterView = ClusterView(annotation: annotation, reuseIdentifier: MeetAnnotationView.reuseID)
         }
         
-//        var clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: ClusterView.reuseID)
-//        if clusterView == nil {
-//          clusterView = ClusterView(annotation: annotation, reuseIdentifier: ClusterView.reuseID)
-//        } else {
-//            clusterView?.annotation = annotation
-//        }
         clusterView.displayPriority = .required
         clusterView.collisionMode = .circle
         clusterView.markerTintColor = .purple
@@ -114,13 +90,23 @@ struct MapView: UIViewRepresentable {
     compassButton.translatesAutoresizingMaskIntoConstraints = false
     compassButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -12).isActive = true
     compassButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 12).isActive = true
+      
+    // add a user tracking button
+    let userTrackingButton = MKUserTrackingButton(mapView: mapView)
+    userTrackingButton.frame = CGRect(x: 10, y: 10, width: 44, height: 44)
+    userTrackingButton.layer.backgroundColor = UIColor(white: 1, alpha: 0.8).cgColor
+    userTrackingButton.layer.borderColor = UIColor.white.cgColor
+    userTrackingButton.layer.borderWidth = 1
+    userTrackingButton.layer.cornerRadius = 5
+    mapView.addSubview(userTrackingButton)
 
+    
     return mapView
   }
   
   private func loadFirebase() {
     firebase.updatedMeets()
-      firebase.updatedLocations() {_ in }
+    firebase.updatedLocations() {_ in }
     firebase.updatedUsers()
   }
   
