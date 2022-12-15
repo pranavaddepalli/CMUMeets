@@ -73,24 +73,7 @@ class Firebase: ObservableObject {
                 )
               }
               
-              if (diff.type == .removed) {
-                  self.meets[diff.document.documentID] = (
-                    Meet(
-                        id: diff.document.documentID,
-                        title: diff.document["title"] as? String ?? "",
-                        location: diff.document["location"] as? String ?? "",
-                        startTime: Timestamp(),
-                        endTime: Timestamp(),
-                        joined: diff.document["joined"] as? Int ?? 0,
-                        capacity: diff.document["capacity"] as? Int ?? 0,
-                        icon: diff.document["icon"] as? String ?? "",
-                        latitude: 0,
-                        longitude: 0,
-                        host: diff.document["host"] as? String ?? "",
-                        people: diff.document["people"] as? [String] ?? [""]
-                  )
-                    )
-              }
+  
           }
         }
     return "success: updated meets"
@@ -115,7 +98,9 @@ class Firebase: ObservableObject {
     return "success: updated users"
   }
 
-  func updatedLocations() -> String {
+func updatedLocations(completion: @escaping ([LocationModel]) -> Void) -> String {
+    var updatedModels = [LocationModel]()
+
     self.db.collection("locations")
         .addSnapshotListener { querySnapshot, error in
           guard let snapshot = querySnapshot else {
@@ -133,6 +118,7 @@ class Firebase: ObservableObject {
 
                   )
                 )
+                updatedModels.append(self.locations[diff.document.documentID]!)
               }
               if (diff.type == .modified) {
                 self.locations[diff.document.documentID] = (
@@ -144,11 +130,15 @@ class Firebase: ObservableObject {
 
                   )
                 )
+                updatedModels.append(self.locations[diff.document.documentID]!)
               }
           }
+
+          completion(updatedModels)
         }
     return "success: updated locations"
   }
+
   
   
   

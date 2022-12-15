@@ -86,7 +86,7 @@
 		82857A822941444200934CA2 /* ClusteredMeetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMeetsView.swift; sourceTree = "<group>"; };
 		82B5DAC8294A8866008CC19A /* MeetsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetsTests.swift; sourceTree = "<group>"; };
 		82B5DAC9294A8868008CC19A /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
-		84233C162941AF5500AEB70D /* FirebaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
+		84233C162941AF5500AEB70D /* FirebaseTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
 		AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB20B70B291B65B9007C8FBD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -183,8 +183,6 @@
 				8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */,
 				8242BD3529171AAF00CB82FE /* Assets.xcassets */,
 				8242BD3729171AAF00CB82FE /* CMUMeets.entitlements */,
-				AB20B710291B667B007C8FBD /* Location.swift */,
-				ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */,
 				8242BD3829171AAF00CB82FE /* Preview Content */,
 			);
 			path = CMUMeets;
@@ -285,6 +283,8 @@
 		ABCDF86329253141006AEE53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */,
+				AB20B710291B667B007C8FBD /* Location.swift */,
 				ABCDF86429253141006AEE53 /* Gender.swift */,
 				ABCDF86529253141006AEE53 /* Meet.swift */,
 				ABCDF86629253141006AEE53 /* User.swift */,

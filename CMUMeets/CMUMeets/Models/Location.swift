@@ -82,8 +82,6 @@ class Location: NSObject {
         self.latitude = unarchiver.decodeDouble(forKey: "latitude")
         self.longitude = unarchiver.decodeDouble(forKey: "longitude")
         unarchiver.finishDecoding()
-      } else {
-        print("\nFILE NOT FOUND AT: \(path)")
       }
     }
   }

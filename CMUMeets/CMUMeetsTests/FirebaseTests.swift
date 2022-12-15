@@ -18,49 +18,16 @@ class FirebaseTests : XCTestCase {
   let expired: TimeInterval = 5.0
   
   override func setUp() {
+    print("beginning a test")
     e = expectation(description: "Firebase operations work correctly")
     firebase = Firebase()
   }
   
-  func testReadUsers() {
-    defer { waitForExpectations(timeout: expired) }
-    
-    let res = firebase.readUsers()
-    
-    // check not nil
-    XCTAssertNotNil(res)
-    // check corect value
-    XCTAssert(res == "success: users")
-//    XCTAssert(!res.hasPrefix("Error getting documents:"))
-    self.e.fulfill()
-    
+  override func tearDown() {
+    print("ending a test")
   }
   
   
-  func testReadLocations() {
-    
-    defer { waitForExpectations(timeout: expired) }
-    
-    firebase.readLocations() {_ in
-      XCTAssert(Array(self.firebase.locations.values).contains(LocationModel(code: "AH", latitude: 40.4447434, longitude: -79.9420948, name: "Alumni House")))
-    }
-    
-    self.e.fulfill()
-    
-  }
-  
-  func testReadMeets() {
-    defer { waitForExpectations(timeout: expired) }
-    
-    let res = firebase.readMeets()
-    
-    // check not nil
-    XCTAssertNotNil(res)
-    // check corect value
-    XCTAssert(res == "success: meets")
-    self.e.fulfill()
-    
-  }
   
   func testUpdatedMeets() {
     defer { waitForExpectations(timeout: expired) }
@@ -117,12 +84,20 @@ class FirebaseTests : XCTestCase {
   func testUpdatedLocations() {
     defer { waitForExpectations(timeout: expired) }
     
-    let res = firebase.updatedLocations()
+    // update one of the locations
+    firebase.db.collection("locations").document("AH").updateData([
+      "name": "Not Alumni House"
+    ])
     
-    // check not nil
-    XCTAssertNotNil(res)
-    // check corect value
-    XCTAssert(res == "success: updated locations")
+    var res = firebase.updatedLocations() { newLocs in
+      for loc in newLocs {
+        // check not nil
+        XCTAssertNotNil(loc)
+        // check corect value
+        XCTAssert(Array(self.firebase.locations.values).contains(loc))
+      }
+    }
+    
     self.e.fulfill()
     
   }
@@ -160,7 +135,7 @@ class FirebaseTests : XCTestCase {
   }
   
   func testJoinMeet() {
-    defer { waitForExpectations(timeout: 20) }
+    defer { waitForExpectations(timeout: expired) }
     
     // host a meet first
     let exampleMeetID = "EXAMPLEMEETID"
@@ -201,8 +176,9 @@ class FirebaseTests : XCTestCase {
         XCTAssert(false)
       }
       
-      self.e.fulfill()
     }
+    self.e.fulfill()
+
   }
   
   func testLeaveMeet(){
@@ -247,8 +223,10 @@ class FirebaseTests : XCTestCase {
         print("Error decoding meet: \(error)")
         XCTAssert(false)
       }
-      self.e.fulfill()
     }
+    
+    self.e.fulfill()
+
   }
   
   func testDeleteMeet(){
@@ -256,7 +234,7 @@ class FirebaseTests : XCTestCase {
 
     // host a meet first
     let exampleMeetID = "EXAMPLEMEETID"
-    
+
     firebase.db.collection("meets").document(exampleMeetID).setData([
       "title" : "JoinMeetTest",
       "icon" : "Fake icon",
@@ -275,9 +253,9 @@ class FirebaseTests : XCTestCase {
         XCTAssert(false)
       }
     }
-    
+
     let docRef = firebase.db.collection("meets").document("EXAMPLEMEETID")
-    
+
     docRef.getDocument(as: Meet.self) { result in
       switch result {
       case .success(let m):
@@ -287,12 +265,14 @@ class FirebaseTests : XCTestCase {
         // check correct value
         print(res)
         XCTAssert(res == "Meet successfully removed!")
-        
+
       case .failure(let error):
         print("Error decoding meet: \(error)")
         XCTAssert(false)
       }
-      self.e.fulfill()
     }
+    
+    self.e.fulfill()
+
   }
 }

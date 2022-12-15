@@ -120,7 +120,7 @@ struct MapView: UIViewRepresentable {
   
   private func loadFirebase() {
     firebase.updatedMeets()
-    firebase.updatedLocations()
+      firebase.updatedLocations() {_ in }
     firebase.updatedUsers()
   }
   
