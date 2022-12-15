@@ -119,7 +119,9 @@ struct HostView: View {
                         message: Text(err),
                         primaryButton: .destructive(Text("Don't host")) {
             presentationMode.wrappedValue.dismiss()
-          }, secondaryButton:.default(Text("I'll fix it"))
+          }, secondaryButton:.default(Text("I'll fix it")) {
+              presentationMode.wrappedValue.dismiss()
+          }
           )
         }
       }

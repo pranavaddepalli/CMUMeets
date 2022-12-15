@@ -72,6 +72,26 @@ class Firebase: ObservableObject {
                   )
                 )
               }
+              if (diff.type == .removed) {
+                self.meets[diff.document.documentID] = (
+                  Meet(
+                    id: diff.document.documentID,
+                    title: diff.document["title"] as? String ?? "",
+                    location: diff.document["location"] as? String ?? "",
+                    startTime: diff.document["startTime"] as? Timestamp ?? Timestamp(),
+                    endTime: diff.document["endTime"] as? Timestamp ?? Timestamp(),
+                    joined: diff.document["joined"] as? Int ?? 0,
+                    capacity: diff.document["capacity"] as? Int ?? 0,
+                    icon: diff.document["icon"] as? String ?? "",
+                    latitude: 0,
+                    longitude: 0,
+                    host: diff.document["host"] as? String ?? "",
+                    people: diff.document["people"] as? [String] ?? [""]
+                  )
+                )
+                  
+                  self.joinedMeets.removeAll(where: {$0 == self.meets[diff.document.documentID]})
+              }
               
   
           }
@@ -173,11 +193,12 @@ func updatedLocations(completion: @escaping ([LocationModel]) -> Void) -> String
     
     var res = "Successfully hosted your Meet!"
     
-    
-    db.collection("meets").document().setData([
+    let newMeetRef = db.collection("meets").document()
+          
+    newMeetRef.setData([
       "title" : meetName,
       "icon" : icon,
-      "joined" : 1,
+      "joined" : 0,
       "host" : currentUser.id!,
       "capacity" : capacity,
       "location" : loc.name,
@@ -185,8 +206,17 @@ func updatedLocations(completion: @escaping ([LocationModel]) -> Void) -> String
       "longitude" : loc.longitude,
       "startTime" : start,
       "endTime" : end,
-      "people" : [currentUser.id!]
+      "people" : []
     ]) { _ in }
+      
+      newMeetRef.getDocument(as: Meet.self) { result in
+          switch result {
+          case .success(let m):
+              self.joinMeet(meet: m)
+          case.failure(let fail):
+              print(fail)
+          }
+      }
     
     return res;
   }

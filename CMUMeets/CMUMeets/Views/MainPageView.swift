@@ -60,7 +60,7 @@ struct MainPageView: View {
           }
         }
       }
-      .background(Color(red: 0xd1/255, green: 0xcc/255, blue: 0xbd/255))
+//      .background(Color(red: 0xd1/255, green: 0xcc/255, blue: 0xbd/255))
   }
 }
 

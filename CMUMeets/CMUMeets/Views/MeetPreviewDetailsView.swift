@@ -37,8 +37,6 @@ struct MeetPreviewDetailsView: View {
                     .cornerRadius(15.0)
             }
             .disabled(clicked)
-            .alert("This Meet has been Removed!", isPresented: $alert2Shown, actions: {})
-
         
         }
       
