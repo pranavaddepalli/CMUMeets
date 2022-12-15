@@ -65,10 +65,38 @@ struct LoginView: View {
     
     private func isUser() -> Bool {
         
-        return Array(firebase.users.values).contains(where: {$0.username == username && $0.name == $0.name})
+        goToMain = Array(firebase.users.values).contains(where: {$0.username == username && $0.name == $0.name})
+        
+        return goToMain
     }
     
     func storeUser() {
+        let db = Firestore.firestore()
+
+        db.collection("users").whereField("username", isEqualTo: username)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        //print("\(document.documentID) => \(document.data())")
+                        self.firebase.currentUser = User(id: document.documentID,
+                                                          name: document["name"] as? String ?? "",
+                                                          phone: document["phone"] as? String ?? "",
+                                                          major: document["major"] as? String ?? "",
+                                                          gradYear: document["gradYear"] as? String ?? "",
+                                                          age: document["age"] as? String ?? "",
+                                                          gender: document["gender"] as? String ?? "",
+                                                          pronouns: document["pronouns"] as? String ?? "",
+                                                          ethnicity: document["ethnicity"] as? String ?? "",
+                                                          username: document["username"] as? String ?? ""
+                        )
+                        print(firebase.currentUser)
+                      
+                    }
+                }
+        }
+        
         let defaults = UserDefaults.standard
         defaults.set(username, forKey: "username")
         defaults.set(name, forKey: "name")
