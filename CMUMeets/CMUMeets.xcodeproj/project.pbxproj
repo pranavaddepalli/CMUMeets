@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8242BD3229171AA900CB82FE /* CMUMeetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */; };
-		8242BD3429171AA900CB82FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD3329171AA900CB82FE /* ContentView.swift */; };
 		8242BD3629171AAF00CB82FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8242BD3529171AAF00CB82FE /* Assets.xcassets */; };
 		8242BD3A29171AAF00CB82FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8242BD3929171AAF00CB82FE /* Preview Assets.xcassets */; };
 		8242BD4429171AAF00CB82FE /* CMUMeetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242BD4329171AAF00CB82FE /* CMUMeetsTests.swift */; };
@@ -21,6 +20,8 @@
 		82828C0C29172BBD003A405C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82828C0B29172BBD003A405C /* FirebaseFirestoreSwift */; };
 		82857A812941440300934CA2 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82857A802941440300934CA2 /* ClusterView.swift */; };
 		82857A832941444200934CA2 /* ClusteredMeetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82857A822941444200934CA2 /* ClusteredMeetsView.swift */; };
+		82B5DACC294A8869008CC19A /* MeetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B5DAC8294A8866008CC19A /* MeetsTests.swift */; };
+		82B5DACD294A8869008CC19A /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B5DAC9294A8868008CC19A /* UserTests.swift */; };
 		84233C172941AF5500AEB70D /* FirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84233C162941AF5500AEB70D /* FirebaseTests.swift */; };
 		84233C1A2941B3A000AEB70D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 84233C192941B3A000AEB70D /* FirebaseFirestore */; };
 		8463FE2F2942DC2C00ABAB8F /* LocationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */; };
@@ -42,11 +43,10 @@
 		ABCDF86D29253141006AEE53 /* Ethnicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86829253141006AEE53 /* Ethnicity.swift */; };
 		ABCDF8722925904F006AEE53 /* MeetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86E2925904F006AEE53 /* MeetDetailsView.swift */; };
 		ABCDF8732925904F006AEE53 /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF86F2925904F006AEE53 /* NewUserView.swift */; };
-		ABCDF8742925904F006AEE53 /* MeetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF8702925904F006AEE53 /* MeetDetails.swift */; };
+		ABCDF8742925904F006AEE53 /* MeetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF8702925904F006AEE53 /* MeetListView.swift */; };
 		ABCDF8752925904F006AEE53 /* MeetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF8712925904F006AEE53 /* MeetRowView.swift */; };
 		ABCDF87B2926C4B3006AEE53 /* MeetAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */; };
 		ABF39CD72942CEB700A8AFA1 /* MeetAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC450942942C64200DA0180 /* MeetAnnotationTests.swift */; };
-		ABF39CD92942D16A00A8AFA1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = ABF39CD82942D16A00A8AFA1 /* FirebaseFirestore */; };
 		ABF39CDB2942E26A00A8AFA1 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF39CDA2942E26A00A8AFA1 /* LocationTests.swift */; };
 		C39241082927810800DD9602 /* CurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39241072927810800DD9602 /* CurrentUserView.swift */; };
 		C3DA3BAB292610CA008247D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DA3BAA292610CA008247D0 /* LoginView.swift */; };
@@ -73,7 +73,6 @@
 /* Begin PBXFileReference section */
 		8242BD2E29171AA900CB82FE /* CMUMeets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMUMeets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8242BD3129171AA900CB82FE /* CMUMeetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMUMeetsApp.swift; sourceTree = "<group>"; };
-		8242BD3329171AA900CB82FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8242BD3529171AAF00CB82FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8242BD3729171AAF00CB82FE /* CMUMeets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CMUMeets.entitlements; sourceTree = "<group>"; };
 		8242BD3929171AAF00CB82FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -85,6 +84,8 @@
 		8242BD5F29171DBE00CB82FE /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
 		82857A802941440300934CA2 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		82857A822941444200934CA2 /* ClusteredMeetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMeetsView.swift; sourceTree = "<group>"; };
+		82B5DAC8294A8866008CC19A /* MeetsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetsTests.swift; sourceTree = "<group>"; };
+		82B5DAC9294A8868008CC19A /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		84233C162941AF5500AEB70D /* FirebaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
 		8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
 		AB20B709291AF3AA007C8FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -108,7 +109,7 @@
 		ABCDF86829253141006AEE53 /* Ethnicity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ethnicity.swift; sourceTree = "<group>"; };
 		ABCDF86E2925904F006AEE53 /* MeetDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetDetailsView.swift; sourceTree = "<group>"; };
 		ABCDF86F2925904F006AEE53 /* NewUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
-		ABCDF8702925904F006AEE53 /* MeetDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetDetails.swift; sourceTree = "<group>"; };
+		ABCDF8702925904F006AEE53 /* MeetListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetListView.swift; sourceTree = "<group>"; };
 		ABCDF8712925904F006AEE53 /* MeetRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetRowView.swift; sourceTree = "<group>"; };
 		ABCDF87A2926C4B3006AEE53 /* MeetAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetAnnotation.swift; sourceTree = "<group>"; };
 		ABF39CDA2942E26A00A8AFA1 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
@@ -134,8 +135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84233C1A2941B3A000AEB70D /* FirebaseFirestore in Frameworks */,
-
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +204,8 @@
 				ABC450942942C64200DA0180 /* MeetAnnotationTests.swift */,
 				8242BD4329171AAF00CB82FE /* CMUMeetsTests.swift */,
 				84233C162941AF5500AEB70D /* FirebaseTests.swift */,
+				82B5DAC8294A8866008CC19A /* MeetsTests.swift */,
+				82B5DAC9294A8868008CC19A /* UserTests.swift */,
 				8463FE2E2942DC2C00ABAB8F /* LocationModelTests.swift */,
 				ABF39CDA2942E26A00A8AFA1 /* LocationTests.swift */,
 			);
@@ -223,11 +224,10 @@
 		8242BD5D29171D3400CB82FE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ABCDF8702925904F006AEE53 /* MeetDetails.swift */,
+				ABCDF8702925904F006AEE53 /* MeetListView.swift */,
 				ABCDF86E2925904F006AEE53 /* MeetDetailsView.swift */,
 				ABCDF8712925904F006AEE53 /* MeetRowView.swift */,
 				ABCDF86F2925904F006AEE53 /* NewUserView.swift */,
-				8242BD3329171AA900CB82FE /* ContentView.swift */,
 				8242BD5F29171DBE00CB82FE /* HostView.swift */,
 				AB20B70B291B65B9007C8FBD /* MapView.swift */,
 				C3DA3BAA292610CA008247D0 /* LoginView.swift */,
@@ -267,7 +267,6 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-
 		ABC4509329428B3700DA0180 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,7 +282,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-
 		ABCDF86329253141006AEE53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,7 +337,6 @@
 			name = CMUMeetsTests;
 			packageProductDependencies = (
 				84233C192941B3A000AEB70D /* FirebaseFirestore */,
-
 			);
 			productName = CMUMeetsTests;
 			productReference = 8242BD3F29171AAF00CB82FE /* CMUMeetsTests.xctest */;
@@ -442,11 +439,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB20B70F291B6616007C8FBD /* Firebase.swift in Sources */,
-				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
 				ABCDF87B2926C4B3006AEE53 /* MeetAnnotation.swift in Sources */,
 				AB20B70C291B65B9007C8FBD /* MapView.swift in Sources */,
 				ABCDF8732925904F006AEE53 /* NewUserView.swift in Sources */,
-				8242BD3429171AA900CB82FE /* ContentView.swift in Sources */,
 				ABCDF86C29253141006AEE53 /* Pronouns.swift in Sources */,
 				AB31CF6D293804740030B300 /* MeetPreviewDetailsView.swift in Sources */,
 				ABCDF86A29253141006AEE53 /* Meet.swift in Sources */,
@@ -457,7 +452,7 @@
 				AB20B711291B667B007C8FBD /* Location.swift in Sources */,
 				82857A812941440300934CA2 /* ClusterView.swift in Sources */,
 				AB6435632929F66F00D32C52 /* MeetPreviewView.swift in Sources */,
-				ABCDF8742925904F006AEE53 /* MeetDetails.swift in Sources */,
+				ABCDF8742925904F006AEE53 /* MeetListView.swift in Sources */,
 				ABC45091294285BA00DA0180 /* MeetAnnotationView.swift in Sources */,
 				C39241082927810800DD9602 /* CurrentUserView.swift in Sources */,
 				AB20B71D291B8FE3007C8FBD /* MeetsRepository.swift in Sources */,
@@ -479,7 +474,9 @@
 			files = (
 				84233C172941AF5500AEB70D /* FirebaseTests.swift in Sources */,
 				8463FE2F2942DC2C00ABAB8F /* LocationModelTests.swift in Sources */,
+				82B5DACC294A8869008CC19A /* MeetsTests.swift in Sources */,
 				8242BD4429171AAF00CB82FE /* CMUMeetsTests.swift in Sources */,
+				82B5DACD294A8869008CC19A /* UserTests.swift in Sources */,
 				ABF39CDB2942E26A00A8AFA1 /* LocationTests.swift in Sources */,
 				ABF39CD72942CEB700A8AFA1 /* MeetAnnotationTests.swift in Sources */,
 			);
@@ -855,7 +852,6 @@
 			productName = FirebaseFirestoreSwift;
 		};
 		84233C192941B3A000AEB70D /* FirebaseFirestore */ = {
-
 			isa = XCSwiftPackageProductDependency;
 			package = 82828C0429172BBD003A405C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;

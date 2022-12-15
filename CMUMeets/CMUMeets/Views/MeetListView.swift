@@ -1,9 +1,16 @@
+//
+//  MeetListView.swift
+//  CMUMeets
+//
+//  Created by Pranav Addepalli on 12/14/22.
+//
+
 import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct MeetDetails: View {
+struct MeetList: View {
     @ObservedObject var firebase: Firebase
     var currentTimestamp: Timestamp = Timestamp()
     

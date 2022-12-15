@@ -31,7 +31,7 @@ struct MainPageView: View {
           }
          
     
-          MeetDetails(firebase: firebase).tabItem {
+          MeetList(firebase: firebase).tabItem {
             Image(systemName: "calendar")
             Text("Meets")
           }

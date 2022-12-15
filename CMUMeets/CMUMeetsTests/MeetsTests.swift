@@ -2,16 +2,30 @@
 //  MeetsTests.swift
 //  CMUMeets
 //
-//  Created by Isaac Ahn on 12/8/22.
+//  Created by Pranav Addepalli on 12/14/22.
 
 
 import XCTest
 import Firebase
 
+@testable import CMUMeets
+
 class MeetsTests: XCTestCase {
   func testInit() {
-      let instance = Meet(title: "World Cup Watching", location: "The UC", startTime: Timestamp(seconds: 1670544607, nanoseconds: 1681980000), endTime: Timestamp(seconds: 1670546407, nanoseconds: 668198000), joined: 2, capacity: 14, icon: "Mug", latitude: 40.44320297241211, longitude: -79.9428482055664)
-
+    let instance : Meet = Meet(
+      title: "World Cup Watching",
+      location: "The UC",
+      startTime: Timestamp(),
+      endTime: Timestamp(),
+      joined: 2,
+      capacity: 14,
+      icon: "Mug",
+      latitude: 40.44320297241211,
+      longitude: -79.9428482055664,
+      host: "best host",
+      people: ["best host", "best attendee"]
+    )
+   
 
     XCTAssertNotNil(instance)
     XCTAssertNotNil(instance.title)
@@ -27,8 +41,6 @@ class MeetsTests: XCTestCase {
     //Assert True Tests
     XCTAssertTrue(instance.title == "World Cup Watching")
     XCTAssertTrue(instance.location == "The UC")
-    XCTAssertTrue(instance.startTime == Timestamp(seconds: 1670544607, nanoseconds: 1681980000))
-    XCTAssertTrue(instance.endTime == Timestamp(seconds: 1670546407, nanoseconds: 668198000))
     XCTAssertTrue(instance.joined == 2)
     XCTAssertTrue(instance.capacity == 14)
     XCTAssertTrue(instance.icon == "Mug")
@@ -39,26 +51,53 @@ class MeetsTests: XCTestCase {
     //Assert False Tests
     XCTAssertFalse(instance.title == "Watching TV")
     XCTAssertFalse(instance.location == "Tepper")
-    XCTAssertFalse(instance.startTime == Timestamp(seconds: 1111111111, nanoseconds: 111111111))
-    XCTAssertFalse(instance.endTime == Timestamp(seconds: 1211111111, nanoseconds: 121111111))
     XCTAssertFalse(instance.joined == 5)
     XCTAssertFalse(instance.capacity == 23)
     XCTAssertFalse(instance.icon == "Map")
     XCTAssertFalse(instance.latitude == 10.00000002201)
     XCTAssertFalse(instance.longitude == -5.3232345643255)
-
-    //Tests for Functions
-    let dictInstance: [String: AnyHashable] = instance.toAnyObject()
-    XCTAssertTrue(dictInstance["title"] as! String == instance.title)
-    XCTAssertTrue(dictInstance["location"] as! String == instance.location)
-    XCTAssertTrue(dictInstance["startTime"] as! Timestamp == instance.startTime)
-    XCTAssertTrue(dictInstance["endTime"] as! Timestamp == instance.endTime)
-    XCTAssertTrue(dictInstance["joined"] as! Int == instance.joined)
-    XCTAssertTrue(dictInstance["capacity"] as! Int == instance.capacity)
-    XCTAssertTrue(dictInstance["icon"] as! String == instance.icon)
-    XCTAssertTrue(dictInstance["latitude"] as! Double == instance.latitude)
-    XCTAssertTrue(dictInstance["longitude"] as! Double == instance.longitude)
+    
+    
+    let instance2 = Meet(
+      title: "World Cup Watching",
+      location: "The UC",
+      startTime: Timestamp(),
+      endTime: Timestamp(),
+      joined: 2,
+      capacity: 14,
+      icon: "Mug",
+      latitude: 40.44320297241211,
+      longitude: -79.9428482055664,
+      host: "best host",
+      people: ["best host", "best attendee"]
+    )
+    
+    let instance3 = Meet(
+      title: "asdf",
+      location: "The UC",
+      startTime: Timestamp(),
+      endTime: Timestamp(),
+      joined: 2,
+      capacity: 14,
+      icon: "Mug",
+      latitude: 40.44320297241211,
+      longitude: -79.9428482055664,
+      host: "best host",
+      people: ["best host", "best attendee"]
+    )
+    
+    XCTAssertTrue(instance == instance2)
+    XCTAssertTrue(instance != instance3)
+    let startTimeDate = instance.startTime.dateValue()
+    let endTimeDate = instance.endTime.dateValue()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+    XCTAssertTrue(instance.getStartString() == dateFormatter.string(from: startTimeDate))
+    XCTAssertTrue(instance.getEndString() == dateFormatter.string(from: endTimeDate))
+    XCTAssertTrue(instance3 > instance)
+    XCTAssertTrue(instance < instance3)
 
   }
+  
 }
 

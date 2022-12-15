@@ -26,72 +26,6 @@ class Firebase: ObservableObject {
       
   }
 
-  func readUsers() -> String {
-      
-    self.db.collection("users").getDocuments() { (querySnapshot, err) in
-          if let err = err {
-              print("Error getting documents: \(err)")
-          } else {
-              for document in querySnapshot!.documents {
-//                    print("\(document.documentID) => \(document.data())")
-                self.users[document.documentID] = document.data()
-              }
-          }
-      }
-    return "success: users"
-  }
-
-  func readLocations() -> String {
-    self.db.collection("locations").getDocuments() { (querySnapshot, err) in
-          if let err = err {
-              print("Error getting documents: \(err)")
-          } else {
-              for d in querySnapshot!.documents {
-//                self.locations[document.documentID] = document.data()
-                self.locations[d.documentID] = (
-                  LocationModel(
-                    code: d["code"] as? String ?? "",
-                    latitude: Double((d["latitude"]! as! NSNumber)),
-                    longitude: Double((d["longitude"]! as! NSNumber)),
-                    name: d["name"] as? String ?? ""
-
-                  )
-                )
-              }
-          }
-      }
-    return "success: locations"
-  }
-
-  func readMeets() -> String {
-    self.db.collection("meets").getDocuments() { (querySnapshot, err) in
-      if let err = err {
-        print("Error getting documents: \(err)")
-      } else {
-        for d in querySnapshot!.documents {
-//          self.meets[document.documentID] = document.data()
-          self.meets[d.documentID] = (
-            Meet(
-              id: d.documentID,
-              title: d["title"] as? String ?? "",
-              location: d["location"] as? String ?? "",
-              startTime: d["startTime"] as? Timestamp ?? Timestamp(),
-              endTime: d["endTime"] as? Timestamp ?? Timestamp(),
-              joined: d["joined"] as? Int ?? 0,
-              capacity: d["capacity"] as? Int ?? 0,
-              icon: d["icon"] as? String ?? "",
-              latitude: Double((d["latitude"]! as! NSNumber)),
-              longitude: Double((d["longitude"]! as! NSNumber)),
-              host: d["host"] as? String ?? "",
-              people: d["people"] as? [String] ?? [""]
-            )
-          )
-        }
-      }
-    }
-    return "success: meets"
-  }
-
   func updatedMeets() -> String {
     self.db.collection("meets")
         .addSnapshotListener { querySnapshot, error in
@@ -236,7 +170,7 @@ class Firebase: ObservableObject {
     }
   
     // title cannot be empty
-    if (loc.name == "") {
+    if (meetName == "") {
       return "Give your Meet a good name."
     }
     
@@ -262,12 +196,7 @@ class Firebase: ObservableObject {
       "startTime" : start,
       "endTime" : end,
       "people" : [currentUser.id!]
-    ]) { err in
-      if let err = err {
-        res = "\(err)"
-        print("Error writing meet: \(err)")
-      }
-    }
+    ]) { _ in }
     
     return res;
   }
@@ -286,45 +215,31 @@ class Firebase: ObservableObject {
       db.collection("meets").document(meet.id!).updateData([
           "joined" : meet.joined + 1,
           "people" : FieldValue.arrayUnion([self.currentUser.id!])
-      ]) { err in
-          if let err = err {
-              print("Error updating document: \(err)")
-          }
-          else {
-              print("Document updated successfully")
-          }
-      }
+      ]) { _ in }
     self.joinedMeets.append(meet)
       return "Successfully joined meet!"
   }
     
-    func leaveMeet(meet : Meet) {
+    func leaveMeet(meet : Meet) -> String {
         // leave a meet
+        var res = "Meet successfully left!"
         db.collection("meets").document(meet.id!).updateData([
             "joined" : meet.joined - 1,
             "people" : FieldValue.arrayRemove([self.currentUser.id!])
-        ]) { err in
-            if let err = err {
-                print("Error leaving Meet: \(err)")
-            }
-            else {
-                print("Meet left successfully")
-            }
-        }
+        ]) { _ in }
         self.joinedMeets.removeAll(where: {$0.id == meet.id})
+        
+        return res
     }
     
-    func deleteMeet(meet: Meet) {
-        db.collection("meets").document(meet.id!).delete() { err in
-            if let err = err {
-                print("Error removing Meet: \(err)")
-            } else {
-                print("Meet successfully removed!")
-            }
-        }
+    func deleteMeet(meet: Meet) -> String {
+        var res = "Meet successfully removed!"
+        db.collection("meets").document(meet.id!).delete() { _ in }
         self.joinedMeets.removeAll(where: {$0.id == meet.id!})
         // pull Meets again
         self.meets.removeValue(forKey: meet.id!)
+      
+        return res
             
     }
 

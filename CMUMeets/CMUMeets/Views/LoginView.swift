@@ -60,7 +60,7 @@ struct LoginView: View {
     }
     
     private func getUsers() {
-        firebase.readUsers()
+        firebase.updatedUsers()
     }
     
     
